@@ -1,0 +1,17 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/brale-openapi-original.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oauth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.brale.xyz/oauth2/token
+    scopes: 11
+  sources:
+  - openapi/brale-openapi-original.yml
