@@ -1,0 +1,483 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts Automations API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Automations
+paths:
+  /accounts/{account_id}/automations/{automation_id}:
+    get:
+      callbacks: {}
+      description: Get Automation
+      operationId: get_automation
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Automation ID
+        in: path
+        name: automation_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - automations:read
+      summary: Get Automation
+      tags:
+      - Automations
+    patch:
+      callbacks: {}
+      description: Disable or archive an Automation
+      operationId: update_automation_status
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Automation ID
+        in: path
+        name: automation_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAutomationStatus'
+        description: Update Automation Status request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unprocessable Entity
+        '502':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Upstream service error
+      security:
+      - oauth:
+        - automations:write
+      summary: Update Automation Status
+      tags:
+      - Automations
+  /accounts/{account_id}/automations:
+    get:
+      callbacks: {}
+      description: Get Automations
+      operationId: get_automations
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - automations:read
+      summary: Get Automations
+      tags:
+      - Automations
+    post:
+      callbacks: {}
+      description: Create Automation
+      operationId: create_automation
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAutomation'
+        description: Create Automation request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - automations:write
+      summary: Create Automation
+      tags:
+      - Automations
+components:
+  schemas:
+    AutomationSourceWithFundingInstructions:
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/AutomationSource'
+      - properties:
+          funding_instructions:
+            $ref: '#/components/schemas/FundingInstructions'
+        type: object
+      title: AutomationSourceWithFundingInstructions
+      type: object
+    AutomationDestination:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        financial_institution_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      title: AutomationDestination
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    AutomationResponse:
+      additionalProperties: false
+      allOf:
+      - properties:
+          brand:
+            $ref: '#/components/schemas/AutomationBrandData'
+          created_at:
+            $ref: '#/components/schemas/DateTime'
+          destination:
+            $ref: '#/components/schemas/AutomationDestination'
+          id:
+            $ref: '#/components/schemas/ID'
+          name:
+            type: string
+          source:
+            $ref: '#/components/schemas/AutomationSourceWithFundingInstructions'
+          status:
+            enum:
+            - pending
+            - active
+            - disabled
+            - archived
+            type: string
+          updated_at:
+            $ref: '#/components/schemas/DateTime'
+        required:
+        - name
+        - status
+        - source
+        - destination
+        type: object
+      title: AutomationResponse
+      type: object
+    AutomationSource:
+      additionalProperties: false
+      properties:
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      title: AutomationSource
+      type: object
+    UpdateAutomationStatus:
+      additionalProperties: false
+      properties:
+        status:
+          enum:
+          - disabled
+          - archived
+          type: string
+      required:
+      - status
+      title: UpdateAutomationStatus
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    AutomationBrandData:
+      additionalProperties: false
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: AutomationBrandData
+      type: object
+    FundingInstructions:
+      additionalProperties: false
+      properties:
+        account_number:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        beneficiary_address:
+          type: string
+        beneficiary_name:
+          type: string
+        routing_number:
+          type: string
+      required:
+      - bank_name
+      - bank_address
+      - account_number
+      - routing_number
+      - beneficiary_name
+      - beneficiary_address
+      title: FundingInstructions
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    CreateAutomation:
+      additionalProperties: false
+      properties:
+        brand:
+          $ref: '#/components/schemas/AutomationBrandData'
+        destination:
+          $ref: '#/components/schemas/AutomationDestination'
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/AutomationSource'
+      required:
+      - name
+      - source
+      - destination
+      title: CreateAutomation
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2

@@ -1,0 +1,807 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts Webhooks API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Webhooks
+paths:
+  /accounts/{account_id}/webhooks/deliveries:
+    get:
+      callbacks: {}
+      description: Returns outbound delivery attempts for webhook subscriptions owned by the account, newest first, with cursor pagination (`page[size]`, and either `page[after]` or `page[before]` — not both).
+      operationId: list_webhook_deliveries
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Paging query parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDeliveryLogList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - webhooks:read
+      summary: List webhook delivery logs
+      tags:
+      - Webhooks
+  /accounts/{account_id}/webhooks/subscriptions/{subscription_id}:
+    delete:
+      callbacks: {}
+      description: Sets an **active** subscription to **archived** so it no longer receives webhooks. Event subscriptions and delivery history are retained. Returns **409** if the subscription is already archived.
+      operationId: delete_webhook_subscription
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Webhook subscription ID
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+      security:
+      - oauth:
+        - webhooks:write
+      summary: Archive webhook subscription
+      tags:
+      - Webhooks
+    patch:
+      callbacks: {}
+      description: Updates URL and/or subscribed event types for an **active** subscription. When `events` is sent, it replaces the full set. **Archived** subscriptions return **409**.
+      operationId: update_webhook_subscription
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Webhook subscription ID
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookSubscription'
+        description: Update webhook subscription
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unprocessable Entity
+      security:
+      - oauth:
+        - webhooks:write
+        - webhooks:read
+      summary: Update webhook subscription
+      tags:
+      - Webhooks
+  /accounts/{account_id}/webhooks/{subscription_id}:
+    get:
+      callbacks: {}
+      operationId: get_webhook_subscription
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Webhook subscription ID
+        in: path
+        name: subscription_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - webhooks:read
+      summary: Get webhook subscription
+      tags:
+      - Webhooks
+  /accounts/{account_id}/webhooks:
+    get:
+      callbacks: {}
+      operationId: list_webhook_subscriptions
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - webhooks:read
+      summary: List webhook subscriptions
+      tags:
+      - Webhooks
+    post:
+      callbacks: {}
+      description: Registers a destination URL and one or more event types. The signing secret is returned once in the response.
+      operationId: create_webhook_subscription
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookSubscription'
+        description: Create webhook subscription
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionCreated'
+          description: Created
+          headers:
+            location:
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unprocessable Entity
+      security:
+      - oauth:
+        - webhooks:write
+        - webhooks:read
+      summary: Create webhook subscription
+      tags:
+      - Webhooks
+  /accounts/{account_id}/webhooks/events/{event_id}/resend:
+    post:
+      callbacks: {}
+      description: Queues one outbound replay delivery job per **active** webhook subscription for this account that subscribes to the event type of the given **`event_id`** (canonical envelope id; e.g. payment id for `payment.completed`, order id for `transfer.completed`, `transfer.canceled`, or `transfer.failed`). Requires **`Idempotency-Key`**. Payload is taken from `webhook_event_payloads` when present, otherwise rebuilt from domain data.
+      operationId: replay_webhook_event
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)
+        in: path
+        name: event_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookReplayAccepted'
+          description: Accepted
+          headers:
+            content-location:
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Service Unavailable
+      security:
+      - oauth:
+        - webhooks:write
+        - webhooks:read
+      summary: Replay webhook deliveries for an event
+      tags:
+      - Webhooks
+  /accounts/{account_id}/webhooks/event_types:
+    get:
+      callbacks: {}
+      description: Returns the event type strings (and short descriptions) that may be passed in `POST .../webhooks` `events` when creating a subscription.
+      operationId: list_webhook_event_types
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookEventTypeList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - webhooks:read
+      summary: List supported webhook event types
+      tags:
+      - Webhooks
+components:
+  schemas:
+    WebhookDeliveryLog:
+      additionalProperties: false
+      properties:
+        attempt_number:
+          minimum: 1
+          type: integer
+        event_id:
+          description: Envelope id for the event (e.g. payment id for `payment.completed`, transfer / order id for `transfer.completed`, `transfer.canceled`, or `transfer.created`).
+          type: string
+        failure_message:
+          description: Present when the attempt failed.
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/ID'
+        inserted_at:
+          $ref: '#/components/schemas/DateTime'
+        status_code:
+          description: HTTP status as string, or a short code such as `request_timeout`.
+          type: string
+        subscription_id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+      - event_id
+      - subscription_id
+      - attempt_number
+      - status_code
+      - inserted_at
+      title: WebhookDeliveryLog
+      type: object
+    Pagination:
+      description: Pagination information for list endpoints
+      properties:
+        next:
+          description: Cursor for the next page of results
+          nullable: true
+          type: string
+        page_size:
+          description: Number of items per page
+          type: integer
+        prev:
+          description: Cursor for the previous page of results
+          nullable: true
+          type: string
+      title: Pagination
+      type: object
+    WebhookSubscriptionCreated:
+      additionalProperties: false
+      properties:
+        events:
+          items:
+            type: string
+          type: array
+        id:
+          $ref: '#/components/schemas/ID'
+        sharedSecret:
+          description: Signing secret (Base64 Encoded). Returned only on create; store it securely to verify signatures.
+          type: string
+        status:
+          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
+          enum:
+          - active
+          - archived
+          type: string
+        url:
+          type: string
+      required:
+      - id
+      - sharedSecret
+      - events
+      - url
+      - status
+      title: WebhookSubscriptionCreated
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    WebhookReplayAccepted:
+      additionalProperties: false
+      properties:
+        jobIds:
+          description: Oban job ids for scheduled replay deliveries (one per active subscription for the event type).
+          items:
+            type: string
+          type: array
+        status:
+          description: Replay delivery jobs were accepted for processing.
+          enum:
+          - queued
+          type: string
+      required:
+      - status
+      - jobIds
+      title: WebhookReplayAccepted
+      type: object
+    WebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          items:
+            type: string
+          type: array
+        id:
+          $ref: '#/components/schemas/ID'
+        status:
+          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
+          enum:
+          - active
+          - archived
+          type: string
+        url:
+          type: string
+      required:
+      - id
+      - events
+      - url
+      - status
+      title: WebhookSubscription
+      type: object
+    WebhookSubscriptionList:
+      additionalProperties: false
+      properties:
+        subscriptions:
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+          type: array
+      required:
+      - subscriptions
+      title: WebhookSubscriptionList
+      type: object
+    WebhookEventType:
+      additionalProperties: false
+      properties:
+        event_type:
+          description: Wire string to pass in `POST .../webhooks` body `events`.
+          type: string
+        summary:
+          description: Human-readable description of when this event fires.
+          type: string
+      required:
+      - event_type
+      - summary
+      title: WebhookEventType
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
+      type: object
+    CreateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
+          items:
+            type: string
+          minItems: 1
+          type: array
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
+          type: string
+      required:
+      - url
+      - events
+      title: CreateWebhookSubscription
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    WebhookDeliveryLogList:
+      additionalProperties: false
+      properties:
+        deliveries:
+          description: Delivery attempts, newest `inserted_at` first.
+          items:
+            $ref: '#/components/schemas/WebhookDeliveryLog'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - deliveries
+      - pagination
+      title: WebhookDeliveryLogList
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    WebhookEventTypeList:
+      additionalProperties: false
+      properties:
+        event_types:
+          description: Supported event types for new subscriptions, sorted by `event_type`.
+          items:
+            $ref: '#/components/schemas/WebhookEventType'
+          type: array
+      required:
+      - event_types
+      title: WebhookEventTypeList
+      type: object
+    UpdateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: When present, replaces all subscribed event types. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*`).
+          items:
+            type: string
+          nullable: true
+          type: array
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
+          nullable: true
+          type: string
+      title: UpdateWebhookSubscription
+      type: object
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2

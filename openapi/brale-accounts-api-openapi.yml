@@ -1,0 +1,854 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Accounts
+paths:
+  /accounts:
+    get:
+      callbacks: {}
+      operationId: list_accounts
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - accounts:read
+      summary: List accounts managed by organization
+      tags:
+      - Accounts
+    post:
+      callbacks: {}
+      operationId: create_account
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+        description: Create account request body (business or individual)
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unprocessable Entity
+      security:
+      - oauth:
+        - accounts:write
+      summary: Creates an account managed by organization
+      tags:
+      - Accounts
+  /accounts/{account_id}/verification/documents:
+    get:
+      callbacks: {}
+      operationId: list_verification_documents
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationDocumentsList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - accounts:read
+      summary: List required verification documents
+      tags:
+      - Accounts
+  /documents:
+    post:
+      callbacks: {}
+      operationId: create_document_submission
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                document_kind:
+                  $ref: '#/components/schemas/DocumentKindEnum'
+                file:
+                  format: binary
+                  type: string
+                person_label:
+                  nullable: true
+                  type: string
+              required:
+              - file
+              - document_kind
+              type: object
+        description: Document submission upload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSubmissionCreated'
+          description: Created
+          headers:
+            location:
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - accounts:write
+      summary: Stage a verification document for later linking
+      tags:
+      - Accounts
+  /accounts/{account_id}:
+    get:
+      callbacks: {}
+      operationId: get_account
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - accounts:read
+      summary: Get individual account
+      tags:
+      - Accounts
+    patch:
+      callbacks: {}
+      operationId: patch_account_documents
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAccountDocumentsRequest'
+        description: Patch account documents request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unprocessable Entity
+      security:
+      - oauth:
+        - accounts:write
+      summary: Link staged verification documents to an account
+      tags:
+      - Accounts
+components:
+  schemas:
+    DocumentRequirement:
+      additionalProperties: false
+      properties:
+        display_name:
+          example: Government-issued photo ID
+          type: string
+        document_kind:
+          $ref: '#/components/schemas/DocumentKindEnum'
+        document_type:
+          enum:
+          - business_document
+          - individual_document
+          - misc_document
+          type: string
+        person_label:
+          example: Jane Doe
+          nullable: true
+          type: string
+        status:
+          enum:
+          - pending_upload
+          - uploaded
+          type: string
+      required:
+      - document_kind
+      - document_type
+      - display_name
+      - status
+      title: DocumentRequirement
+      type: object
+    Individual:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/IndividualAddress'
+        country:
+          description: ISO 3166-1 alpha-2 country code; stored separately for AiPrise routing
+          example: US
+          type: string
+        date_of_birth:
+          description: YYYY-MM-DD
+          example: '1990-01-31'
+          type: string
+        email:
+          example: jane@example.com
+          type: string
+        first_name:
+          example: Jane
+          type: string
+        identity:
+          $ref: '#/components/schemas/IndividualIdentity'
+        last_name:
+          example: Doe
+          type: string
+        phone_number:
+          example: 515-555-1212
+          type: string
+      required:
+      - first_name
+      - last_name
+      - date_of_birth
+      - email
+      - phone_number
+      - address
+      - country
+      title: Individual
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    Account:
+      properties:
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        name:
+          example: My Account
+          type: string
+        status:
+          enum:
+          - complete
+          - pending
+          - rejected
+          type: string
+        updated:
+          $ref: '#/components/schemas/DateTime'
+      required:
+      - id
+      - name
+      - status
+      title: Account
+      type: object
+    ControllingParty:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/USStreetAddress'
+        dob:
+          example: YYYY-MM-DD
+          type: string
+        email:
+          example: a@b.com
+          type: string
+        first_name:
+          example: John
+          type: string
+        last_name:
+          example: Doe
+          type: string
+        ownership_percentage:
+          example: 40
+          nullable: true
+          type: number
+        phone_number:
+          example: 515-555-1212
+          type: string
+        ssn:
+          example: 123-45-6789
+          type: string
+      required:
+      - first_name
+      - last_name
+      - dob
+      - ssn
+      - address
+      - email
+      - phone_number
+      title: ControllingParty
+      type: object
+    CreateAccountRequest:
+      additionalProperties: false
+      properties:
+        account_type:
+          default: custodial
+          enum:
+          - custodial
+          - transactional
+          type: string
+        address:
+          $ref: '#/components/schemas/USStreetAddress'
+        beneficial_owners:
+          items:
+            $ref: '#/components/schemas/ControllingParty'
+          nullable: true
+          type: array
+        business_controller:
+          $ref: '#/components/schemas/ControllingParty'
+        business_name:
+          example: My Customer
+          type: string
+        doc_submission_ids:
+          description: Optional staged document submission IDs to link at account creation
+          items:
+            $ref: '#/components/schemas/ID'
+          nullable: true
+          type: array
+        ein:
+          example: '123456789'
+          type: string
+        email:
+          example: a@b.com
+          type: string
+        entity_type:
+          default: business
+          enum:
+          - business
+          - individual
+          type: string
+        individual:
+          $ref: '#/components/schemas/Individual'
+        phone_number:
+          example: 515-555-1212
+          nullable: true
+          type: string
+        tos_attestation:
+          $ref: '#/components/schemas/EndUserTosAttestation'
+        verification_mode:
+          default: standard
+          enum:
+          - standard
+          - reliance
+          - bypass
+          type: string
+        website:
+          example: https://example.com
+          type: string
+      title: CreateAccountRequest
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    VerificationDocumentsList:
+      additionalProperties: false
+      properties:
+        account_id:
+          $ref: '#/components/schemas/ID'
+        available_person_labels:
+          example:
+          - Jane Doe
+          items:
+            type: string
+          type: array
+        documents:
+          items:
+            $ref: '#/components/schemas/DocumentRequirement'
+          type: array
+        other_documents_uploaded_count:
+          example: 0
+          type: integer
+      required:
+      - account_id
+      - documents
+      - other_documents_uploaded_count
+      - available_person_labels
+      title: VerificationDocumentsList
+      type: object
+    IndividualAddress:
+      additionalProperties: false
+      properties:
+        city:
+          example: London
+          type: string
+        country:
+          example: GB
+          type: string
+        state:
+          description: State, province, or region (free-form; not US-only)
+          example: England
+          type: string
+        street_line_1:
+          example: 10 Downing St
+          type: string
+        street_line_2:
+          example: Flat 2
+          type: string
+        zip:
+          description: Postal code (any format)
+          example: SW1A 2AA
+          type: string
+      required:
+      - street_line_1
+      - city
+      - state
+      - zip
+      title: IndividualAddress
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    DocumentKindEnum:
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - ein_letter
+      - government_photo_id
+      - other
+      title: DocumentKindEnum
+      type: string
+    IndividualIdentity:
+      additionalProperties: false
+      properties:
+        number:
+          description: The identity number.
+          example: 123-45-6789
+          type: string
+        type:
+          description: The identity number type.
+          enum:
+          - SSN9
+          - SSN4
+          - DRIVER_LICENSE
+          - PASSPORT
+          - NATIONAL_ID
+          - VOTER_ID
+          - BVN
+          - NIN
+          - NIN_SLIP
+          - SSNIT
+          - TAX_ID
+          - KENYA_KRA_PIN
+          - ALIEN_CARD
+          - RESIDENT_ID
+          - COLOMBIA_PPT_NUMBER
+          - GHANA_CARD_NUMBER
+          example: SSN9
+          type: string
+      required:
+      - number
+      - type
+      title: IndividualIdentity
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    USStreetAddress:
+      additionalProperties: false
+      properties:
+        city:
+          example: Springfield
+          type: string
+        country:
+          example: US
+          type: string
+        state:
+          enum:
+          - AL
+          - AK
+          - AS
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - GU
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - MP
+          - OH
+          - OK
+          - OR
+          - PA
+          - PR
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - VI
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          type: string
+        street_line_1:
+          example: 100 Example St.
+          type: string
+        street_line_2:
+          example: Suite 500
+          type: string
+        zip:
+          example: '90001'
+          type: string
+      required:
+      - street_line_1
+      - city
+      - state
+      - zip
+      title: USStreetAddress
+      type: object
+    AccountList:
+      additionalProperties: false
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/Account'
+          type: array
+      required:
+      - accounts
+      title: AccountList
+      type: object
+    EndUserTosAttestation:
+      additionalProperties: false
+      properties:
+        accepted_at:
+          $ref: '#/components/schemas/DateTime'
+        ip:
+          example: 203.0.113.42
+          type: string
+        user_agent:
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:138.0) Gecko/20100101 Firefox/138.0
+          type: string
+        version:
+          example: '2025-04-01'
+          type: string
+      required:
+      - accepted_at
+      title: EndUserTosAttestation
+      type: object
+    DocumentSubmissionCreated:
+      additionalProperties: false
+      properties:
+        doc_submission_id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - doc_submission_id
+      title: DocumentSubmissionCreated
+      type: object
+    PatchAccountDocumentsRequest:
+      additionalProperties: false
+      properties:
+        doc_submission_ids:
+          items:
+            $ref: '#/components/schemas/ID'
+          minItems: 1
+          type: array
+      required:
+      - doc_submission_ids
+      title: PatchAccountDocumentsRequest
+      type: object
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2

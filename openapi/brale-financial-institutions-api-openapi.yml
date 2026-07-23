@@ -1,0 +1,1104 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts Financial Institutions API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Financial Institutions
+paths:
+  /accounts/{account_id}/financial-institutions/{fi_id}/status:
+    get:
+      callbacks: {}
+      operationId: get_financial_institution_status
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Financial Institution ID
+        in: path
+        name: fi_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialInstitutionStatusResponse'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - financial-institutions:read
+      summary: Get financial institution status and update requirements
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions:
+    get:
+      callbacks: {}
+      description: Returns all financial institutions you have added to your account to receive wired funds.
+      operationId: list_account_financial_institutions
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialInstitutionListV2'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - financial-institutions:read
+      summary: List financial institutions V2
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/plaid/register-account:
+    post:
+      callbacks: {}
+      description: Registers a financial institution account using Plaid public token and returns the address ID
+      operationId: register_account_to_address_id
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAccountWithTransferTypesRequest'
+        description: Register account request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAccountAddressResponse'
+          description: Created
+          headers:
+            location:
+              schema:
+                type: string
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:write
+      summary: Register financial institution account via Plaid and return address ID
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions/register-account:
+    post:
+      callbacks: {}
+      description: Registers a financial institution account using Plaid public token
+      operationId: register_account
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAccountRequest'
+        description: Register account request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAccountResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:write
+      summary: Register financial institution account
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions/{fi_id}/update-link-token:
+    post:
+      callbacks: {}
+      operationId: create_update_link_token (2)
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Financial Institution ID
+        in: path
+        name: fi_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+        description: Update link token request body
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - financial-institutions:read
+      summary: Create update link token for existing financial institution
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/plaid/link_token:
+    post:
+      callbacks: {}
+      description: Creates a Plaid link token for bank authentication
+      operationId: create_plaid_link_token (2)
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+        description: Create link token request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:write
+      summary: Create Plaid link token
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions/external:
+    post:
+      callbacks: {}
+      description: Creates a record of an external financial institution that can be used to receive funds.
+      operationId: create_external_financial_institution
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExternalFinancialInstitutionRequest'
+        description: Create external financial institution request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialInstitutionV2'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:write
+      summary: Create External financial institution
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/addresses/{address_id}/update-link-token:
+    post:
+      callbacks: {}
+      operationId: create_update_link_token
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Financial Institution ID
+        in: path
+        name: fi_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+        description: Update link token request body
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - financial-institutions:read
+      summary: Create update link token for existing financial institution
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions/plaid/link_token:
+    post:
+      callbacks: {}
+      description: Creates a Plaid link token for bank authentication
+      operationId: create_plaid_link_token
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+        description: Create link token request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:write
+      summary: Create Plaid link token
+      tags:
+      - Financial Institutions
+  /accounts/{account_id}/financial-institutions/{fi_id}:
+    get:
+      callbacks: {}
+      operationId: get_account_financial_institution
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: FinancialInstitution ID
+        in: path
+        name: fi_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialInstitutionV2'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - financial-institutions:read
+      summary: Get individual financial institution
+      tags:
+      - Financial Institutions
+components:
+  schemas:
+    FinancialInstitutionV2:
+      properties:
+        account_number:
+          description: 'Masked account number showing only last 4 digits for security (format: ****1234). Full number never returned.'
+          example: '****1234'
+          nullable: true
+          type: string
+        account_type:
+          enum:
+          - checking
+          - savings
+          example: checking
+          nullable: true
+          type: string
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          nullable: true
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        last_updated:
+          description: Last update timestamp
+          example: '2024-01-15T10:30:00Z'
+          format: date_time
+          type: string
+        name:
+          example: First Last Bank
+          nullable: true
+          type: string
+        needs_update:
+          description: Whether this FI needs Plaid reauthorization
+          example: false
+          type: boolean
+        owner:
+          description: Beneficiary name for wire transfers (maps from POST request owner field)
+          example: Jane Doe
+          nullable: true
+          type: string
+        ownership:
+          description: Ownership type of the financial institution
+          enum:
+          - self-owned
+          - customer-owned
+          example: customer-owned
+          type: string
+        routingNumber:
+          example: '123456789'
+          type: string
+        status:
+          enum:
+          - active
+          - archived
+          type: string
+        transfer_types:
+          items:
+            example: ach_debit
+            type: string
+          nullable: true
+          type: array
+      required:
+      - id
+      - name
+      - routingNumber
+      - status
+      - created
+      title: FinancialInstitutionV2
+      type: object
+    RegisterAccountResponse:
+      properties:
+        financial_institution_id:
+          description: The ID of the created financial institution
+          example: fi_123456789
+          type: string
+      required:
+      - financial_institution_id
+      title: RegisterAccountResponse
+      type: object
+    CreateExternalFinancialInstitutionRequest:
+      additionalProperties: false
+      properties:
+        account_number:
+          example: '123456789'
+          type: string
+        account_type:
+          example: checking
+          type: string
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: Bank street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
+          nullable: true
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: Beneficiary street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
+          nullable: true
+        name:
+          example: First Last Bank
+          type: string
+        owner:
+          example: Jane Doe
+          type: string
+        ownership:
+          description: Ownership type of the financial institution
+          enum:
+          - self-owned
+          - customer-owned
+          example: customer-owned
+          type: string
+        routing_number:
+          example: '123456789'
+          type: string
+        transfer_types:
+          description: Transfer types to support for this financial institution. When wire is included, bank_address and beneficiary_address are required.
+          example:
+          - ach_credit
+          - wire
+          items:
+            example: ach_debit
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - owner
+      - account_number
+      - routing_number
+      - account_type
+      - transfer_types
+      title: CreateExternalFinancialInstitutionRequest
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    RegisterAccountAddressResponse:
+      properties:
+        address_id:
+          description: The ID of the created address
+          example: addr_123456789
+          type: string
+      required:
+      - address_id
+      title: RegisterAccountAddressResponse
+      type: object
+    CreateLinkTokenRequest:
+      properties:
+        android_package_name:
+          description: Android package name for OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for Android OAuth flows. Cannot be used with redirect_uri.
+          example: com.example.myapp
+          type: string
+        date_of_birth:
+          description: User's date of birth (optional)
+          example: '1990-01-01'
+          type: string
+        email_address:
+          description: User's email address (optional)
+          example: user@example.com
+          type: string
+        legal_name:
+          description: User's legal name (optional)
+          example: John Doe
+          type: string
+        phone_number:
+          description: User's phone number (optional)
+          example: '+1234567890'
+          type: string
+        redirect_uri:
+          description: Universal link for iOS OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for iOS OAuth flows. Cannot be used with android_package_name.
+          example: https://app.example.com/plaid-oauth
+          format: uri
+          type: string
+      title: CreateLinkTokenRequest
+      type: object
+    USStreetAddress:
+      additionalProperties: false
+      properties:
+        city:
+          example: Springfield
+          type: string
+        country:
+          example: US
+          type: string
+        state:
+          enum:
+          - AL
+          - AK
+          - AS
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - GU
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - MP
+          - OH
+          - OK
+          - OR
+          - PA
+          - PR
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - VI
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          type: string
+        street_line_1:
+          example: 100 Example St.
+          type: string
+        street_line_2:
+          example: Suite 500
+          type: string
+        zip:
+          example: '90001'
+          type: string
+      required:
+      - street_line_1
+      - city
+      - state
+      - zip
+      title: USStreetAddress
+      type: object
+    RegisterAccountRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+      required:
+      - public_token
+      - customer_webhook_url
+      title: RegisterAccountRequest
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    FinancialInstitutionListV2:
+      additionalProperties: false
+      properties:
+        financial_institutions:
+          items:
+            $ref: '#/components/schemas/FinancialInstitutionV2'
+          type: array
+      required:
+      - financial_institutions
+      title: FinancialInstitutionListV2
+      type: object
+    LinkTokenResponse:
+      properties:
+        callback_url:
+          description: The URL to POST the public token tox after Plaid Link completion to register the account
+          example: http://localhost:4000/financial_institutions/register_account
+          type: string
+        expiration:
+          description: ISO 8601 timestamp when the link token expires
+          example: '2024-01-01T12:00:00Z'
+          type: string
+        link_token:
+          description: The Plaid link token for bank authentication
+          example: link-sandbox-123456789
+          type: string
+      required:
+      - link_token
+      - expiration
+      - callback_url
+      title: LinkTokenResponse
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    FinancialInstitutionStatusResponse:
+      properties:
+        financial_institution_id:
+          description: The ID of the financial institution
+          example: fi_123456789
+          type: string
+        last_updated:
+          description: Last update timestamp
+          example: '2024-01-15T10:30:00Z'
+          format: date_time
+          type: string
+        needs_update:
+          description: Whether this FI needs Plaid reauthorization
+          example: false
+          type: boolean
+        status:
+          description: Current FI status
+          enum:
+          - active
+          - archived
+          example: active
+          type: string
+      required:
+      - needs_update
+      - status
+      - last_updated
+      title: FinancialInstitutionStatusResponse
+      type: object
+    RegisterAccountWithTransferTypesRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        ownership:
+          description: Ownership type of the financial institution. Defaults to third_party when not provided.
+          enum:
+          - first_party
+          - third_party
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+        transfer_types:
+          description: Transfer types to support for this financial institution
+          example:
+          - ach_credit
+          - wire
+          items:
+            example: ach_credit
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - public_token
+      - customer_webhook_url
+      - transfer_types
+      title: RegisterAccountWithTransferTypesRequest
+      type: object
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2

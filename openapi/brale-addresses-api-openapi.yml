@@ -1,0 +1,974 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts Addresses API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Addresses
+paths:
+  /accounts/{account_id}/addresses:
+    get:
+      callbacks: {}
+      description: Returns wallet addresses associated with your account, including custodial wallets and EOAs. Archived custodial (internal) addresses are omitted.
+      operationId: list_account_addresses
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Filter by onchain address (case-insensitive)
+        in: query
+        name: address
+        required: false
+        schema:
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          type: string
+      - description: Filter by address type
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - internal
+          - external
+          example: internal
+          type: string
+      - description: Filter by transfer type (can be specified multiple times for OR logic)
+        in: query
+        name: transfer_type
+        required: false
+        schema:
+          example: ethereum
+          type: string
+      - description: Pagination parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressListV2'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - addresses:read
+      summary: List addresses for account
+      tags:
+      - Addresses
+  /accounts/{account_id}/addresses/{address_id}:
+    get:
+      callbacks: {}
+      operationId: get_account_address
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Address ID
+        in: path
+        name: address_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressV2'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - addresses:read
+      summary: Get individual address for account
+      tags:
+      - Addresses
+    patch:
+      callbacks: {}
+      operationId: update_account_address
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Address ID
+        in: path
+        name: address_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExternalAddressRequest'
+        description: Update address request body
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressV2'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - addresses:write
+      summary: Update address details for an account
+      tags:
+      - Addresses
+  /accounts/{account_id}/addresses/internal:
+    post:
+      callbacks: {}
+      description: Provisions a new custodial (internal) address for the given account and environment. The first custodial address created for an account/environment combination is marked as primary.
+      operationId: create_internal_address
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInternalBlockchainAddressRequest'
+        description: Create internal address request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressV2'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - addresses:write
+      summary: Provision internal (custodial) address
+      tags:
+      - Addresses
+  /accounts/{account_id}/addresses/external:
+    post:
+      callbacks: {}
+      description: Creates a record of an external address that can be used to receive funds.
+      operationId: create_external_address
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExternalAddressRequest'
+        description: Create address request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressV2'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Conflict
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - addresses:write
+      summary: Create external address
+      tags:
+      - Addresses
+  /accounts/{account_id}/addresses/{address_id}/balance:
+    get:
+      callbacks: {}
+      operationId: get_address_token_balance
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Address ID
+        in: path
+        name: address_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Transfer type
+        in: query
+        name: transfer_type
+        required: false
+        schema:
+          type: string
+      - description: Value type
+        in: query
+        name: value_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressBalance'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - addresses:read
+      summary: Get token balance for a given address on a specific chain
+      tags:
+      - Addresses
+components:
+  schemas:
+    BlockchainAddressV2:
+      properties:
+        address:
+          description: On-chain address value. Null for pending addresses awaiting API-gateway provisioning.
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          nullable: true
+          type: string
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        is_primary:
+          description: Whether this is the primary custodial address for the environment
+          nullable: true
+          type: boolean
+        name:
+          example: Company External EVM Address
+          nullable: true
+          type: string
+        ownership:
+          enum:
+          - self-owned
+          - customer-owned
+          type: string
+        status:
+          enum:
+          - active
+          - archived
+          - pending
+          type: string
+        transfer_types:
+          items:
+            example: solana
+            type: string
+          type: array
+        type:
+          enum:
+          - internal
+          - external
+          type: string
+      required:
+      - id
+      - status
+      - name
+      - transfer_types
+      title: BlockchainAddressV2
+      type: object
+    AddressListV2:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/AddressV2'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/Pagination'
+          nullable: true
+      required:
+      - addresses
+      title: AddressListV2
+      type: object
+    UpdateExternalAddressRequest:
+      additionalProperties: false
+      properties:
+        additional_transfer_types:
+          items:
+            example: solana
+            type: string
+          type: array
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
+          nullable: true
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
+          nullable: true
+        name:
+          example: Company External EVM Address
+          nullable: true
+          type: string
+        status:
+          enum:
+          - active
+          - archived
+          nullable: true
+          type: string
+      title: UpdateExternalAddressRequest
+      type: object
+    AddressReference:
+      additionalProperties: false
+      properties:
+        address:
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          type: string
+        id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+      - address
+      title: AddressReference
+      type: object
+    Pagination:
+      description: Pagination information for list endpoints
+      properties:
+        next:
+          description: Cursor for the next page of results
+          nullable: true
+          type: string
+        page_size:
+          description: Number of items per page
+          type: integer
+        prev:
+          description: Cursor for the previous page of results
+          nullable: true
+          type: string
+      title: Pagination
+      type: object
+    CreateExternalAddressRequest:
+      additionalProperties: false
+      oneOf:
+      - $ref: '#/components/schemas/CreateExternalBlockchainAddressRequest'
+      - $ref: '#/components/schemas/CreateExternalFinancialInstitutionRequest'
+      title: CreateExternalAddressRequest
+      type: object
+    CreateExternalBlockchainAddressRequest:
+      additionalProperties: false
+      properties:
+        address:
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          type: string
+        name:
+          example: Company External EVM Address
+          nullable: true
+          type: string
+        ownership:
+          description: Ownership type of the address
+          enum:
+          - self-owned
+          - customer-owned
+          type: string
+        transfer_types:
+          items:
+            example: solana
+            type: string
+          type: array
+      required:
+      - name
+      - address
+      - transfer_types
+      title: CreateExternalBlockchainAddressRequest
+      type: object
+    CreateExternalFinancialInstitutionRequest:
+      additionalProperties: false
+      properties:
+        account_number:
+          example: '123456789'
+          type: string
+        account_type:
+          example: checking
+          type: string
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: Bank street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
+          nullable: true
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: Beneficiary street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
+          nullable: true
+        name:
+          example: First Last Bank
+          type: string
+        owner:
+          example: Jane Doe
+          type: string
+        ownership:
+          description: Ownership type of the financial institution
+          enum:
+          - self-owned
+          - customer-owned
+          example: customer-owned
+          type: string
+        routing_number:
+          example: '123456789'
+          type: string
+        transfer_types:
+          description: Transfer types to support for this financial institution. When wire is included, bank_address and beneficiary_address are required.
+          example:
+          - ach_credit
+          - wire
+          items:
+            example: ach_debit
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - owner
+      - account_number
+      - routing_number
+      - account_type
+      - transfer_types
+      title: CreateExternalFinancialInstitutionRequest
+      type: object
+    AddressV2:
+      additionalProperties: false
+      oneOf:
+      - $ref: '#/components/schemas/BlockchainAddressV2'
+      - $ref: '#/components/schemas/FinancialInstitutionV2'
+      title: AddressV2
+      type: object
+    CreateInternalBlockchainAddressRequest:
+      additionalProperties: false
+      properties:
+        name:
+          example: Company Internal EVM Address
+          nullable: true
+          type: string
+        transfer_types:
+          description: Transfer types for the custodial address. All must belong to the same environment (e.g. ["ethereum", "polygon"] for EVM). Must be non-empty.
+          items:
+            example: ethereum
+            type: string
+          type: array
+      required:
+      - name
+      - transfer_types
+      title: CreateInternalBlockchainAddressRequest
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    FinancialInstitutionV2:
+      properties:
+        account_number:
+          description: 'Masked account number showing only last 4 digits for security (format: ****1234). Full number never returned.'
+          example: '****1234'
+          nullable: true
+          type: string
+        account_type:
+          enum:
+          - checking
+          - savings
+          example: checking
+          nullable: true
+          type: string
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          nullable: true
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        last_updated:
+          description: Last update timestamp
+          example: '2024-01-15T10:30:00Z'
+          format: date_time
+          type: string
+        name:
+          example: First Last Bank
+          nullable: true
+          type: string
+        needs_update:
+          description: Whether this FI needs Plaid reauthorization
+          example: false
+          type: boolean
+        owner:
+          description: Beneficiary name for wire transfers (maps from POST request owner field)
+          example: Jane Doe
+          nullable: true
+          type: string
+        ownership:
+          description: Ownership type of the financial institution
+          enum:
+          - self-owned
+          - customer-owned
+          example: customer-owned
+          type: string
+        routingNumber:
+          example: '123456789'
+          type: string
+        status:
+          enum:
+          - active
+          - archived
+          type: string
+        transfer_types:
+          items:
+            example: ach_debit
+            type: string
+          nullable: true
+          type: array
+      required:
+      - id
+      - name
+      - routingNumber
+      - status
+      - created
+      title: FinancialInstitutionV2
+      type: object
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    USStreetAddress:
+      additionalProperties: false
+      properties:
+        city:
+          example: Springfield
+          type: string
+        country:
+          example: US
+          type: string
+        state:
+          enum:
+          - AL
+          - AK
+          - AS
+          - AZ
+          - AR
+          - CA
+          - CO
+          - CT
+          - DE
+          - DC
+          - FL
+          - GA
+          - GU
+          - HI
+          - ID
+          - IL
+          - IN
+          - IA
+          - KS
+          - KY
+          - LA
+          - ME
+          - MD
+          - MA
+          - MI
+          - MN
+          - MS
+          - MO
+          - MT
+          - NE
+          - NV
+          - NH
+          - NJ
+          - NM
+          - NY
+          - NC
+          - ND
+          - MP
+          - OH
+          - OK
+          - OR
+          - PA
+          - PR
+          - RI
+          - SC
+          - SD
+          - TN
+          - TX
+          - VI
+          - UT
+          - VT
+          - VA
+          - WA
+          - WV
+          - WI
+          - WY
+          type: string
+        street_line_1:
+          example: 100 Example St.
+          type: string
+        street_line_2:
+          example: Suite 500
+          type: string
+        zip:
+          example: '90001'
+          type: string
+      required:
+      - street_line_1
+      - city
+      - state
+      - zip
+      title: USStreetAddress
+      type: object
+    Amount:
+      additionalProperties: false
+      properties:
+        currency:
+          example: USD
+          type: string
+        value:
+          example: '11234.88'
+          type: string
+      required:
+      - value
+      - currency
+      title: Amount
+      type: object
+    AddressBalance:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/AddressReference'
+        balance:
+          $ref: '#/components/schemas/Amount'
+        transfer_type:
+          example: Solana
+          type: string
+        value_type:
+          example: USDC
+          type: string
+      required:
+      - value
+      - currency
+      title: AddressBalance
+      type: object
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2

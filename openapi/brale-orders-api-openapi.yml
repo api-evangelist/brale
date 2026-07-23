@@ -1,0 +1,1433 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@brale.xyz
+    name: Brale API Support
+  description: Update this with a description. Can we use markdown in this section?
+  termsOfService: https://brale.xyz/legal
+  title: Brale Accounts Orders API
+  version: '1.0'
+servers:
+- url: https://api.brale.xyz
+  variables: {}
+security: []
+tags:
+- name: Orders
+paths:
+  /accounts/{account_id}/tokens/mints:
+    get:
+      callbacks: {}
+      description: List all mint transactions for a tokenization account. Supports pagination and filtering.
+      operationId: list_mints
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Paging query parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      - description: Filter by on-chain transaction hash
+        in: query
+        name: transaction_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by token ticker
+        in: query
+        name: value_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MintsList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: List Mints
+      tags:
+      - Orders
+    post:
+      callbacks: {}
+      description: Mint (create) new tokens. Only available for tokenization/self-attested accounts.
+      operationId: create_mint
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMint'
+        description: Mint request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MintResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - self_attested_tokens:mint
+      summary: Mint Tokens
+      tags:
+      - Orders
+  /accounts/{account_id}/tokens/transfers:
+    get:
+      callbacks: {}
+      description: List all tokenization transfer transactions for a tokenization account. Supports pagination and filtering.
+      operationId: list_tokenization_transfers
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Paging query parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      - description: Filter by on-chain transaction hash
+        in: query
+        name: transaction_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by token ticker
+        in: query
+        name: value_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenizationTransfersList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: List Tokenization Transfers
+      tags:
+      - Orders
+    post:
+      callbacks: {}
+      description: Transfer attested tokens between addresses on the same blockchain. Only available for tokenization/self-attested accounts.
+      operationId: create_tokenization_transfer
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenizationTransfer'
+        description: Transfer request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenizationTransferResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - self_attested_tokens:transfer
+      summary: Transfer Tokens
+      tags:
+      - Orders
+  /accounts/{account_id}/tokens/burns:
+    get:
+      callbacks: {}
+      description: List all burn transactions for a tokenization account. Supports pagination and filtering.
+      operationId: list_burns
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Paging query parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      - description: Filter by on-chain transaction hash
+        in: query
+        name: transaction_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by token ticker
+        in: query
+        name: value_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BurnsList'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: List Burns
+      tags:
+      - Orders
+    post:
+      callbacks: {}
+      description: Burn (destroy) tokens from an address. Only available for tokenization/self-attested accounts.
+      operationId: create_burn
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBurn'
+        description: Burn request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BurnResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - self_attested_tokens:burn
+      summary: Burn Tokens
+      tags:
+      - Orders
+  /accounts/{account_id}/transfers:
+    get:
+      callbacks: {}
+      description: Returns all transfers for the specified account.
+      operationId: list_transfers
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Paging query parameters
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/PagingParameters'
+      - description: On-chain transaction hash
+        in: query
+        name: transaction_id
+        required: false
+        schema:
+          type: string
+      - description: Filter transfers created by a specific automation
+        in: query
+        name: automation_id
+        required: false
+        schema:
+          type: string
+      - description: Filter transfers by status
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - pending
+          - processing
+          - complete
+          - canceled
+          type: string
+      - description: Filter transfers by address ID
+        in: query
+        name: address_id
+        required: false
+        schema:
+          type: string
+      - description: Filter transfers by blockchain chain (e.g. solana, base, ethereum). Fiat payment types (e.g. same_day_ach_credit, wire) are not supported as filter values.
+        in: query
+        name: transfer_type
+        required: false
+        schema:
+          type: string
+      - description: Filter transfers by token ticker (e.g. USDC, SBC)
+        in: query
+        name: value_type
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransfersList'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Unknown
+      security:
+      - oauth:
+        - transfers:read
+      summary: List transfers for an account
+      tags:
+      - Orders
+    post:
+      callbacks: {}
+      description: Create Transfer
+      operationId: create_transfer
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransfer'
+        description: Create transfer request body
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+      security:
+      - oauth:
+        - transfers:write
+      summary: Create Transfer
+      tags:
+      - Orders
+  /accounts/{account_id}/tokens/mints/{mint_id}:
+    get:
+      callbacks: {}
+      description: Retrieve a specific mint transaction by ID.
+      operationId: get_mint
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Mint ID
+        in: path
+        name: mint_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MintResponse'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: Get Mint
+      tags:
+      - Orders
+  /accounts/{account_id}/transfers/{transfer_id}:
+    get:
+      callbacks: {}
+      operationId: get_transfer
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Transfer ID
+        in: path
+        name: transfer_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - transfers:read
+      summary: Get Transfer
+      tags:
+      - Orders
+  /accounts/{account_id}/tokens/burns/{burn_id}:
+    get:
+      callbacks: {}
+      description: Retrieve a specific burn transaction by ID.
+      operationId: get_burn
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Burn ID
+        in: path
+        name: burn_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BurnResponse'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: Get Burn
+      tags:
+      - Orders
+  /accounts/{account_id}/tokens/transfers/{transfer_id}:
+    get:
+      callbacks: {}
+      description: Retrieve a specific tokenization transfer transaction by ID.
+      operationId: get_tokenization_transfer
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      - description: Transfer ID
+        in: path
+        name: transfer_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenizationTransferResponse'
+          description: OK
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Failure'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorV2'
+          description: Not Found
+      security:
+      - oauth:
+        - self_attested_tokens:read
+      summary: Get Tokenization Transfer
+      tags:
+      - Orders
+components:
+  schemas:
+    MintDestination:
+      properties:
+        address_id:
+          description: Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          nullable: true
+          type: string
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: MintDestination
+      type: object
+    MintResponse:
+      properties:
+        amount:
+          description: Amount minted
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+        id:
+          description: Order ID
+          type: string
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: MintResponse
+      type: object
+    BurnResponse:
+      properties:
+        amount:
+          description: Amount burned
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          description: Order ID
+          type: string
+        source:
+          $ref: '#/components/schemas/BurnSource'
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: BurnResponse
+      type: object
+    CreateBurn:
+      additionalProperties: false
+      example:
+        amount: '1000'
+        note: Monthly burn for Q1 2024
+        source:
+          address_id: 2zbcDT1E1K6xjuYT
+          transfer_type: solana
+          value_type: eSDR
+      properties:
+        amount:
+          description: Amount to burn as a decimal string
+          example: '1000.50'
+          type: string
+        note:
+          maxLength: 255
+          type: string
+        source:
+          $ref: '#/components/schemas/BurnSource'
+      required:
+      - amount
+      - source
+      title: CreateBurn
+      type: object
+    AutomationsTransfer:
+      allOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - properties:
+          automation_id:
+            type: string
+        required:
+        - automation_id
+        type: object
+      title: AutomationsTransfer
+      type: object
+    CreateMint:
+      additionalProperties: false
+      properties:
+        amount:
+          description: Amount to mint as a decimal string
+          type: string
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+      required:
+      - amount
+      - destination
+      title: CreateMint
+      type: object
+    TokenizationTransfersList:
+      description: List of tokenization transfer transactions with pagination metadata
+      properties:
+        pagination:
+          type: object
+        transfers:
+          items:
+            $ref: '#/components/schemas/TokenizationTransferResponse'
+          type: array
+      title: TokenizationTransfersList
+      type: object
+    BurnSource:
+      properties:
+        address_id:
+          description: Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          nullable: true
+          type: string
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: BurnSource
+      type: object
+    TransferWithWireInstructions:
+      allOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - properties:
+          wire_instructions:
+            $ref: '#/components/schemas/WireInstructions'
+        required:
+        - wire_instructions
+        type: object
+      title: TransferWithWireInstructions
+      type: object
+    MintsList:
+      description: List of mint transactions with pagination metadata
+      properties:
+        mints:
+          items:
+            $ref: '#/components/schemas/MintResponse'
+          type: array
+        pagination:
+          type: object
+      title: MintsList
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: object
+        meta:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        source:
+          nullable: true
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type: object
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    TransfersList:
+      description: List of transfers with pagination metadata
+      properties:
+        pagination:
+          type: object
+        transfers:
+          items:
+            $ref: '#/components/schemas/Transfer'
+          type: array
+      title: TransfersList
+      type: object
+    TransferSource:
+      properties:
+        address_id:
+          description: Source Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          nullable: true
+          type: string
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: TransferSource
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    BasePaymentData:
+      additionalProperties: false
+      properties:
+        payment_details:
+          allOf:
+          - $ref: '#/components/schemas/PaymentDetails'
+          nullable: true
+        requested_transfer_type:
+          nullable: true
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      title: BasePaymentData
+      type: object
+    CreateTokenizationTransfer:
+      additionalProperties: false
+      example:
+        amount: '3200'
+        destination:
+          address_id: 36FkHXYoAJo6QVQSHJ37Nmbaaaa
+          transfer_type: solana
+          value_type: eSDR
+        source:
+          address_id: 36FkHXYoAJo6QVQSHJ37NmbisZx
+          transfer_type: solana
+          value_type: eSDR
+      properties:
+        amount:
+          description: Amount to transfer as a decimal string
+          example: '3200'
+          type: string
+        destination:
+          $ref: '#/components/schemas/TransferDestination'
+        source:
+          $ref: '#/components/schemas/TransferSource'
+      required:
+      - amount
+      - source
+      - destination
+      title: CreateTokenizationTransfer
+      type: object
+    PaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        financial_institution_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+        wire_memo:
+          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
+          nullable: true
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      title: PaymentData
+      type: object
+    ThirdPartyFinancialInstitutionPaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        payment_details:
+          allOf:
+          - $ref: '#/components/schemas/PaymentDetails'
+          nullable: true
+        requested_transfer_type:
+          nullable: true
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+        wire_memo:
+          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
+          nullable: true
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - financial_institution_id
+      title: ThirdPartyFinancialInstitutionPaymentData
+      type: object
+    FinancialInstitutionPaymentData:
+      additionalProperties: false
+      properties:
+        financial_institution_id:
+          type: string
+        payment_details:
+          allOf:
+          - $ref: '#/components/schemas/PaymentDetails'
+          nullable: true
+        requested_transfer_type:
+          nullable: true
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+        wire_memo:
+          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
+          nullable: true
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - financial_institution_id
+      title: FinancialInstitutionPaymentData
+      type: object
+    BrandData:
+      additionalProperties: false
+      nullable: true
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: BrandData
+      type: object
+    PaymentDataView:
+      additionalProperties: false
+      discriminator:
+        propertyName: paymentDataType
+      oneOf:
+      - $ref: '#/components/schemas/BasePaymentData'
+      - $ref: '#/components/schemas/FinancialInstitutionPaymentData'
+      - $ref: '#/components/schemas/ThirdPartyFinancialInstitutionPaymentData'
+      - $ref: '#/components/schemas/AddressPaymentData'
+      - $ref: '#/components/schemas/AddressPaymentDataWithTransaction'
+      title: PaymentDataView
+      type: object
+    CreateTransfer:
+      additionalProperties: false
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        brand:
+          $ref: '#/components/schemas/BrandData'
+        destination:
+          $ref: '#/components/schemas/PaymentData'
+        note:
+          maxLength: 255
+          type: string
+        source:
+          $ref: '#/components/schemas/PaymentData'
+      required:
+      - amount
+      - source
+      - destination
+      title: CreateTransfer
+      type: object
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
+      type: object
+    Transfer:
+      additionalProperties: false
+      discriminator:
+        propertyName: transferType
+      oneOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - $ref: '#/components/schemas/AutomationsTransfer'
+      - $ref: '#/components/schemas/TransferWithWireInstructions'
+      title: Transfer
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    AddressPaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - address_id
+      title: AddressPaymentData
+      type: object
+    TokenizationTransferResponse:
+      properties:
+        amount:
+          description: Amount transferred
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        destination:
+          properties:
+            address:
+              description: Destination blockchain address
+              type: string
+            transaction_id:
+              description: On-chain transaction hash
+              nullable: true
+              type: string
+            transfer_type:
+              description: Blockchain name
+              type: string
+          type: object
+        id:
+          description: Order ID
+          type: string
+        source:
+          properties:
+            address:
+              description: Source blockchain address
+              type: string
+            transaction_id:
+              description: On-chain transaction hash
+              nullable: true
+              type: string
+            transfer_type:
+              description: Blockchain name
+              type: string
+          type: object
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: TokenizationTransferResponse
+      type: object
+    BurnsList:
+      description: List of burn transactions with pagination metadata
+      properties:
+        burns:
+          items:
+            $ref: '#/components/schemas/BurnResponse'
+          type: array
+        pagination:
+          type: object
+      title: BurnsList
+      type: object
+    BaseTransfer:
+      additionalProperties: false
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        created_at:
+          $ref: '#/components/schemas/DateTime'
+        destination:
+          $ref: '#/components/schemas/PaymentDataView'
+        failure:
+          allOf:
+          - $ref: '#/components/schemas/Failure'
+          nullable: true
+        funding_simulated:
+          description: When true, inbound ACH funding was simulated for testnet or sandbox rather than submitted to Dwolla
+          type: boolean
+        id:
+          $ref: '#/components/schemas/ID'
+        note:
+          type: string
+        source:
+          $ref: '#/components/schemas/PaymentDataView'
+        status:
+          enum:
+          - pending
+          - processing
+          - complete
+          - canceled
+          - failed
+          type: string
+        updated_at:
+          $ref: '#/components/schemas/DateTime'
+      title: BaseTransfer
+      type: object
+    AddressPaymentDataWithTransaction:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        transaction_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - address_id
+      title: AddressPaymentDataWithTransaction
+      type: object
+    WireInstructions:
+      additionalProperties: false
+      properties:
+        account_number:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        beneficiary_address:
+          type: string
+        beneficiary_name:
+          type: string
+        memo:
+          type: string
+        routing_number:
+          type: string
+      required:
+      - bank_name
+      - bank_address
+      - account_number
+      - routing_number
+      - beneficiary_name
+      - beneficiary_address
+      title: WireInstructions
+      type: object
+    TransferDestination:
+      properties:
+        address_id:
+          description: Destination Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          nullable: true
+          type: string
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: TransferDestination
+      type: object
+    Amount:
+      additionalProperties: false
+      properties:
+        currency:
+          example: USD
+          type: string
+        value:
+          example: '11234.88'
+          type: string
+      required:
+      - value
+      - currency
+      title: Amount
+      type: object
+    PaymentDetails:
+      additionalProperties: false
+      properties:
+        fallback_at:
+          format: date-time
+          nullable: true
+          type: string
+        fallback_reason:
+          nullable: true
+          type: string
+        fallback_reason_code:
+          nullable: true
+          type: string
+        imad:
+          nullable: true
+          type: string
+        original_transfer_type:
+          nullable: true
+          type: string
+        payment_reference:
+          nullable: true
+          type: string
+        received_at:
+          format: date-time
+          nullable: true
+          type: string
+        sender_bank_name:
+          nullable: true
+          type: string
+        sender_bank_routing_number:
+          nullable: true
+          type: string
+        sender_name:
+          nullable: true
+          type: string
+        sent_at:
+          format: date-time
+          nullable: true
+          type: string
+        trace_number:
+          nullable: true
+          type: string
+      title: PaymentDetails
+      type: object
+  securitySchemes:
+    oauth:
+      flows:
+        clientCredentials:
+          scopes:
+            addresses:read: Read address details
+            financial-institutions:read: Read financial institution details
+            mints:write: Mint more of a specific token on chain
+            orders:read: Read order details
+            redemptions:write: Redeem/burn a particular token on a specific chain
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
+            tokens:read: Read token details
+            webhooks:read: Read webhook subscriptions
+            webhooks:write: Create and manage webhook subscriptions
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+      type: oauth2
