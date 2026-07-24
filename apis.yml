@@ -1,8 +1,15 @@
 aid: brale
 name: Brale
-description: Brale is a company surfaced as a portfolio company of lightspeed-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Brale is a regulated stablecoin issuance and orchestration platform. Its Issuance
+  and Orchestration API lets businesses create their own fiat-backed stablecoins and
+  move value across fiat rails and blockchains — onramps, offramps, swaps, custody,
+  and payouts — with mint/burn execution, reserves, custody, settlement, and reporting
+  handled by Brale. Developers authenticate with OAuth2 client-credentials and manage
+  customer accounts (KYB/KYC), on-chain and off-chain addresses, transfers, automations
+  (virtual U.S. account/routing numbers that auto-mint stablecoins on fiat deposit),
+  self-attested tokenization (mints, burns, transfers), and webhooks across Stellar,
+  Solana, Base, Ethereum, Polygon, Avalanche, Celo, Optimism, Arbitrum, and Canton.
 url: https://raw.githubusercontent.com/api-evangelist/brale/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,14 +17,240 @@ x-backed-by:
 - lightspeed-venture-partners
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://brale.xyz/assets/site/global-og-image.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Stablecoins
+- Stablecoin Issuance
+- Payments
+- Blockchain
+- Cryptocurrency
+- Fintech
+- Financial Services
+- Custody
+- Tokenization
+- On-Ramp
+- Off-Ramp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: brale:brale-accounts-api
+  name: Brale Accounts API
+  description: The Accounts API from Brale — 4 operation(s) for accounts.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-addresses-api
+  name: Brale Addresses API
+  description: The Addresses API from Brale — 5 operation(s) for addresses.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Addresses
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-addresses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-automations-api
+  name: Brale Automations API
+  description: The Automations API from Brale — 2 operation(s) for automations.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Automations
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-automations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-financial-institutions-api
+  name: Brale Financial Institutions API
+  description: The Financial Institutions API from Brale — 10 operation(s) for financial institutions.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Financial Institutions
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-financial-institutions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-orders-api
+  name: Brale Orders API
+  description: The Orders API from Brale — 8 operation(s) for orders.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-webhooks-api
+  name: Brale Webhooks API
+  description: The Webhooks API from Brale — 6 operation(s) for webhooks.
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+common:
+- type: Documentation
+  url: https://docs.brale.xyz/
+- type: DeveloperPortal
+  url: https://docs.brale.xyz/
+- type: APIReference
+  url: https://docs.brale.xyz/api-reference/brale-introduction
+- type: GettingStarted
+  url: https://docs.brale.xyz/documentation/introduction
+- type: Blog
+  url: https://brale.xyz/blog
+- type: Pricing
+  url: https://brale.xyz/pricing
+- type: SignUp
+  url: https://app.brale.xyz
+- type: Login
+  url: https://app.brale.xyz
+- type: Support
+  url: https://brale.xyz/contact
+- type: TermsOfService
+  url: https://brale.xyz/legal/terms
+- type: PrivacyPolicy
+  url: https://brale.xyz/legal/privacy
+- type: GitHubOrganization
+  url: https://github.com/Brale-xyz
+- type: Postman
+  url: https://www.postman.com/brale-xyz/brale-api/overview
+- type: OpenAPI
+  url: openapi/brale-openapi-original.yml
+- type: Authentication
+  url: authentication/brale-authentication.yml
+- type: OAuthScopes
+  url: scopes/brale-scopes.yml
+- type: DomainSecurity
+  url: security/brale-domain-security.yml
+- type: SecurityTxt
+  url: well-known/brale-security.txt
+- type: WellKnown
+  url: well-known/brale-well-known.yml
+- type: VulnerabilityDisclosure
+  url: security/brale-vulnerability-disclosure.yml
+- type: Security
+  url: https://brale.xyz/security
+- type: MCPServer
+  url: mcp/brale-mcp.yml
+- type: LLMsTxt
+  url: llms/brale-llms.txt
+- type: Packages
+  url: packages/brale-packages.yml
+- type: CLI
+  url: cli/brale-cli.yml
+- type: Overlay
+  url: overlays/brale-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/brale-conformance.yml
+- type: ErrorCatalog
+  url: errors/brale-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/brale-lifecycle.yml
+- type: StatusPage
+  url: https://status.brale.xyz
+- type: Deprecation
+  url: lifecycle/brale-lifecycle.yml
+- type: Conventions
+  url: conventions/brale-conventions.yml
+- type: Idempotency
+  url: conventions/brale-conventions.yml
+- type: ChangeLog
+  url: changelog/brale-changelog.yml
+- type: Sandbox
+  url: sandbox/brale-sandbox.yml
+- type: DataModel
+  url: data-model/brale-data-model.yml
+- type: Webhooks
+  url: asyncapi/brale-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

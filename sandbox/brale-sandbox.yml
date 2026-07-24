@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.brale.xyz/docs/quickstart-create-a-stablecoin-on-testnets
+summary: >-
+  Brale exposes a testnet path for development: you can create a stablecoin and mint
+  on public blockchain testnets before going to production, using the same
+  https://api.brale.xyz base URL with testnet transfer_type identifiers. There is a
+  single production host; test vs live is selected by using testnet chains/rails and
+  test credentials rather than a separate sandbox subdomain.
+model:
+  separation: testnet-vs-mainnet (chain-selected), not a separate host
+  base_url: https://api.brale.xyz
+  auth: OAuth2 client-credentials (test API app credentials)
+testing:
+- capability: Mint a stablecoin on testnets
+  reference: https://docs.brale.xyz/docs/quickstart-create-a-stablecoin-on-testnets
+- capability: Testnet transfer_type identifiers
+  reference: https://docs.brale.xyz/coverage/transfer-types
+notes: >-
+  No verbatim test card numbers, magic identifiers, or hosted test tokens are
+  published (Brale is fiat/stablecoin rails, not card acquiring); testing is done
+  against blockchain testnets. No values are invented here.

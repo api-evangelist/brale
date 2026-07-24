@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/brale-openapi-original.yml
+skills:
+- file: brale-onramp-fiat-to-stablecoin.md
+  name: Onramp fiat to a stablecoin
+  api: openapi/brale-openapi-original.yml
+  operations: [create_account, create_internal_address, create_transfer, get_transfer]
+- file: brale-stablecoin-payout.md
+  name: Send a stablecoin payout to an external wallet
+  api: openapi/brale-openapi-original.yml
+  operations: [list_account_addresses, get_address_token_balance, create_external_address, create_transfer, get_transfer]
+- file: brale-create-automation.md
+  name: Create a deposit automation (auto-mint on fiat deposit)
+  api: openapi/brale-openapi-original.yml
+  operations: [create_automation, get_automations, get_automation, update_automation_status]
+- file: brale-webhook-setup.md
+  name: Subscribe to and debug Brale webhooks
+  api: openapi/brale-openapi-original.yml
+  operations: [list_webhook_event_types, create_webhook_subscription, get_webhook_subscription, list_webhook_deliveries, replay_webhook_event]

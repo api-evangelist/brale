@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.brale.xyz/webhooks/overview
+spec_type: Webhooks
+note: >-
+  Brale documents a first-party webhooks surface but does not publish an AsyncAPI
+  document. Webhook subscriptions, deliveries, event types, and event resend are all
+  managed through the REST API (scopes webhooks:read / webhooks:write). Concrete event
+  type strings are discovered dynamically per account via the List Webhook Event Types
+  operation, so none are hard-coded here.
+delivery:
+  transport: HTTPS POST to a subscriber URL
+  retained: Delivery history is retained; archiving a subscription stops future deliveries.
+management_operations:
+- id: create_webhook_subscription
+  method: POST
+  path: /accounts/{account_id}/webhooks
+  summary: Create a webhook subscription (URL + subscribed event types).
+- id: list_webhook_subscriptions
+  method: GET
+  path: /accounts/{account_id}/webhooks
+- id: get_webhook_subscription
+  method: GET
+  path: /accounts/{account_id}/webhooks/{subscription_id}
+- id: update_webhook_subscription
+  method: PATCH
+  path: /accounts/{account_id}/webhooks/subscriptions/{subscription_id}
+  summary: Update the URL or subscribed event types.
+- id: delete_webhook_subscription
+  method: DELETE
+  path: /accounts/{account_id}/webhooks/subscriptions/{subscription_id}
+  summary: Archive a subscription (stops future deliveries; history retained).
+- id: list_webhook_event_types
+  method: GET
+  path: /accounts/{account_id}/webhooks/event_types
+  summary: Discover supported webhook event types for an account.
+- id: list_webhook_deliveries
+  method: GET
+  path: /accounts/{account_id}/webhooks/deliveries
+  summary: List delivery attempts for debugging status, retries, and failures.
+- id: replay_webhook_event
+  method: POST
+  path: /accounts/{account_id}/webhooks/events/{event_id}/resend
+  summary: Resend/replay a webhook event.

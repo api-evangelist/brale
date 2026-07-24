@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+hosts:
+- host: https://brale.xyz
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: brale-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://api.brale.xyz
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://auth.brale.xyz
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: brale-auth-openid-configuration.json
+    note: >-
+      OIDC discovery document is served (200) but advertises a placeholder issuer
+      (https://localhost:4444/) and localhost endpoints — the authorization server
+      (Ory Hydra) appears to expose a default/misconfigured discovery document. The
+      working token endpoint per the OpenAPI is https://auth.brale.xyz/oauth2/token.
+  - path: /.well-known/oauth-authorization-server
+    status: 404

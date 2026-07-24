@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/brale-openapi-original.yml
+docs: https://brale.xyz/blog
+scheme: semver-ish (document version)
+current_version: 2.3.1
+entries:
+- version: 2.3.1
+  breaking: true
+  highlights:
+  - Unified Addresses model for on-chain and off-chain endpoints; Transfers now accept address_id only (no financial_institution_id).
+  - Added off-chain rails: ach_credit, same_day_ach_credit, ach_debit, same_day_ach_debit, rtp_credit (rtp_credit is the canonical RTP rail name).
+  - Financial Institutions resource marked deprecated with a migration path to Addresses.
+  - Create Account now uses CreateManagedAccountRequest with beneficial_owners, business_controller, and EndUserTosAttestation.
+  - Transfers accept an optional brand object to control bank-statement presentation (branding still accepted as a legacy alias).
+  - Plaid endpoints moved to /accounts/{account_id}/plaid/* and now return address_id and accept transfer_types.
+  - Off-chain Address creation uses CreateExternalAddressRequest oneOf with bank + blockchain variants.
+- date: '2026-03'
+  breaking: false
+  highlights:
+  - Launched the Brale MCP Server (https://mcp.brale.xyz/) — scoped, OAuth-authenticated stablecoin execution for AI agents (v1 read-heavy / low-risk operations).
+  source: https://brale.xyz/blog/brale-mcp-server
+note: >-
+  Brale does not publish a single dated machine changelog; the recent window above is
+  reconstructed from the OpenAPI "What's new in 2.3.1" release notes and the Brale blog.

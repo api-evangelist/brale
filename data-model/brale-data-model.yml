@@ -1,0 +1,98 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/brale-openapi-original.yml
+id_format: KSUID (26-char, time-sortable)
+entities:
+- name: Account
+  root: true
+  id: account_id
+  notes: A customer (managed) account; carries KYB/KYC status. Root of nearly every path.
+- name: Address
+  id: address_id
+  notes: Unified on-chain and off-chain resource (internal/custodial or external). Replaces Financial Institutions.
+- name: FinancialInstitution
+  id: fi_id
+  deprecated: true
+  notes: Legacy bank resource; migrate to Address.
+- name: Automation
+  id: automation_id
+  notes: Virtual U.S. account/routing number that auto-mints stablecoins to a destination address on fiat deposit.
+- name: Transfer
+  id: transfer_id
+  notes: Movement of value (fiat<->stablecoin, stablecoin<->stablecoin) between a source and destination address.
+- name: TokenMint
+  id: mint_id
+  notes: Self-attested tokenization mint order.
+- name: TokenBurn
+  id: burn_id
+  notes: Self-attested tokenization burn order.
+- name: TokenizationTransfer
+  id: transfer_id
+  notes: Self-attested tokenization transfer between custodial and external addresses.
+- name: VerificationDocument
+  notes: KYB/KYC document submission linked to an account.
+- name: WebhookSubscription
+  id: subscription_id
+  notes: Registered webhook endpoint + subscribed event types under an account.
+- name: WebhookDelivery
+  notes: A delivery attempt (with retry/status) for a webhook event.
+relationships:
+- from: Address
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: FinancialInstitution
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: Automation
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: Automation
+  type: has_one
+  to: Address
+  via: destination.address_id
+- from: Transfer
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: Transfer
+  type: has_one
+  to: Address
+  via: source.address_id
+- from: Transfer
+  type: has_one
+  to: Address
+  via: destination.address_id
+- from: TokenMint
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: TokenMint
+  type: has_one
+  to: Address
+  via: destination.address_id
+- from: TokenBurn
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: TokenizationTransfer
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: WebhookSubscription
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: WebhookDelivery
+  type: belongs_to
+  to: WebhookSubscription
+  via: subscription_id
+- from: VerificationDocument
+  type: belongs_to
+  to: Account
+  via: account_id
+- from: Account
+  type: has_many
+  to: [Address, FinancialInstitution, Automation, Transfer, TokenMint, TokenBurn, TokenizationTransfer, VerificationDocument, WebhookSubscription]

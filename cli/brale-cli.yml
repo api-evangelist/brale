@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/Brale-xyz/cli
+name: Brale CLI
+binary: brale
+package: "@brale/cli"
+framework: oclif
+api_base: https://api.brale.xyz
+description: >-
+  Command-line interface for the Brale API. Send stablecoins to any wallet with a
+  single command, or use the full command surface for accounts, addresses, balances,
+  and transfers.
+install:
+- method: npm
+  command: npm install -g @brale/cli
+configure:
+  command: brale configure
+  detail: Interactive setup storing API app credentials (client id/secret, host).
+commands:
+- name: brale configure
+  summary: Interactively configure credentials and host.
+- name: brale accounts
+  summary: List your client and managed accounts.
+- name: brale addresses [ACCOUNTID]
+  summary: List internal and external addresses for an account.
+- name: brale balances [ACCOUNTID]
+  summary: Show stablecoin balances for an account.
+- name: brale internal-wallets
+  summary: List custodial (internal) wallets; supports --network and --format filters.
+- name: brale transfer AMOUNT WALLET VALUETYPE TRANSFERTYPE
+  summary: Unified one-shot transfer from a custodial wallet to any external wallet (supports --dry-run).
+- name: brale transfers create ACCOUNTID
+  summary: Create a fully specified transfer (source/dest type, transfer_type, address/fi ids).
+- name: brale transfers get ACCOUNTID TRANSFERID
+  summary: Retrieve a transfer by id.
+- name: brale transfers list ACCOUNTID
+  summary: List transfers for an account.
+- name: brale help [COMMANDS]
+  summary: Display help for a command.
+key_flows:
+- Send stablecoins to an external wallet in one command (brale transfer 100 0x... SBC base).
+- Preview a transfer without executing (--dry-run).

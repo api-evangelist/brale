@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Brale Issuance and Orchestration API
+  version: 1.0.0
+extends: openapi/brale-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-provider: brale
+    x-api-id-format: KSUID (26-character, time-sortable alphanumeric)
+    x-idempotency-header: Idempotency-Key
+    x-error-envelope: JSON:API (errors[] with code/status/title/detail/source)
+    x-pagination: page query parameter
+    x-status-page: https://status.brale.xyz
+    x-mcp-server: https://mcp.brale.xyz/
+- target: $.servers
+  update:
+  - url: https://api.brale.xyz
+    description: Production server
+    x-token-url: https://auth.brale.xyz/oauth2/token
+- target: $.info
+  update:
+    x-deprecation-note: >-
+      The Financial Institutions resource is deprecated; use the unified Addresses
+      resource (on-chain and off-chain) instead.

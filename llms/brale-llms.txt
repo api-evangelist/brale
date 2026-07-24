@@ -1,0 +1,111 @@
+# Brale
+
+> API documentation for issuing, moving, and managing stablecoins on any blockchain with Brale.
+
+## Docs
+
+- [Brale Issuance and Orchestration API](https://docs.brale.xyz/api-reference/brale-introduction.md): Stablecoin issuance, orchestration, onramps, offramps, and swaps via the Brale API.
+- [Archive an Automation](https://docs.brale.xyz/api-reference/brale/archive-automation.md): Archives an automation, permanently stopping it from processing deposits. The underlying virtual account is closed and billing is released.
+- [Archive Webhook Subscription](https://docs.brale.xyz/api-reference/brale/archive-webhook-subscription.md): Archive a webhook subscription. Future events will not be delivered to this subscription.
+- [Create a customer account](https://docs.brale.xyz/api-reference/brale/create-account.md): Creates a new customer (account) with the required KYC/KYB details.
+- [Create a new external address](https://docs.brale.xyz/api-reference/brale/create-address.md): Creates a non-custodial address (EOA) for the specified account using the Direct bank entry path.
+- [Create an Automation](https://docs.brale.xyz/api-reference/brale/create-automations.md): Create an automation that mints stablecoins to a destination wallet when fiat deposits are received.
+- [Create a new external financial institution](https://docs.brale.xyz/api-reference/brale/create-financial-institution.md): Links an external bank account to the specified account (ACH, wire, etc.).
+- [Create a new internal address](https://docs.brale.xyz/api-reference/brale/create-internal-address.md): Provision an additional custodial (internal) address for the specified account.
+- [Create Plaid link token](https://docs.brale.xyz/api-reference/brale/create-plaid-link-token.md): Step 1 of the Plaid-linked bank account flow. Generates a Plaid Link token to launch the Plaid UI for connecting a bank account.
+- [Create Token Burn](https://docs.brale.xyz/api-reference/brale/create-token-burn.md): Burn tokens from a source address. Only available for tokenization (self-attested) accounts.
+- [Create Token Mint](https://docs.brale.xyz/api-reference/brale/create-token-mint.md): Mint new tokens into a destination address. Only available for tokenization (self-attested) accounts.
+- [Create Token Transfer](https://docs.brale.xyz/api-reference/brale/create-token-transfer.md): Move tokens between custodial and external addresses. Only available for tokenization (self-attested) accounts.
+- [Create a new transfer](https://docs.brale.xyz/api-reference/brale/create-transfer.md): Creates a new transfer using the specified source and destination details.
+- [Create Webhook Subscription](https://docs.brale.xyz/api-reference/brale/create-webhook-subscription.md): Create a new webhook subscription under a Brale account.
+- [Retrieve a customer account](https://docs.brale.xyz/api-reference/brale/get-account.md): Returns the details of a specific customer account, including KYB status.
+- [Retrieve an address](https://docs.brale.xyz/api-reference/brale/get-address.md): Retrieves a single internal or external Address by `address_id`.
+- [Fetch the balance of an internal (custodial) address for a specific token](https://docs.brale.xyz/api-reference/brale/get-address-balance.md): Returns balance data for a given address, chain, and token.   Provide `transfer_type` and `value_type` as query parameters.
+- [Retrieve a single automation](https://docs.brale.xyz/api-reference/brale/get-automations.md): Returns details for a specific automation.
+- [Fetch a specific financial institution](https://docs.brale.xyz/api-reference/brale/get-financial-institution.md): Retrieves details for the specified financial institution (bank account).
+- [Get Token Burn](https://docs.brale.xyz/api-reference/brale/get-token-burn.md): Retrieve a single tokenization burn order by ID.
+- [Get Token Mint](https://docs.brale.xyz/api-reference/brale/get-token-mint.md): Retrieve a single tokenization mint order by ID.
+- [Get Token Transfer](https://docs.brale.xyz/api-reference/brale/get-token-transfer.md): Retrieve a single tokenization transfer by ID.
+- [Retrieve a single transfer](https://docs.brale.xyz/api-reference/brale/get-transfer.md): Returns details for a specific transfer.
+- [Get Webhook Subscription](https://docs.brale.xyz/api-reference/brale/get-webhook-subscription.md): Retrieve a single webhook subscription by ID.
+- [Link Verification Documents](https://docs.brale.xyz/api-reference/brale/link-verification-documents.md): Link staged KYB document submissions to an account.
+- [Retrieve all accounts](https://docs.brale.xyz/api-reference/brale/list-accounts.md): Retrieve your client account and any managed accounts, returning account IDs, names, and KYB status.
+- [Fetch all addresses](https://docs.brale.xyz/api-reference/brale/list-addresses.md): Retrieves all addresses (internal and external) associated with the given account.
+- [Fetch all automations for an account](https://docs.brale.xyz/api-reference/brale/list-automations.md): Retrieves all automations associated with the specified customer account.
+- [Fetch all financial institutions](https://docs.brale.xyz/api-reference/brale/list-financial-institutions.md): Returns all financial institutions associated with the given account.
+- [List Token Burns](https://docs.brale.xyz/api-reference/brale/list-token-burns.md): List tokenization burn orders for an account.
+- [List Token Mints](https://docs.brale.xyz/api-reference/brale/list-token-mints.md): List tokenization mint orders for an account.
+- [List Token Transfers](https://docs.brale.xyz/api-reference/brale/list-token-transfers.md): List tokenization transfers for an account.
+- [List transfers](https://docs.brale.xyz/api-reference/brale/list-transfers.md): Returns a paginated list of transfers for a given account, with optional filters.
+- [List Verification Documents](https://docs.brale.xyz/api-reference/brale/list-verification-documents.md): List required KYB/KYC documents and their upload status for an account.
+- [List Webhook Delivery Attempts](https://docs.brale.xyz/api-reference/brale/list-webhook-delivery-attempts.md): List webhook delivery attempts for debugging delivery status, retries, and failures.
+- [List Webhook Event Types](https://docs.brale.xyz/api-reference/brale/list-webhook-event-types.md): Discover the webhook event types supported by Brale for a given account.
+- [List Webhook Subscriptions](https://docs.brale.xyz/api-reference/brale/list-webhook-subscriptions.md): List the webhook subscriptions registered under a Brale account.
+- [Register financial institution account via Plaid and return address ID](https://docs.brale.xyz/api-reference/brale/register-financial-institution-account-via-plaid-and-return-address-id.md): Completes the Plaid-linked bank account flow by exchanging a Plaid public_token and returning the new address_id.
+- [Stage a Verification Document](https://docs.brale.xyz/api-reference/brale/stage-verification-document.md): Upload a KYB/KYC document for later linking to an account.
+- [Update an Address](https://docs.brale.xyz/api-reference/brale/update-address.md): Update the name, status, or transfer types for an existing address.
+- [Update Webhook Subscription](https://docs.brale.xyz/api-reference/brale/update-webhook-subscription.md): Update the URL or subscribed event types for an active webhook subscription.
+- [Transfer Types](https://docs.brale.xyz/coverage/transfer-types.md): Supported onchain and offchain `transfer_type` identifiers for Brale addresses and transfers.
+- [Value Types](https://docs.brale.xyz/coverage/value-types.md): Canonical `value_type` identifiers for Brale transfers (onchain and offchain).
+- [Add Your Stablecoin](https://docs.brale.xyz/documentation/add-your-stablecoin.md): Submit your token list to Brale Commons so it’s indexed and priced on data.brale.xyz.
+- [Example Standard](https://docs.brale.xyz/documentation/api-design/example-standard.md): Brale API conventions used across docs and examples — IDs, enum casing, SBC placeholder, canonical Create Transfer shape, automations exception, pagination, and testnet terminology.
+- [Core Objects](https://docs.brale.xyz/documentation/api-design/primitives.md): Core building blocks of the Brale API and how they compose.
+- [Structure](https://docs.brale.xyz/documentation/api-design/structure.md): How Brale API resources relate to each other, including accounts, addresses, automations, and financial institutions.
+- [Commons Repo](https://docs.brale.xyz/documentation/commons-repo.md): Jump to the Brale Commons repository for CSF and shared artifacts.
+- [Commons Stablecoin Format](https://docs.brale.xyz/documentation/commons-stablecoin-format.md): Use CSF to generate clear, consistent funds-flow diagrams for Brale workflows.
+- [Documentation](https://docs.brale.xyz/documentation/introduction.md): Get set up quickly, explore key concepts, and ship stablecoin experiences with the Brale API.
+- [Company Overview](https://docs.brale.xyz/documentation/platform/company-overview.md): Brale is a regulated stablecoin issuer with end-to-end APIs for issuance, custody, on and off ramps, and payouts.
+- [Reserves](https://docs.brale.xyz/documentation/platform/reserves.md): Brale stablecoins are fully backed by cash, money market funds, and Treasury bills held in segregated accounts.
+- [Stablecoin Issuance](https://docs.brale.xyz/documentation/platform/stablecoin-issuance.md): Launch fiat-backed stablecoins with Brale handling mint, burn, custody, settlement, reserves, and reporting.
+- [Stablecoin Orchestration](https://docs.brale.xyz/documentation/platform/stablecoin-orchestration.md): Move value across fiat rails and blockchains with controls for branding, automation, and reconciliation.
+- [Tokenization](https://docs.brale.xyz/documentation/platform/tokenization.md): Issue and operate your own tokens with Brale handling key custody, orchestration, mint and burn execution, and reporting.
+- [Transfer Timing](https://docs.brale.xyz/documentation/platform/transfer-timing.md): Cut-off times, settlement windows, and finality for every transfer_type on the Brale platform.
+- [Troubleshooting & Known Pitfalls](https://docs.brale.xyz/documentation/troubleshooting.md): Common issues, quick fixes, and how to avoid retries gone wrong.
+- [Branded Transfers](https://docs.brale.xyz/guides/2nd-and-3rd-party-transfers.md): Display your business name or your customer's name on ACH transfers instead of Brale.
+- [ach_debit to end user wallet ](https://docs.brale.xyz/guides/ach-on-ramp.md): Create an ach_debit funded transaction to a custodial, or self custody wallet.
+- [Canton Token Standard](https://docs.brale.xyz/guides/canton-token-standard.md): Transfer stablecoins to Canton Network parties using the Token Standard interface for offers and acceptance.
+- [Canton Token transfers to EOAs](https://docs.brale.xyz/guides/canton-token-transfers-to-eoas.md)
+- [wire or ach_debit to custodial wallet](https://docs.brale.xyz/guides/fiat-to-stablecoin-onramp.md): Fund stablecoins in custodial wallets via wire or ACH debit transfers, or set up automations for automatic minting.
+- [Add an External Destination](https://docs.brale.xyz/guides/how-to/add-external-destination.md): Register an external address (onchain or offchain) to use as a transfer source or destination.
+- [Get A Balance](https://docs.brale.xyz/guides/how-to/get-a-balance.md): Query the stablecoin balance of an internal (custodial) address.
+- [Get your account_id](https://docs.brale.xyz/guides/how-to/get-your-account-id.md): Fetch your account_id and managed account IDs using the Accounts API with a bearer token.
+- [Get your custodial address_ids](https://docs.brale.xyz/guides/how-to/get-your-address-ids.md): A custodial account_id is a internal (custodial) addresses. You can use custodial accounts to manage balances for specific workflows, or to hold onchain balances for others. To retrieve address_ids for transfers and balances.
+- [Para Wallet integration](https://docs.brale.xyz/guides/integrations/para-wallet.md): Use Para to provision self-custody wallets and Brale to on/off-ramp and orchestrate stablecoin flows to those wallets.
+- [Turnkey Wallet integration](https://docs.brale.xyz/guides/integrations/turnkey.md)
+- [Custodial Accounts](https://docs.brale.xyz/guides/managed-accounts.md): Hold fiat-backed stablecoins on behalf of end users with Brale-managed custodial wallets on supported chains.
+- [Self-custody wallets](https://docs.brale.xyz/guides/self-custody-wallets.md): Provider-agnostic integration pattern for pairing Brale rails with any self-custody wallet provider.
+- [Stablecoin Issuance](https://docs.brale.xyz/guides/stablecoin-issuance.md): Create your own stablecoin in minutes and earn program revenue on fully-backed reserves managed by Brale.
+- [Stablecoin Payouts](https://docs.brale.xyz/guides/stablecoin-payouts.md): Send stablecoin payouts from custodial addresses to external onchain wallets anywhere in the world.
+- [Stablecoin to Fiat (Offramp)](https://docs.brale.xyz/guides/stablecoin-to-fiat-offramp.md): Convert stablecoins to USD and withdraw to bank accounts via wire, ACH, or RTP payment rails.
+- [Stablecoin to Stablecoin (Swap)](https://docs.brale.xyz/guides/stablecoin-to-stablecoin-swap.md): Swap between stablecoins and move stablecoins across blockchains with burn and mint operations.
+- [Tokenization Overview](https://docs.brale.xyz/guides/tokenization.md): Issue and operate your own tokens using Brale for key custody, mint and burn execution, and wallet orchestration.
+- [Accounts](https://docs.brale.xyz/key-concepts/accounts.md): Accounts represent KYB-verified business entities with `account_id` values used to scope API requests and manage custodial wallets.
+- [Addresses](https://docs.brale.xyz/key-concepts/addresses.md): Addresses represent onchain wallets and offchain bank accounts, identified by `address_id` for use in transfers.
+- [API Concepts Overview](https://docs.brale.xyz/key-concepts/api-concepts-overview.md): An overview of accounts, addresses, transfers, automations, and other key resources in the Brale API.
+- [Authentication](https://docs.brale.xyz/key-concepts/authentication.md): Authenticate to the Brale API using OAuth2 client credentials to obtain short-lived bearer tokens.
+- [Automations](https://docs.brale.xyz/key-concepts/automations.md): Configure automatic onramps, offramps, and swaps that trigger when funds are received without manual transfer requests.
+- [External bank addresses](https://docs.brale.xyz/key-concepts/external-bank-addresses.md): Two paths for creating external off-chain bank addresses: Plaid-linked bank account and Direct bank entry.
+- [Financial Institutions](https://docs.brale.xyz/key-concepts/financial-institutions.md): Legacy resource for linking customer bank accounts for withdrawals and deposits. New integrations should use Addresses.
+- [Idempotency](https://docs.brale.xyz/key-concepts/idempotency.md): Use idempotency keys on POST requests to guarantee each operation executes exactly once and prevent duplicate transfers.
+- [Transfers](https://docs.brale.xyz/key-concepts/transfers.md): Move funds between fiat and stablecoins, swap between stablecoins, and convert stablecoins back to fiat.
+- [API MCP](https://docs.brale.xyz/mcp/api.md): Connect your MCP-compatible LLM client to the Brale API server for live endpoint access on testnets and mainnets.
+- [Documentation MCP](https://docs.brale.xyz/mcp/documentation.md): Connect your MCP-compatible LLM client to the Brale documentation server for inline developer reference.
+- [Introduction](https://docs.brale.xyz/overview/introduction.md): Overview of the Brale API for issuing, moving, and managing stablecoins across fiat and blockchain rails.
+- [Quick Start - Your First Brale Stablecoin Transfer](https://docs.brale.xyz/overview/quick-start.md): Get authenticated, grab your IDs, and create your first stablecoin transfer in minutes.
+- [Sandbox and Testnet](https://docs.brale.xyz/overview/sandbox-and-testnet.md): Use Brale's testnet environment to build and test stablecoin integrations without moving real funds.
+- [Stablecoin Calculators](https://docs.brale.xyz/tools/calculators/stablecoin-calculators.md): Estimate stablecoin program revenue and USDC payout costs.
+- [Webhooks](https://docs.brale.xyz/webhooks/overview.md): Receive signed webhook events from Brale when transfers and payments complete.
+- [Quickstart](https://docs.brale.xyz/webhooks/quickstart.md)
+- [Signatures](https://docs.brale.xyz/webhooks/signatures.md)
+- [Subscription api reference](https://docs.brale.xyz/webhooks/subscription-api-reference.md)
+- [Troubleshooting](https://docs.brale.xyz/webhooks/troubleshooting.md)
+- [Webhook events](https://docs.brale.xyz/webhooks/webhook-events.md)
+
+## OpenAPI Specs
+
+- [brale-openapi](https://docs.brale.xyz/api-reference/brale-openapi.yaml)
+
+## Optional
+
+- [API Keys](https://app.brale.xyz)
+- [API Logs](https://app.brale.xyz/api?tab=activity)

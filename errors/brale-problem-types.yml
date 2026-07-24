@@ -1,0 +1,52 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/brale-openapi-original.yml
+format: json-api
+envelope:
+  description: >-
+    Errors are returned as a JSON:API-style Failure document. The top-level object
+    carries errors[], plus optional links and meta. Each error object (ApiError) has
+    code, status, title, detail, id, source (with pointer and/or parameter), links,
+    and meta.
+  shape:
+    errors:
+    - code: string (e.g. ValidationError, NotFound)
+      status: string (HTTP status as string)
+      title: string
+      detail: string | null
+      id: string | null
+      source:
+        pointer: e.g. /body/data/attributes
+        parameter: e.g. page[cursor]
+    links: object | null
+    meta: object | null
+observed_codes:
+- code: ValidationError
+  status: 422
+  notes: request body/parameter validation failure (source.pointer / source.parameter identify the field)
+- code: NotFound
+  status: 404
+  notes: requested resource does not exist
+- code: Forbidden
+  status: 403
+  notes: e.g. account is not configured as a tokenization (self-attested) account
+problems:
+- status: 400
+  title: Bad Request
+- status: 401
+  title: Unauthorized
+  detail: Missing or invalid bearer token / OAuth credentials
+- status: 403
+  title: Forbidden
+- status: 404
+  title: Not Found
+- status: 409
+  title: Conflict
+- status: 422
+  title: Unprocessable Entity (validation)
+- status: 500
+  title: Internal Server Error
+- status: 502
+  title: Bad Gateway
+- status: 503
+  title: Service Unavailable

@@ -1,0 +1,24 @@
+{
+  "provider": "brale",
+  "sources": [
+    "brale-accounts-api-openapi.yml",
+    "brale-addresses-api-openapi.yml",
+    "brale-automations-api-openapi.yml",
+    "brale-financial-institutions-api-openapi.yml",
+    "brale-orders-api-openapi.yml",
+    "brale-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "brale-accounts-api-openapi.yml",
+    "brale-addresses-api-openapi.yml",
+    "brale-automations-api-openapi.yml",
+    "brale-financial-institutions-api-openapi.yml",
+    "brale-orders-api-openapi.yml",
+    "brale-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

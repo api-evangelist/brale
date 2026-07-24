@@ -1,0 +1,60 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.brale.xyz/
+authentication:
+  style: oauth2-client-credentials
+  token_type: Bearer
+  token_url: https://auth.brale.xyz/oauth2/token
+  header: 'Authorization: Bearer {access_token}'
+  scopes_artifact: scopes/brale-scopes.yml
+  detail: >-
+    OAuth2 client-credentials grant returns a bearer access token used on all
+    subsequent calls. Scopes are per-resource (e.g. transfers:write, addresses:read,
+    webhooks:write, self_attested_tokens:mint).
+idempotency:
+  supported: true
+  mechanism: header
+  header: Idempotency-Key
+  detail: >-
+    Mutating operations accept an Idempotency-Key header (documented on token mint
+    and present in the OpenAPI) so retried requests are not double-processed. Use a
+    unique key (e.g. UUID) per logical operation.
+  cross_ref: errors/brale-problem-types.yml
+pagination:
+  style: page
+  params:
+  - page
+  detail: >-
+    List endpoints (e.g. list transfers) accept a page query parameter. Additional
+    filters (status, transaction_id, automation_id, address_id, transfer_type,
+    value_type) narrow results. An ApiError source.parameter example (page[cursor])
+    suggests cursor-style pagination on some collections.
+identifiers:
+  format: KSUID
+  detail: >-
+    All resource IDs (account_id, address_id, financial_institution_id,
+    automation_id, transfer_id, etc.) are KSUIDs — 26-character time-sortable
+    alphanumeric strings. Examples showing UUIDs in older docs are incorrect.
+error_envelope:
+  format: json-api
+  cross_ref: errors/brale-problem-types.yml
+  detail: >-
+    Errors return a Failure document: errors[] (code/status/title/detail/source),
+    plus optional links and meta.
+domain_vocabulary:
+  transfer_type:
+    detail: >-
+      Identifies the rail/chain for a transfer or address (onchain: base, solana,
+      ethereum, polygon, avalanche, celo, optimism, arbitrum, stellar, canton;
+      offchain: wire, ach_credit, ach_debit, same_day_ach_credit, same_day_ach_debit,
+      rtp_credit).
+    reference: https://docs.brale.xyz/coverage/transfer-types
+  value_type:
+    detail: The token/currency being moved (e.g. USD, USDC, SBC, a custom stablecoin symbol).
+    reference: https://docs.brale.xyz/coverage/value-types
+versioning:
+  cross_ref: lifecycle/brale-lifecycle.yml
+rate_limits:
+  detail: Existing account-level API limits apply (including through the MCP surface); no numeric public rate-limit table was found published during this pass.
+webhooks:
+  cross_ref: asyncapi/brale-webhooks.yml

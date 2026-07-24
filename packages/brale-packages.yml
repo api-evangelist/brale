@@ -1,0 +1,18 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.npmjs.com/package/@brale/cli
+note: >-
+  Brale ships a first-party CLI (@brale/cli) but does not publish a dedicated
+  server-side client SDK library; the OpenAPI spec and Postman collection are the
+  recommended integration path. No official SDK pointer is emitted (no SDK library
+  found — CLI only). oauth2-token-agent is an Elixir token-renewal helper in the
+  Brale-xyz GitHub org, not published to a package registry.
+packages:
+- language: javascript
+  registry: npm
+  name: "@brale/cli"
+  url: https://www.npmjs.com/package/@brale/cli
+  install: npm install -g @brale/cli
+  official: true
+  kind: cli
+  source_repo: https://github.com/Brale-xyz/cli

@@ -1,0 +1,103 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/brale-openapi-original.yml
+schemes:
+- name: oauth
+  source: openapi/brale-openapi-original.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.brale.xyz/oauth2/token
+scopes:
+- scope: accounts:read
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: accounts:write
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: addresses:read
+  description: Read address details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: addresses:write
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: automations:read
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: automations:write
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: financial-institutions:read
+  description: Read financial institution details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: financial-institutions:write
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: mints:write
+  description: Mint more of a specific token on chain
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: orders:read
+  description: Read order details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: redemptions:write
+  description: Redeem/burn a particular token on a specific chain
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: self_attested_tokens:burn
+  description: Burn attested tokens (tokenization accounts only)
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: self_attested_tokens:mint
+  description: Mint attested tokens (tokenization accounts only)
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: self_attested_tokens:read
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: self_attested_tokens:transfer
+  description: Transfer attested tokens (tokenization accounts only)
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: tokens:read
+  description: Read token details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: transfers:read
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: transfers:write
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: webhooks:read
+  description: Read webhook subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml
+- scope: webhooks:write
+  description: Create and manage webhook subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/brale-openapi-original.yml

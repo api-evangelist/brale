@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.brale.xyz/
+versioning:
+  scheme: document-versioned
+  current: 2.3.1
+  notes: >-
+    The OpenAPI served at https://api.brale.xyz/openapi reports info.version 1.0
+    (title "Brale API"); the published docs spec (Brale-xyz/docs) reports version
+    2.3.1 (title "Brale Issuance and Orchestration API"). The API is not path- or
+    header-versioned; there is a single production base URL https://api.brale.xyz.
+deprecation:
+  policy_url: https://docs.brale.xyz/
+  sunset_header: unknown
+  deprecated_resources:
+  - resource: Financial Institutions
+    replacement: Addresses (unified on-chain and off-chain resource)
+    notes: >-
+      Financial Institutions endpoints are kept but marked deprecated as of 2.3.1;
+      Transfers now accept address_id only (no financial_institution_id). Migrate to
+      the Addresses resource.
+status_page: https://status.brale.xyz
+status_page_alt: https://brale.statuspage.io
+sla:
+  url: null
+  uptime_target: null
+deprecated_operations:
+- openapi/brale-openapi-original.yml#list_account_financial_institutions
+- openapi/brale-openapi-original.yml#get_account_financial_institution
+- openapi/brale-openapi-original.yml#create_external_financial_institution
+- openapi/brale-openapi-original.yml#get_financial_institution_status
+- openapi/brale-openapi-original.yml#register_account
