@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "name": "Brale",
+  "description": "Stablecoin infrastructure platform for enterprises. Issue branded stablecoins, connect on/off ramps, and manage cross-chain transfers via API.",
+  "url": "https://brale.xyz",
+  "api": {
+    "catalog": "https://brale.xyz/.well-known/api-catalog",
+    "openapi": "https://api.brale.xyz/openapi",
+    "base_url": "https://api.brale.xyz"
+  },
+  "mcp": {
+    "server_url": "https://mcp.brale.xyz",
+    "oauth_protected_resource": "https://mcp.brale.xyz/.well-known/oauth-protected-resource",
+    "server_card": "https://brale.xyz/.well-known/mcp/server-card.json"
+  },
+  "auth": {
+    "type": "oauth2",
+    "authorization_server": "https://auth.brale.xyz",
+    "authorization_server_metadata": "https://brale.xyz/.well-known/oauth-authorization-server",
+    "token_url": "https://auth.brale.xyz/oauth2/token",
+    "docs": "https://docs.brale.xyz/auth.md",
+    "protected_resource_metadata": "https://brale.xyz/.well-known/oauth-protected-resource"
+  },
+  "documentation": {
+    "llms_txt": "https://brale.xyz/llms.txt",
+    "llms_full_txt": "https://brale.xyz/llms-full.txt",
+    "auth_md": "https://brale.xyz/auth.md",
+    "index_md": "https://brale.xyz/index.md"
+  }
+}

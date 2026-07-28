@@ -173,6 +173,10 @@ apis:
   - type: Postman
     url: https://www.postman.com/brale-xyz/brale-api/overview
 common:
+- type: AgentCard
+  url: a2a/brale-a2a.yml
+  name: A2A Agent Card
+  description: Agent Card served at /.well-known/agent.json (flavored against A2A 1.0.0).
 - type: Documentation
   url: https://docs.brale.xyz/
 - type: DeveloperPortal
