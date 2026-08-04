@@ -1,0 +1,1432 @@
+{
+  "info": {
+    "_postman_id": "3593f07c-454d-4112-8448-305b96193922",
+    "name": "Brale Accounts Automations API",
+    "description": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:43.000Z",
+    "updatedAt": "2026-07-28T01:15:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3593f07c-454d-4112-8448-305b96193922"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "automations",
+              "item": [
+                {
+                  "name": "{automation_id}",
+                  "item": [
+                    {
+                      "name": "Get Automation",
+                      "id": "30f16084-79e8-43fa-aa3c-652251efdfb9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations",
+                            ":automation_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "357412dd-456b-4c7c-89e8-bf4117a3392c",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            },
+                            {
+                              "id": "f877a828-5cad-4bdd-adcf-677d5bb4c3b2",
+                              "key": "automation_id",
+                              "value": "<string>",
+                              "description": "(Required) Automation ID"
+                            }
+                          ]
+                        },
+                        "description": "Get Automation"
+                      },
+                      "response": [
+                        {
+                          "id": "fef387e8-f138-4748-bb1b-b0c9fc32dbac",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"status\": \"pending\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"funding_instructions\": {\n      \"bank_name\": \"<string>\",\n      \"bank_address\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"routing_number\": \"<string>\",\n      \"beneficiary_name\": \"<string>\",\n      \"beneficiary_address\": \"<string>\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-fef387e8-f138-4748-bb1b-b0c9fc32dbac"
+                        },
+                        {
+                          "id": "a1f9e4dd-3780-4279-abe8-abc6e62b30e1",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-a1f9e4dd-3780-4279-abe8-abc6e62b30e1"
+                        },
+                        {
+                          "id": "abf7b0b8-3524-4338-b297-e262b2be1160",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-abf7b0b8-3524-4338-b297-e262b2be1160"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-30f16084-79e8-43fa-aa3c-652251efdfb9"
+                    },
+                    {
+                      "name": "Update Automation Status",
+                      "id": "fe05df2a-f366-4ff5-bd09-b1c914f68971",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"archived\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations",
+                            ":automation_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "968808bc-57a8-4b99-a2da-ddc1537dba83",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            },
+                            {
+                              "id": "d76b43fb-852d-41f6-878c-6291a173f992",
+                              "key": "automation_id",
+                              "value": "<string>",
+                              "description": "(Required) Automation ID"
+                            }
+                          ]
+                        },
+                        "description": "Disable or archive an Automation"
+                      },
+                      "response": [
+                        {
+                          "id": "0c823af9-b16b-42f9-bf12-5bc62e19e2af",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"status\": \"pending\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"funding_instructions\": {\n      \"bank_name\": \"<string>\",\n      \"bank_address\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"routing_number\": \"<string>\",\n      \"beneficiary_name\": \"<string>\",\n      \"beneficiary_address\": \"<string>\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-0c823af9-b16b-42f9-bf12-5bc62e19e2af"
+                        },
+                        {
+                          "id": "21e971f2-ab40-4e47-8a48-6f8b8a1f7d71",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-21e971f2-ab40-4e47-8a48-6f8b8a1f7d71"
+                        },
+                        {
+                          "id": "78aae87d-7cb6-4331-9d4a-07816c9731ce",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"non_0c\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"non_d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"laborumd70\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"irurec_\": \"<string>\",\n        \"non_c6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"minim__\": {\n      \"href\": \"<string>\"\n    },\n    \"labore_2\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ut39\": \"<string>\",\n    \"do_777\": \"<string>\",\n    \"aliquipbc\": \"<string>\",\n    \"cillum_8c\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-78aae87d-7cb6-4331-9d4a-07816c9731ce"
+                        },
+                        {
+                          "id": "9660b58d-5673-46ef-8120-1af86fc6c32c",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"non_0c\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"non_d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"laborumd70\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"irurec_\": \"<string>\",\n        \"non_c6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"minim__\": {\n      \"href\": \"<string>\"\n    },\n    \"labore_2\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ut39\": \"<string>\",\n    \"do_777\": \"<string>\",\n    \"aliquipbc\": \"<string>\",\n    \"cillum_8c\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-9660b58d-5673-46ef-8120-1af86fc6c32c"
+                        },
+                        {
+                          "id": "df371ee6-58ad-4aeb-93e1-4076a40ed59c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-df371ee6-58ad-4aeb-93e1-4076a40ed59c"
+                        },
+                        {
+                          "id": "96a304d2-10db-4655-ac4f-c80de6ca0d86",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"non_0c\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"non_d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"laborumd70\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"irurec_\": \"<string>\",\n        \"non_c6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"minim__\": {\n      \"href\": \"<string>\"\n    },\n    \"labore_2\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ut39\": \"<string>\",\n    \"do_777\": \"<string>\",\n    \"aliquipbc\": \"<string>\",\n    \"cillum_8c\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-96a304d2-10db-4655-ac4f-c80de6ca0d86"
+                        },
+                        {
+                          "id": "e58d6657-97c4-45ef-b3e7-0e2f8db318b5",
+                          "name": "Upstream service error",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/automations/:automation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "automations",
+                                ":automation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "automation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Gateway",
+                          "code": 502,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:44.000Z",
+                          "updatedAt": "2026-07-28T01:15:44.000Z",
+                          "uid": "35240-e58d6657-97c4-45ef-b3e7-0e2f8db318b5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-fe05df2a-f366-4ff5-bd09-b1c914f68971"
+                    }
+                  ],
+                  "id": "584b4554-4082-416b-ac85-6adac92b833c",
+                  "createdAt": "2026-07-28T01:15:44.000Z",
+                  "updatedAt": "2026-07-28T01:15:44.000Z",
+                  "uid": "35240-584b4554-4082-416b-ac85-6adac92b833c"
+                },
+                {
+                  "name": "Get Automations",
+                  "id": "5926dd68-4cb3-4630-9267-94435d8cd5f1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://auth.brale.xyz/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "automations"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b779dda6-ce12-4304-a742-d68f5c9ab5f9",
+                          "key": "account_id",
+                          "value": "<string>",
+                          "description": "(Required) Account ID"
+                        }
+                      ]
+                    },
+                    "description": "Get Automations"
+                  },
+                  "response": [
+                    {
+                      "id": "1a39047d-3888-44fe-970d-71942d70cd4a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"status\": \"pending\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"funding_instructions\": {\n      \"bank_name\": \"<string>\",\n      \"bank_address\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"routing_number\": \"<string>\",\n      \"beneficiary_name\": \"<string>\",\n      \"beneficiary_address\": \"<string>\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-1a39047d-3888-44fe-970d-71942d70cd4a"
+                    },
+                    {
+                      "id": "011d6772-b9f0-4930-9a27-95a4a2d6471e",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-011d6772-b9f0-4930-9a27-95a4a2d6471e"
+                    },
+                    {
+                      "id": "2f2d9d53-7b5d-4834-9391-5a08abd21953",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-2f2d9d53-7b5d-4834-9391-5a08abd21953"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:44.000Z",
+                  "updatedAt": "2026-07-28T01:15:44.000Z",
+                  "uid": "35240-5926dd68-4cb3-4630-9267-94435d8cd5f1"
+                },
+                {
+                  "name": "Create Automation",
+                  "id": "5ecc2452-57df-434d-a151-02e32112b193",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://auth.brale.xyz/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "automations"
+                      ],
+                      "variable": [
+                        {
+                          "id": "bafe9b91-5a7f-4991-b1f7-b80e86b17ac8",
+                          "key": "account_id",
+                          "value": "<string>",
+                          "description": "(Required) Account ID"
+                        }
+                      ]
+                    },
+                    "description": "Create Automation"
+                  },
+                  "response": [
+                    {
+                      "id": "f0aebb42-b0a7-4712-89b6-7f5036e75d3f",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"status\": \"pending\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"funding_instructions\": {\n      \"bank_name\": \"<string>\",\n      \"bank_address\": \"<string>\",\n      \"account_number\": \"<string>\",\n      \"routing_number\": \"<string>\",\n      \"beneficiary_name\": \"<string>\",\n      \"beneficiary_address\": \"<string>\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-f0aebb42-b0a7-4712-89b6-7f5036e75d3f"
+                    },
+                    {
+                      "id": "5e203f6e-16fc-4431-9c4e-727b80103dde",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-5e203f6e-16fc-4431-9c4e-727b80103dde"
+                    },
+                    {
+                      "id": "ae5a95a5-73ba-4f6f-997a-63c8dcd4ab47",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"non_0c\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"non_d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"laborumd70\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"irurec_\": \"<string>\",\n        \"non_c6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"minim__\": {\n      \"href\": \"<string>\"\n    },\n    \"labore_2\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ut39\": \"<string>\",\n    \"do_777\": \"<string>\",\n    \"aliquipbc\": \"<string>\",\n    \"cillum_8c\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-ae5a95a5-73ba-4f6f-997a-63c8dcd4ab47"
+                    },
+                    {
+                      "id": "66d54e22-ea52-4590-81af-464575a1bcbd",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"non_0c\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"non_d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"laborumd70\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"irurec_\": \"<string>\",\n        \"non_c6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"minim__\": {\n      \"href\": \"<string>\"\n    },\n    \"labore_2\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ut39\": \"<string>\",\n    \"do_777\": \"<string>\",\n    \"aliquipbc\": \"<string>\",\n    \"cillum_8c\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-66d54e22-ea52-4590-81af-464575a1bcbd"
+                    },
+                    {
+                      "id": "34e711d9-e48c-4187-afd7-6becccae2077",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/automations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "automations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:44.000Z",
+                      "updatedAt": "2026-07-28T01:15:44.000Z",
+                      "uid": "35240-34e711d9-e48c-4187-afd7-6becccae2077"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:44.000Z",
+                  "updatedAt": "2026-07-28T01:15:44.000Z",
+                  "uid": "35240-5ecc2452-57df-434d-a151-02e32112b193"
+                }
+              ],
+              "id": "313641c0-7666-4144-875b-d72df3e6f6ab",
+              "createdAt": "2026-07-28T01:15:44.000Z",
+              "updatedAt": "2026-07-28T01:15:44.000Z",
+              "uid": "35240-313641c0-7666-4144-875b-d72df3e6f6ab"
+            }
+          ],
+          "id": "1c33d6ae-0c7d-4018-8d01-3aff6bb82a03",
+          "createdAt": "2026-07-28T01:15:44.000Z",
+          "updatedAt": "2026-07-28T01:15:44.000Z",
+          "uid": "35240-1c33d6ae-0c7d-4018-8d01-3aff6bb82a03"
+        }
+      ],
+      "id": "bf70b592-0d75-464a-b737-0d3fbee96974",
+      "createdAt": "2026-07-28T01:15:44.000Z",
+      "updatedAt": "2026-07-28T01:15:44.000Z",
+      "uid": "35240-bf70b592-0d75-464a-b737-0d3fbee96974"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.brale.xyz"
+    }
+  ]
+}

@@ -173,6 +173,8 @@ apis:
   - type: Postman
     url: https://www.postman.com/brale-xyz/brale-api/overview
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/brale/overview
 - type: AgentCard
   url: a2a/brale-a2a.yml
   name: A2A Agent Card

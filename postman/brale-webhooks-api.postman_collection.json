@@ -1,0 +1,3090 @@
+{
+  "info": {
+    "_postman_id": "e69b5af3-ebe5-4292-afe8-e92aec0e1eb9",
+    "name": "Brale Accounts Webhooks API",
+    "description": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:47.000Z",
+    "updatedAt": "2026-07-28T01:15:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e69b5af3-ebe5-4292-afe8-e92aec0e1eb9"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "webhooks",
+              "item": [
+                {
+                  "name": "deliveries",
+                  "item": [
+                    {
+                      "name": "List webhook delivery logs",
+                      "id": "4d572b64-d145-4cbb-9ab2-654f2cdeb09a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks",
+                            "deliveries"
+                          ],
+                          "query": [
+                            {
+                              "description": "Paging query parameters",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Paging query parameters",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Paging query parameters",
+                              "key": "size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "f5472eaf-4315-401f-8106-94751cd9a87a",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            }
+                          ]
+                        },
+                        "description": "Returns outbound delivery attempts for webhook subscriptions owned by the account, newest first, with cursor pagination (`page[size]`, and either `page[after]` or `page[before]` \u2014 not both)."
+                      },
+                      "response": [
+                        {
+                          "id": "47fccab1-47f6-4fb5-bdd5-add3bb4394ab",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "deliveries"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"deliveries\": [\n    {\n      \"id\": \"<string>\",\n      \"event_id\": \"<string>\",\n      \"subscription_id\": \"<string>\",\n      \"attempt_number\": \"<integer>\",\n      \"status_code\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"failure_message\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"event_id\": \"<string>\",\n      \"subscription_id\": \"<string>\",\n      \"attempt_number\": \"<integer>\",\n      \"status_code\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"failure_message\": \"<string>\"\n    }\n  ],\n  \"pagination\": {\n    \"next\": \"<string>\",\n    \"page_size\": \"<integer>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-47fccab1-47f6-4fb5-bdd5-add3bb4394ab"
+                        },
+                        {
+                          "id": "995b485f-9b18-4469-b2e3-e9e688039981",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "deliveries"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-995b485f-9b18-4469-b2e3-e9e688039981"
+                        },
+                        {
+                          "id": "eb2e7c3a-4450-4719-b37a-45c409d29286",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "deliveries"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-eb2e7c3a-4450-4719-b37a-45c409d29286"
+                        },
+                        {
+                          "id": "4b111327-f113-4fa2-9b3e-228e7e58d7f6",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "deliveries"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-4b111327-f113-4fa2-9b3e-228e7e58d7f6"
+                        },
+                        {
+                          "id": "8d1197de-ffbe-4e44-9953-c4e0634c4645",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/deliveries?after=<string>&before=<string>&size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "deliveries"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Paging query parameters",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-8d1197de-ffbe-4e44-9953-c4e0634c4645"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-4d572b64-d145-4cbb-9ab2-654f2cdeb09a"
+                    }
+                  ],
+                  "id": "4ae493f7-8a52-4aea-8586-8fe21176f1b0",
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-4ae493f7-8a52-4aea-8586-8fe21176f1b0"
+                },
+                {
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "{subscription_id}",
+                      "item": [
+                        {
+                          "name": "Archive webhook subscription",
+                          "id": "43715dab-7062-4cef-b294-c331f947e70a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "https://auth.brale.xyz/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "subscriptions",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4aff59de-4874-4284-90b9-332b9e61ed81",
+                                  "key": "account_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Account ID"
+                                },
+                                {
+                                  "id": "3c154aa8-82af-450f-84f8-92df66fd3971",
+                                  "key": "subscription_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Webhook subscription ID"
+                                }
+                              ]
+                            },
+                            "description": "Sets an **active** subscription to **archived** so it no longer receives webhooks. Event subscriptions and delivery history are retained. Returns **409** if the subscription is already archived."
+                          },
+                          "response": [
+                            {
+                              "id": "2e8093ea-b6aa-4786-b5e3-d8007e64dcee",
+                              "name": "No Content",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-2e8093ea-b6aa-4786-b5e3-d8007e64dcee"
+                            },
+                            {
+                              "id": "4e145c01-a6af-4723-bdcb-e9d7a0c9bf0a",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-4e145c01-a6af-4723-bdcb-e9d7a0c9bf0a"
+                            },
+                            {
+                              "id": "f2a4a66b-1c7c-4332-89c4-50a9a9e268eb",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-f2a4a66b-1c7c-4332-89c4-50a9a9e268eb"
+                            },
+                            {
+                              "id": "b781cf5e-3cf4-428a-9dae-59846f2618b2",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-b781cf5e-3cf4-428a-9dae-59846f2618b2"
+                            },
+                            {
+                              "id": "76552e1c-8a9b-47d7-a2ad-af5b90f072e0",
+                              "name": "Conflict",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-76552e1c-8a9b-47d7-a2ad-af5b90f072e0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-43715dab-7062-4cef-b294-c331f947e70a"
+                        },
+                        {
+                          "name": "Update webhook subscription",
+                          "id": "b3f9e22a-fee0-4975-9565-c2c7de92c6b3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "https://auth.brale.xyz/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "subscriptions",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a806b480-6a2d-4670-a4e8-7c3a7817b5ec",
+                                  "key": "account_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Account ID"
+                                },
+                                {
+                                  "id": "909009a6-1700-41c1-bc4e-db59fcc7f170",
+                                  "key": "subscription_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Webhook subscription ID"
+                                }
+                              ]
+                            },
+                            "description": "Updates URL and/or subscribed event types for an **active** subscription. When `events` is sent, it replaces the full set. **Archived** subscriptions return **409**."
+                          },
+                          "response": [
+                            {
+                              "id": "93802bb0-1fe1-43cd-8f90-0edc0f23608c",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-93802bb0-1fe1-43cd-8f90-0edc0f23608c"
+                            },
+                            {
+                              "id": "db1c42c6-70e4-45f5-b244-8200db3ce27a",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-db1c42c6-70e4-45f5-b244-8200db3ce27a"
+                            },
+                            {
+                              "id": "5513d9b3-2fed-4eb0-9d7f-b6827d425bd6",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-5513d9b3-2fed-4eb0-9d7f-b6827d425bd6"
+                            },
+                            {
+                              "id": "c365c408-d84f-490b-a475-acf8a407875b",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-c365c408-d84f-490b-a475-acf8a407875b"
+                            },
+                            {
+                              "id": "69ee6102-6611-4259-afa1-1eaa6c9348a8",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-69ee6102-6611-4259-afa1-1eaa6c9348a8"
+                            },
+                            {
+                              "id": "64ae3562-06b1-4895-ab95-a1a6798a87ea",
+                              "name": "Conflict",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-64ae3562-06b1-4895-ab95-a1a6798a87ea"
+                            },
+                            {
+                              "id": "e731473f-73ad-4710-83e7-1672db4c735c",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/subscriptions/:subscription_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "subscriptions",
+                                    ":subscription_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "subscription_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-e731473f-73ad-4710-83e7-1672db4c735c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-b3f9e22a-fee0-4975-9565-c2c7de92c6b3"
+                        }
+                      ],
+                      "id": "a1397108-a3af-499f-8c71-6a51c9f3b0e5",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-a1397108-a3af-499f-8c71-6a51c9f3b0e5"
+                    }
+                  ],
+                  "id": "223a444b-faf4-421f-893c-e38e080f5896",
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-223a444b-faf4-421f-893c-e38e080f5896"
+                },
+                {
+                  "name": "{subscription_id}",
+                  "item": [
+                    {
+                      "name": "Get webhook subscription",
+                      "id": "3025bee1-661f-4996-8d91-61efec7ba0e0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks/:subscription_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks",
+                            ":subscription_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bb49aa88-7a91-47a6-9088-600b9962e144",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            },
+                            {
+                              "id": "981989af-b2ba-4798-a4b8-81ab4fffff2b",
+                              "key": "subscription_id",
+                              "value": "<string>",
+                              "description": "(Required) Webhook subscription ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ca695183-89b4-4d02-ae75-9edb865f321f",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-ca695183-89b4-4d02-ae75-9edb865f321f"
+                        },
+                        {
+                          "id": "65ff3e86-8e8a-458e-95d6-8fa4fe8bff4c",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-65ff3e86-8e8a-458e-95d6-8fa4fe8bff4c"
+                        },
+                        {
+                          "id": "75fae960-f980-402a-9749-9570370d479e",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-75fae960-f980-402a-9749-9570370d479e"
+                        },
+                        {
+                          "id": "e295aac6-ebad-4d6b-ab43-b2d32492cf17",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-e295aac6-ebad-4d6b-ab43-b2d32492cf17"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-3025bee1-661f-4996-8d91-61efec7ba0e0"
+                    }
+                  ],
+                  "id": "217b2ca6-5551-40bf-854e-32dfa85c7452",
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-217b2ca6-5551-40bf-854e-32dfa85c7452"
+                },
+                {
+                  "name": "events",
+                  "item": [
+                    {
+                      "name": "{event_id}",
+                      "item": [
+                        {
+                          "name": "resend",
+                          "item": [
+                            {
+                              "name": "Replay webhook deliveries for an event",
+                              "id": "3ae4daef-515a-440d-9efe-d8def27bdcc5",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "oauth2",
+                                  "oauth2": [
+                                    {
+                                      "key": "scope",
+                                      "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "accessTokenUrl",
+                                      "value": "https://auth.brale.xyz/oauth2/token",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "grant_type",
+                                      "value": "client_credentials",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "webhooks",
+                                    "events",
+                                    ":event_id",
+                                    "resend"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3838fa07-3eec-415f-b3a0-353709be514a",
+                                      "key": "account_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Account ID"
+                                    },
+                                    {
+                                      "id": "dcf4e7f0-d2b8-4108-9331-7ede12b65897",
+                                      "key": "event_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                                    }
+                                  ]
+                                },
+                                "description": "Queues one outbound replay delivery job per **active** webhook subscription for this account that subscribes to the event type of the given **`event_id`** (canonical envelope id; e.g. payment id for `payment.completed`, order id for `transfer.completed`, `transfer.canceled`, or `transfer.failed`). Requires **`Idempotency-Key`**. Payload is taken from `webhook_event_payloads` when present, otherwise rebuilt from domain data."
+                              },
+                              "response": [
+                                {
+                                  "id": "fd57c451-4c9c-43c0-835b-caa1a9a0750c",
+                                  "name": "Accepted",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Accepted",
+                                  "code": 202,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    },
+                                    {
+                                      "disabled": false,
+                                      "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                      },
+                                      "key": "content-location",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"queued\",\n  \"jobIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-fd57c451-4c9c-43c0-835b-caa1a9a0750c"
+                                },
+                                {
+                                  "id": "b60fbf48-8dd4-4965-8945-e86cd466241b",
+                                  "name": "Bad Request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-b60fbf48-8dd4-4965-8945-e86cd466241b"
+                                },
+                                {
+                                  "id": "a8ce5285-d00a-4139-88a0-1f0c3227a1f7",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-a8ce5285-d00a-4139-88a0-1f0c3227a1f7"
+                                },
+                                {
+                                  "id": "3af85270-2b5b-48c8-94bf-6542ebe4fc8c",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-3af85270-2b5b-48c8-94bf-6542ebe4fc8c"
+                                },
+                                {
+                                  "id": "07b5071d-27c6-4441-ae27-c55c8b1f4b1f",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-07b5071d-27c6-4441-ae27-c55c8b1f4b1f"
+                                },
+                                {
+                                  "id": "b8e0a35e-6756-41a6-8de1-eb03670ba0f3",
+                                  "name": "Service Unavailable",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks/events/:event_id/resend",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "accounts",
+                                        ":account_id",
+                                        "webhooks",
+                                        "events",
+                                        ":event_id",
+                                        "resend"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "account_id"
+                                        },
+                                        {
+                                          "key": "event_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Service Unavailable",
+                                  "code": 503,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:47.000Z",
+                                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                                  "uid": "35240-b8e0a35e-6756-41a6-8de1-eb03670ba0f3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:15:47.000Z",
+                              "updatedAt": "2026-07-28T01:15:47.000Z",
+                              "uid": "35240-3ae4daef-515a-440d-9efe-d8def27bdcc5"
+                            }
+                          ],
+                          "id": "c1c43938-7649-46a7-b5b5-7126aa23e6b3",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-c1c43938-7649-46a7-b5b5-7126aa23e6b3"
+                        }
+                      ],
+                      "id": "9252e422-a720-46b9-962a-46fda8f5f235",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-9252e422-a720-46b9-962a-46fda8f5f235"
+                    }
+                  ],
+                  "id": "443e45b8-7b31-47cb-b80c-02d24f8c8d10",
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-443e45b8-7b31-47cb-b80c-02d24f8c8d10"
+                },
+                {
+                  "name": "event_types",
+                  "item": [
+                    {
+                      "name": "List supported webhook event types",
+                      "id": "5e8fe01b-8d44-4063-a638-270d93cb4848",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks/event_types",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks",
+                            "event_types"
+                          ],
+                          "variable": [
+                            {
+                              "id": "add389be-0d56-4dc9-9189-d60c0dfc38d4",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            }
+                          ]
+                        },
+                        "description": "Returns the event type strings (and short descriptions) that may be passed in `POST .../webhooks` `events` when creating a subscription."
+                      },
+                      "response": [
+                        {
+                          "id": "7a66f788-79b4-4b95-acdb-c31e9836656d",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/event_types",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "event_types"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"event_types\": [\n    {\n      \"event_type\": \"<string>\",\n      \"summary\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"summary\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-7a66f788-79b4-4b95-acdb-c31e9836656d"
+                        },
+                        {
+                          "id": "8f539a05-39fe-4d48-b5bb-27763801ddf2",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/event_types",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "event_types"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-8f539a05-39fe-4d48-b5bb-27763801ddf2"
+                        },
+                        {
+                          "id": "61b04cf3-cf99-4c4e-bd14-bf1a7db938da",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/event_types",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "event_types"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-61b04cf3-cf99-4c4e-bd14-bf1a7db938da"
+                        },
+                        {
+                          "id": "f7804114-ec30-4f99-bebb-b968059ba63a",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/webhooks/event_types",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "webhooks",
+                                "event_types"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:47.000Z",
+                          "updatedAt": "2026-07-28T01:15:47.000Z",
+                          "uid": "35240-f7804114-ec30-4f99-bebb-b968059ba63a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-5e8fe01b-8d44-4063-a638-270d93cb4848"
+                    }
+                  ],
+                  "id": "b46a8dc6-38fb-41de-8555-13ad6cbfd5aa",
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-b46a8dc6-38fb-41de-8555-13ad6cbfd5aa"
+                },
+                {
+                  "name": "List webhook subscriptions",
+                  "id": "4b2a184d-7baf-4811-a3b2-0ff5c1d1ec11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://auth.brale.xyz/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "webhooks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f7884bb5-31c7-4124-b02f-3a96cc404491",
+                          "key": "account_id",
+                          "value": "<string>",
+                          "description": "(Required) Account ID"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cf8eeaab-5c84-47fd-ba1e-845b3326290f",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"subscriptions\": [\n    {\n      \"id\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"url\": \"<string>\",\n      \"status\": \"active\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"url\": \"<string>\",\n      \"status\": \"archived\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-cf8eeaab-5c84-47fd-ba1e-845b3326290f"
+                    },
+                    {
+                      "id": "44d8657e-374b-4173-95e3-eead53ec5afe",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-44d8657e-374b-4173-95e3-eead53ec5afe"
+                    },
+                    {
+                      "id": "48269146-4070-4a3d-92bc-a61a4b96d4c3",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-48269146-4070-4a3d-92bc-a61a4b96d4c3"
+                    },
+                    {
+                      "id": "c4612163-3b18-4cad-add7-3a4243dcc133",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-c4612163-3b18-4cad-add7-3a4243dcc133"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-4b2a184d-7baf-4811-a3b2-0ff5c1d1ec11"
+                },
+                {
+                  "name": "Create webhook subscription",
+                  "id": "87f9eee1-abbe-47d0-b603-f7aff709d56f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://auth.brale.xyz/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "webhooks"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a88c251-a98f-4578-925d-09320a545061",
+                          "key": "account_id",
+                          "value": "<string>",
+                          "description": "(Required) Account ID"
+                        }
+                      ]
+                    },
+                    "description": "Registers a destination URL and one or more event types. The signing secret is returned once in the response."
+                  },
+                  "response": [
+                    {
+                      "id": "708a8010-01cc-4aef-b703-54194fc6d751",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "location",
+                          "value": "<string>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"sharedSecret\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"status\": \"active\"\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-708a8010-01cc-4aef-b703-54194fc6d751"
+                    },
+                    {
+                      "id": "bc0d3062-1b19-4dca-8d28-f71061ccc25a",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-bc0d3062-1b19-4dca-8d28-f71061ccc25a"
+                    },
+                    {
+                      "id": "f40edc7f-8137-4cff-b17e-9ed1922a4e8a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-f40edc7f-8137-4cff-b17e-9ed1922a4e8a"
+                    },
+                    {
+                      "id": "d40a2587-a229-4999-a117-0e1b2aceddd6",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-d40a2587-a229-4999-a117-0e1b2aceddd6"
+                    },
+                    {
+                      "id": "bd6c5d91-9371-4c58-a46a-303f78db133d",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-bd6c5d91-9371-4c58-a46a-303f78db133d"
+                    },
+                    {
+                      "id": "ed492069-bc60-43aa-87ce-92c4f77d6849",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/webhooks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "webhooks"
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in_890\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"dolore_3\": \"<string>\",\n        \"nostrud_a\": \"<string>\",\n        \"exercitation6\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"aliquip_1d\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"culpa0\": \"<string>\",\n        \"sed_3d\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_78_\": {\n      \"href\": \"<string>\"\n    },\n    \"enim57\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"Ut54\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:47.000Z",
+                      "updatedAt": "2026-07-28T01:15:47.000Z",
+                      "uid": "35240-ed492069-bc60-43aa-87ce-92c4f77d6849"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:47.000Z",
+                  "updatedAt": "2026-07-28T01:15:47.000Z",
+                  "uid": "35240-87f9eee1-abbe-47d0-b603-f7aff709d56f"
+                }
+              ],
+              "id": "d772c71f-6e05-4f12-a29a-f73ebe293355",
+              "createdAt": "2026-07-28T01:15:47.000Z",
+              "updatedAt": "2026-07-28T01:15:47.000Z",
+              "uid": "35240-d772c71f-6e05-4f12-a29a-f73ebe293355"
+            }
+          ],
+          "id": "e6c6a6ae-cf72-4f45-bc43-ad500984ae42",
+          "createdAt": "2026-07-28T01:15:47.000Z",
+          "updatedAt": "2026-07-28T01:15:47.000Z",
+          "uid": "35240-e6c6a6ae-cf72-4f45-bc43-ad500984ae42"
+        }
+      ],
+      "id": "24f74db4-3e44-4e5b-8f01-de49f4471cb6",
+      "createdAt": "2026-07-28T01:15:47.000Z",
+      "updatedAt": "2026-07-28T01:15:47.000Z",
+      "uid": "35240-24f74db4-3e44-4e5b-8f01-de49f4471cb6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.brale.xyz"
+    }
+  ]
+}

@@ -1,0 +1,1993 @@
+{
+  "info": {
+    "_postman_id": "ff965029-e965-4f7c-9647-7ecf2439d128",
+    "name": "Brale Accounts API",
+    "description": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:41.000Z",
+    "updatedAt": "2026-07-28T01:15:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ff965029-e965-4f7c-9647-7ecf2439d128"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "verification",
+              "item": [
+                {
+                  "name": "documents",
+                  "item": [
+                    {
+                      "name": "List required verification documents",
+                      "id": "96e3fc94-1d57-4ccc-8ad8-09f3e06c62d5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/verification/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "verification",
+                            "documents"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6e23e46f-c7c7-4c29-8cc5-6e2310aacb8e",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1a1eaa65-12ac-4965-920f-48b0b91d0e63",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/verification/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "verification",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"account_id\": \"<string>\",\n  \"documents\": [\n    {\n      \"document_kind\": \"ein_letter\",\n      \"document_type\": \"business_document\",\n      \"display_name\": \"<string>\",\n      \"status\": \"pending_upload\",\n      \"person_label\": \"<string>\"\n    },\n    {\n      \"document_kind\": \"other\",\n      \"document_type\": \"individual_document\",\n      \"display_name\": \"<string>\",\n      \"status\": \"uploaded\",\n      \"person_label\": \"<string>\"\n    }\n  ],\n  \"other_documents_uploaded_count\": \"<integer>\",\n  \"available_person_labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:42.000Z",
+                          "updatedAt": "2026-07-28T01:15:42.000Z",
+                          "uid": "35240-1a1eaa65-12ac-4965-920f-48b0b91d0e63"
+                        },
+                        {
+                          "id": "b09716b4-2ba5-4340-9ce3-fcbb7fe18196",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/verification/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "verification",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:42.000Z",
+                          "updatedAt": "2026-07-28T01:15:42.000Z",
+                          "uid": "35240-b09716b4-2ba5-4340-9ce3-fcbb7fe18196"
+                        },
+                        {
+                          "id": "c4d41435-1336-4984-8f82-81dd06b34146",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/verification/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "verification",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:42.000Z",
+                          "updatedAt": "2026-07-28T01:15:42.000Z",
+                          "uid": "35240-c4d41435-1336-4984-8f82-81dd06b34146"
+                        },
+                        {
+                          "id": "34075768-40c9-49df-8a35-dea5252b6719",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/verification/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "verification",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:42.000Z",
+                          "updatedAt": "2026-07-28T01:15:42.000Z",
+                          "uid": "35240-34075768-40c9-49df-8a35-dea5252b6719"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:42.000Z",
+                      "updatedAt": "2026-07-28T01:15:42.000Z",
+                      "uid": "35240-96e3fc94-1d57-4ccc-8ad8-09f3e06c62d5"
+                    }
+                  ],
+                  "id": "9dd12acb-0afa-4009-8c99-0de2ea260e28",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-9dd12acb-0afa-4009-8c99-0de2ea260e28"
+                }
+              ],
+              "id": "50a92c35-2119-4e73-8e57-5cc34d075730",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-50a92c35-2119-4e73-8e57-5cc34d075730"
+            },
+            {
+              "name": "Get individual account",
+              "id": "a0e456a2-2df2-4dbc-845a-10a791b01a59",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://auth.brale.xyz/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts/:account_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3e4a280a-3de2-4707-896f-bbcf129b7704",
+                      "key": "account_id",
+                      "value": "<string>",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b6302377-0a1a-4624-be41-2a3c179d5b21",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"complete\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-b6302377-0a1a-4624-be41-2a3c179d5b21"
+                },
+                {
+                  "id": "89b59b3d-7d96-4091-b96e-2f96193f7617",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-89b59b3d-7d96-4091-b96e-2f96193f7617"
+                },
+                {
+                  "id": "369821ac-f5b9-4ef0-9c8c-0ca3570bb551",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-369821ac-f5b9-4ef0-9c8c-0ca3570bb551"
+                },
+                {
+                  "id": "de1b1b20-9796-4557-b55f-549cf07cf85d",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-de1b1b20-9796-4557-b55f-549cf07cf85d"
+                }
+              ],
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-a0e456a2-2df2-4dbc-845a-10a791b01a59"
+            },
+            {
+              "name": "Link staged verification documents to an account",
+              "id": "8b017889-8a7a-4fc2-97b8-5afafceda60b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://auth.brale.xyz/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts/:account_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts",
+                    ":account_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "341552de-e80c-4e3a-a0cc-9fa6af681584",
+                      "key": "account_id",
+                      "value": "<string>",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "39256066-9297-48a3-9a3d-e0eeb7c616c2",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"complete\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-39256066-9297-48a3-9a3d-e0eeb7c616c2"
+                },
+                {
+                  "id": "eaa659da-8691-494d-a23e-4eb758d13b4b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-eaa659da-8691-494d-a23e-4eb758d13b4b"
+                },
+                {
+                  "id": "2a612996-225c-4709-a5f9-7049e2bad957",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-2a612996-225c-4709-a5f9-7049e2bad957"
+                },
+                {
+                  "id": "06786800-b02c-4e92-afaf-4d845850fe69",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-06786800-b02c-4e92-afaf-4d845850fe69"
+                },
+                {
+                  "id": "6cfc3906-08db-4094-a448-254f586c937b",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-6cfc3906-08db-4094-a448-254f586c937b"
+                },
+                {
+                  "id": "d550950a-1303-4fc3-a96a-bb24a84187d5",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"doc_submission_ids\": [\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "account_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:15:42.000Z",
+                  "updatedAt": "2026-07-28T01:15:42.000Z",
+                  "uid": "35240-d550950a-1303-4fc3-a96a-bb24a84187d5"
+                }
+              ],
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-8b017889-8a7a-4fc2-97b8-5afafceda60b"
+            }
+          ],
+          "id": "5df84d10-a4c9-431c-b19d-427cc7a8fd8b",
+          "createdAt": "2026-07-28T01:15:42.000Z",
+          "updatedAt": "2026-07-28T01:15:42.000Z",
+          "uid": "35240-5df84d10-a4c9-431c-b19d-427cc7a8fd8b"
+        },
+        {
+          "name": "List accounts managed by organization",
+          "id": "2be0c448-8347-4da8-b937-c3fdd16a49f3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7a23dc7e-5866-40e7-96e7-d7d47bdc8747",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"accounts\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"rejected\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"rejected\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-7a23dc7e-5866-40e7-96e7-d7d47bdc8747"
+            },
+            {
+              "id": "6bcf0d9f-1f4c-4f19-9e03-434e034c94aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-6bcf0d9f-1f4c-4f19-9e03-434e034c94aa"
+            },
+            {
+              "id": "7e17a1a9-d0d8-4e21-ba65-9b3e18abecf8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-7e17a1a9-d0d8-4e21-ba65-9b3e18abecf8"
+            },
+            {
+              "id": "7d3cf116-db63-4170-bb50-002e7afdd294",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-7d3cf116-db63-4170-bb50-002e7afdd294"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:42.000Z",
+          "updatedAt": "2026-07-28T01:15:42.000Z",
+          "uid": "35240-2be0c448-8347-4da8-b937-c3fdd16a49f3"
+        },
+        {
+          "name": "Creates an account managed by organization",
+          "id": "4a8669d9-62dc-406e-942e-3fcc32c02aba",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "58e4d4b5-90a3-4707-9bba-c736c93c0b9f",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"complete\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-58e4d4b5-90a3-4707-9bba-c736c93c0b9f"
+            },
+            {
+              "id": "2a64ce23-7d92-4405-87de-a55b5f0f8bfe",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-2a64ce23-7d92-4405-87de-a55b5f0f8bfe"
+            },
+            {
+              "id": "d10011bd-dd5e-4d48-b334-3bb22f4f1758",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-d10011bd-dd5e-4d48-b334-3bb22f4f1758"
+            },
+            {
+              "id": "5f7a56cb-529b-4bad-805c-d46a47c7c9bc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-5f7a56cb-529b-4bad-805c-d46a47c7c9bc"
+            },
+            {
+              "id": "5b947ec7-e052-404f-a009-0814442c1a60",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-5b947ec7-e052-404f-a009-0814442c1a60"
+            },
+            {
+              "id": "8e37a478-c0b3-445f-9256-b7e274708e10",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_type\": \"custodial\",\n  \"address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"SD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficial_owners\": [\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"VT\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    },\n    {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"ssn\": \"<string>\",\n      \"address\": {\n        \"street_line_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"HI\",\n        \"zip\": \"<string>\",\n        \"country\": \"<string>\",\n        \"street_line_2\": \"<string>\"\n      },\n      \"email\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"ownership_percentage\": \"<number>\"\n    }\n  ],\n  \"business_controller\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<string>\",\n    \"ssn\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"OH\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"ownership_percentage\": \"<number>\"\n  },\n  \"business_name\": \"<string>\",\n  \"doc_submission_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ein\": \"<string>\",\n  \"email\": \"<string>\",\n  \"entity_type\": \"business\",\n  \"individual\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"date_of_birth\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"address\": {\n      \"street_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"country\": \"<string>\",\n      \"street_line_2\": \"<string>\"\n    },\n    \"country\": \"<string>\",\n    \"identity\": {\n      \"number\": \"<string>\",\n      \"type\": \"DRIVER_LICENSE\"\n    }\n  },\n  \"phone_number\": \"<string>\",\n  \"tos_attestation\": {\n    \"accepted_at\": \"<dateTime>\",\n    \"ip\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"verification_mode\": \"standard\",\n  \"website\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-8e37a478-c0b3-445f-9256-b7e274708e10"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:42.000Z",
+          "updatedAt": "2026-07-28T01:15:42.000Z",
+          "uid": "35240-4a8669d9-62dc-406e-942e-3fcc32c02aba"
+        }
+      ],
+      "id": "8c453845-c543-4d6a-8027-3df9ca80a74b",
+      "createdAt": "2026-07-28T01:15:42.000Z",
+      "updatedAt": "2026-07-28T01:15:42.000Z",
+      "uid": "35240-8c453845-c543-4d6a-8027-3df9ca80a74b"
+    },
+    {
+      "name": "documents",
+      "item": [
+        {
+          "name": "Stage a verification document for later linking",
+          "id": "3197366b-8d6d-4ec5-80e2-4b9e8c687476",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "description": "(Required) ",
+                  "key": "file",
+                  "type": "file",
+                  "value": null
+                },
+                {
+                  "description": "(Required)  (This can only be one of articles_of_incorporation,certificate_of_good_standing,ein_letter,government_photo_id,other)",
+                  "key": "document_kind",
+                  "value": "articles_of_incorporation",
+                  "type": "text"
+                },
+                {
+                  "key": "person_label",
+                  "value": "<string>",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/documents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "documents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d9651c0-425c-4d79-bc8e-2b258cee1a0f",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": "(Required)  (This can only be one of articles_of_incorporation,certificate_of_good_standing,ein_letter,government_photo_id,other)",
+                      "key": "document_kind",
+                      "value": "articles_of_incorporation",
+                      "type": "text"
+                    },
+                    {
+                      "key": "person_label",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "key": "location",
+                  "value": "<string>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"doc_submission_id\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-7d9651c0-425c-4d79-bc8e-2b258cee1a0f"
+            },
+            {
+              "id": "14366b5c-d282-4f10-a3ec-0965b45cd871",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": "(Required)  (This can only be one of articles_of_incorporation,certificate_of_good_standing,ein_letter,government_photo_id,other)",
+                      "key": "document_kind",
+                      "value": "articles_of_incorporation",
+                      "type": "text"
+                    },
+                    {
+                      "key": "person_label",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-14366b5c-d282-4f10-a3ec-0965b45cd871"
+            },
+            {
+              "id": "467a9bea-6043-4d9f-9697-0c0594d6b507",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": "(Required)  (This can only be one of articles_of_incorporation,certificate_of_good_standing,ein_letter,government_photo_id,other)",
+                      "key": "document_kind",
+                      "value": "articles_of_incorporation",
+                      "type": "text"
+                    },
+                    {
+                      "key": "person_label",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-467a9bea-6043-4d9f-9697-0c0594d6b507"
+            },
+            {
+              "id": "62d42e61-00b9-46f2-9349-68033c12c0fe",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": "(Required)  (This can only be one of articles_of_incorporation,certificate_of_good_standing,ein_letter,government_photo_id,other)",
+                      "key": "document_kind",
+                      "value": "articles_of_incorporation",
+                      "type": "text"
+                    },
+                    {
+                      "key": "person_label",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "documents"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"esse52b\": {\n          \"href\": \"<string>\"\n        },\n        \"voluptate_7\": {\n          \"href\": \"<string>\"\n        },\n        \"mollita\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"incididuntb\": \"<string>\",\n        \"sedc_2\": \"<string>\",\n        \"nostrud_4f\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"voluptate6c1\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"velit__4c\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"ea_833\": {\n      \"href\": \"<string>\"\n    },\n    \"cillum_c5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"ea_75\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:15:42.000Z",
+              "updatedAt": "2026-07-28T01:15:42.000Z",
+              "uid": "35240-62d42e61-00b9-46f2-9349-68033c12c0fe"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:42.000Z",
+          "updatedAt": "2026-07-28T01:15:42.000Z",
+          "uid": "35240-3197366b-8d6d-4ec5-80e2-4b9e8c687476"
+        }
+      ],
+      "id": "fb0a6e5c-4ae2-4f53-b15a-1693dc4ff659",
+      "createdAt": "2026-07-28T01:15:42.000Z",
+      "updatedAt": "2026-07-28T01:15:42.000Z",
+      "uid": "35240-fb0a6e5c-4ae2-4f53-b15a-1693dc4ff659"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.brale.xyz"
+    }
+  ]
+}

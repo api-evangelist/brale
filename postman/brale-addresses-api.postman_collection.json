@@ -1,0 +1,2775 @@
+{
+  "info": {
+    "_postman_id": "d713c5ae-a458-4ad4-871c-218b24d3adb0",
+    "name": "Brale Accounts Addresses API",
+    "description": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:42.000Z",
+    "updatedAt": "2026-07-28T01:15:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d713c5ae-a458-4ad4-871c-218b24d3adb0"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "addresses",
+              "item": [
+                {
+                  "name": "{address_id}",
+                  "item": [
+                    {
+                      "name": "balance",
+                      "item": [
+                        {
+                          "name": "Get token balance for a given address on a specific chain",
+                          "id": "1bd69f60-b4c4-4a45-bdde-7102e51d15b6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "https://auth.brale.xyz/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id",
+                                "balance"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Transfer type",
+                                  "key": "transfer_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Value type",
+                                  "key": "value_type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "dc22c488-e271-4f83-ad28-f4ee8043b968",
+                                  "key": "account_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Account ID"
+                                },
+                                {
+                                  "id": "af628d2e-ea1e-40c3-8b8f-16e8aa08f7dd",
+                                  "key": "address_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Address ID"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "5e795661-9f1b-4252-81f9-be26d9245f57",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"address\": {\n    \"id\": \"<string>\",\n    \"address\": \"<string>\"\n  },\n  \"balance\": {\n    \"value\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"transfer_type\": \"<string>\",\n  \"value_type\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-5e795661-9f1b-4252-81f9-be26d9245f57"
+                            },
+                            {
+                              "id": "8150e7c9-cdfb-4978-9e00-66f7c3ad8d79",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-8150e7c9-cdfb-4978-9e00-66f7c3ad8d79"
+                            },
+                            {
+                              "id": "ef07c998-3cfb-46b0-a1b6-1886ffdae941",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-ef07c998-3cfb-46b0-a1b6-1886ffdae941"
+                            },
+                            {
+                              "id": "410da832-93a9-4b32-954f-096a8ae47014",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-410da832-93a9-4b32-954f-096a8ae47014"
+                            },
+                            {
+                              "id": "7796c023-5ba1-405d-a4bf-b8b6e7e98e20",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-7796c023-5ba1-405d-a4bf-b8b6e7e98e20"
+                            },
+                            {
+                              "id": "f7875ee7-ce8b-4362-ade8-5086df090df0",
+                              "name": "Unknown",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id/balance?transfer_type=<string>&value_type=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "accounts",
+                                    ":account_id",
+                                    "addresses",
+                                    ":address_id",
+                                    "balance"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Transfer type",
+                                      "key": "transfer_type",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Value type",
+                                      "key": "value_type",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "account_id"
+                                    },
+                                    {
+                                      "key": "address_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-f7875ee7-ce8b-4362-ade8-5086df090df0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-1bd69f60-b4c4-4a45-bdde-7102e51d15b6"
+                        }
+                      ],
+                      "id": "83a966e8-082c-41e0-852c-05b326cf2e37",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-83a966e8-082c-41e0-852c-05b326cf2e37"
+                    },
+                    {
+                      "name": "Get individual address for account",
+                      "id": "3195e848-aa4d-41ec-bf9b-443aa43547bc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses",
+                            ":address_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0647c88f-7de1-4b5c-b455-ef047daa4bfd",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            },
+                            {
+                              "id": "03c2b954-8b9e-4e49-8793-ade7761fa628",
+                              "key": "address_id",
+                              "value": "<string>",
+                              "description": "(Required) Address ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c9f43414-5b86-4fd7-b15d-3d39ed0862fe",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"archived\",\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"address\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"is_primary\": \"<boolean>\",\n  \"ownership\": \"self-owned\",\n  \"type\": \"external\"\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-c9f43414-5b86-4fd7-b15d-3d39ed0862fe"
+                        },
+                        {
+                          "id": "20f8459b-42f0-4ea6-8f50-68dbb3f6ad1d",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-20f8459b-42f0-4ea6-8f50-68dbb3f6ad1d"
+                        },
+                        {
+                          "id": "9584bd26-8292-42c2-9ea5-2fae8c1c0c9c",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-9584bd26-8292-42c2-9ea5-2fae8c1c0c9c"
+                        },
+                        {
+                          "id": "10a9a046-5ebf-45dd-ba4c-98a92a1758f1",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-10a9a046-5ebf-45dd-ba4c-98a92a1758f1"
+                        },
+                        {
+                          "id": "01d266b5-6070-416e-b418-2f988d273b88",
+                          "name": "Unknown",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-01d266b5-6070-416e-b418-2f988d273b88"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-3195e848-aa4d-41ec-bf9b-443aa43547bc"
+                    },
+                    {
+                      "name": "Update address details for an account",
+                      "id": "31e111a4-515e-4d98-8c2a-a216d5218530",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses",
+                            ":address_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0370cb99-51b2-4c1f-a244-638bf6f70787",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            },
+                            {
+                              "id": "4f6fb919-b679-4763-8007-2d1bb038547e",
+                              "key": "address_id",
+                              "value": "<string>",
+                              "description": "(Required) Address ID"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "228694df-6654-44a7-a82e-189fd8a01ae0",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"archived\",\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"address\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"is_primary\": \"<boolean>\",\n  \"ownership\": \"self-owned\",\n  \"type\": \"external\"\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-228694df-6654-44a7-a82e-189fd8a01ae0"
+                        },
+                        {
+                          "id": "8c48af57-efde-4279-8b9a-f532b8e40e7d",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-8c48af57-efde-4279-8b9a-f532b8e40e7d"
+                        },
+                        {
+                          "id": "8dead94d-afa2-4cb6-a139-4807cd6eae36",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-8dead94d-afa2-4cb6-a139-4807cd6eae36"
+                        },
+                        {
+                          "id": "b81d022a-b842-4e3f-b1b7-6f273f478aad",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-b81d022a-b842-4e3f-b1b7-6f273f478aad"
+                        },
+                        {
+                          "id": "e8c3ddfc-f3a5-4d80-9213-fa2e2af0b45a",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-e8c3ddfc-f3a5-4d80-9213-fa2e2af0b45a"
+                        },
+                        {
+                          "id": "1f067bb1-1e3a-4529-8259-8143336d8597",
+                          "name": "Unknown",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"MD\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"DE\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"archived\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/:address_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                ":address_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                },
+                                {
+                                  "key": "address_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-1f067bb1-1e3a-4529-8259-8143336d8597"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-31e111a4-515e-4d98-8c2a-a216d5218530"
+                    }
+                  ],
+                  "id": "0a91ba6d-e8b6-4b57-bf1d-0d0345fd33fc",
+                  "createdAt": "2026-07-28T01:15:43.000Z",
+                  "updatedAt": "2026-07-28T01:15:43.000Z",
+                  "uid": "35240-0a91ba6d-e8b6-4b57-bf1d-0d0345fd33fc"
+                },
+                {
+                  "name": "internal",
+                  "item": [
+                    {
+                      "name": "Provision internal (custodial) address",
+                      "id": "49b03bde-c579-4da3-857e-ece6685c13f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses",
+                            "internal"
+                          ],
+                          "variable": [
+                            {
+                              "id": "49f1f0b3-6ba3-4fdb-9008-171b0e828e42",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            }
+                          ]
+                        },
+                        "description": "Provisions a new custodial (internal) address for the given account and environment. The first custodial address created for an account/environment combination is marked as primary."
+                      },
+                      "response": [
+                        {
+                          "id": "de5f1269-49ad-4ea8-9ca3-a073ae70eaf8",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"archived\",\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"address\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"is_primary\": \"<boolean>\",\n  \"ownership\": \"self-owned\",\n  \"type\": \"external\"\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-de5f1269-49ad-4ea8-9ca3-a073ae70eaf8"
+                        },
+                        {
+                          "id": "1721a562-c93a-4c9c-aa09-28e958167003",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-1721a562-c93a-4c9c-aa09-28e958167003"
+                        },
+                        {
+                          "id": "d7d8cecb-0b4a-4aeb-a49e-3c54baedd6c5",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-d7d8cecb-0b4a-4aeb-a49e-3c54baedd6c5"
+                        },
+                        {
+                          "id": "bc68a3ad-908a-428f-9f68-b6c4164f0713",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-bc68a3ad-908a-428f-9f68-b6c4164f0713"
+                        },
+                        {
+                          "id": "a3286262-96a5-462b-a879-5fa0d59fe730",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-a3286262-96a5-462b-a879-5fa0d59fe730"
+                        },
+                        {
+                          "id": "9940a3a3-1714-41c2-8c0f-b7a8f96b7231",
+                          "name": "Unknown",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/internal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "internal"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-9940a3a3-1714-41c2-8c0f-b7a8f96b7231"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-49b03bde-c579-4da3-857e-ece6685c13f4"
+                    }
+                  ],
+                  "id": "0e7aceba-bae6-40d0-bd45-44cd340c7768",
+                  "createdAt": "2026-07-28T01:15:43.000Z",
+                  "updatedAt": "2026-07-28T01:15:43.000Z",
+                  "uid": "35240-0e7aceba-bae6-40d0-bd45-44cd340c7768"
+                },
+                {
+                  "name": "external",
+                  "item": [
+                    {
+                      "name": "Create external address",
+                      "id": "605d2650-2fd6-4943-9411-89946d3a934f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://auth.brale.xyz/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses",
+                            "external"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c27558a0-bfe2-4b1f-8cc4-86cd0a16f26c",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) Account ID"
+                            }
+                          ]
+                        },
+                        "description": "Creates a record of an external address that can be used to receive funds."
+                      },
+                      "response": [
+                        {
+                          "id": "c9e6f4c6-74ff-4f49-8b40-1f7b21337949",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"archived\",\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"address\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"is_primary\": \"<boolean>\",\n  \"ownership\": \"self-owned\",\n  \"type\": \"external\"\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-c9e6f4c6-74ff-4f49-8b40-1f7b21337949"
+                        },
+                        {
+                          "id": "1432ded6-e204-4adf-be86-4568e2ab8bc4",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-1432ded6-e204-4adf-be86-4568e2ab8bc4"
+                        },
+                        {
+                          "id": "1d73495a-0957-43f9-b8c5-7744a966ae26",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-1d73495a-0957-43f9-b8c5-7744a966ae26"
+                        },
+                        {
+                          "id": "2e4d877b-f57a-41ba-9644-64cab8613f10",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-2e4d877b-f57a-41ba-9644-64cab8613f10"
+                        },
+                        {
+                          "id": "f0073631-6e27-4f35-8034-5dca8dfa8992",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-f0073631-6e27-4f35-8034-5dca8dfa8992"
+                        },
+                        {
+                          "id": "48a4b9df-e132-4582-a682-6697a56e4cae",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-48a4b9df-e132-4582-a682-6697a56e4cae"
+                        },
+                        {
+                          "id": "9c560b2d-eed1-460c-982a-1d01940b7376",
+                          "name": "Unknown",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"self-owned\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/addresses/external",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "addresses",
+                                "external"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-9c560b2d-eed1-460c-982a-1d01940b7376"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-605d2650-2fd6-4943-9411-89946d3a934f"
+                    }
+                  ],
+                  "id": "1adbc4c9-f05d-4321-9dff-7a816dec2132",
+                  "createdAt": "2026-07-28T01:15:43.000Z",
+                  "updatedAt": "2026-07-28T01:15:43.000Z",
+                  "uid": "35240-1adbc4c9-f05d-4321-9dff-7a816dec2132"
+                },
+                {
+                  "name": "List addresses for account",
+                  "id": "a4b5a578-c7f6-4c0c-b1c0-811acbf5b77c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://auth.brale.xyz/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/addresses?address=<string>&type=internal&transfer_type=<string>&after=<string>&before=<string>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "addresses"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by onchain address (case-insensitive)",
+                          "key": "address",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by address type",
+                          "key": "type",
+                          "value": "internal"
+                        },
+                        {
+                          "description": "Filter by transfer type (can be specified multiple times for OR logic)",
+                          "key": "transfer_type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Pagination parameters",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Pagination parameters",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Pagination parameters",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9b93f253-a0d8-434c-988b-a144f21c0d20",
+                          "key": "account_id",
+                          "value": "<string>",
+                          "description": "(Required) Account ID"
+                        }
+                      ]
+                    },
+                    "description": "Returns wallet addresses associated with your account, including custodial wallets and EOAs. Archived custodial (internal) addresses are omitted."
+                  },
+                  "response": [
+                    {
+                      "id": "80375080-09dc-4c6f-8cc4-7aa958439b6c",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses?address=<string>&type=internal&transfer_type=<string>&after=<string>&before=<string>&size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by onchain address (case-insensitive)",
+                              "key": "address",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by address type",
+                              "key": "type",
+                              "value": "internal"
+                            },
+                            {
+                              "description": "Filter by transfer type (can be specified multiple times for OR logic)",
+                              "key": "transfer_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"addresses\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"active\",\n      \"name\": \"<string>\",\n      \"transfer_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"address\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"is_primary\": \"<boolean>\",\n      \"ownership\": \"self-owned\",\n      \"type\": \"internal\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"pending\",\n      \"name\": \"<string>\",\n      \"transfer_types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"address\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"is_primary\": \"<boolean>\",\n      \"ownership\": \"self-owned\",\n      \"type\": \"external\"\n    }\n  ],\n  \"pagination\": {\n    \"next\": \"<string>\",\n    \"page_size\": \"<integer>\",\n    \"prev\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-80375080-09dc-4c6f-8cc4-7aa958439b6c"
+                    },
+                    {
+                      "id": "7d9cffc4-a746-4f83-8efe-a1508bcd1e0b",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses?address=<string>&type=internal&transfer_type=<string>&after=<string>&before=<string>&size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by onchain address (case-insensitive)",
+                              "key": "address",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by address type",
+                              "key": "type",
+                              "value": "internal"
+                            },
+                            {
+                              "description": "Filter by transfer type (can be specified multiple times for OR logic)",
+                              "key": "transfer_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"code\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"values\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-7d9cffc4-a746-4f83-8efe-a1508bcd1e0b"
+                    },
+                    {
+                      "id": "579a4fd6-d4cf-426d-a85e-3c5eea2f535c",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses?address=<string>&type=internal&transfer_type=<string>&after=<string>&before=<string>&size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by onchain address (case-insensitive)",
+                              "key": "address",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by address type",
+                              "key": "type",
+                              "value": "internal"
+                            },
+                            {
+                              "description": "Filter by transfer type (can be specified multiple times for OR logic)",
+                              "key": "transfer_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-579a4fd6-d4cf-426d-a85e-3c5eea2f535c"
+                    },
+                    {
+                      "id": "fa08cd8c-676f-4906-aebf-678937ae61db",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/addresses?address=<string>&type=internal&transfer_type=<string>&after=<string>&before=<string>&size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "addresses"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by onchain address (case-insensitive)",
+                              "key": "address",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by address type",
+                              "key": "type",
+                              "value": "internal"
+                            },
+                            {
+                              "description": "Filter by transfer type (can be specified multiple times for OR logic)",
+                              "key": "transfer_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Pagination parameters",
+                              "key": "size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"sunt_fe\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"ex_a37\": \"<string>\",\n        \"nisid2\": \"<string>\",\n        \"commodo_b\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"in975\": {\n          \"href\": \"<string>\"\n        },\n        \"quicc\": {\n          \"href\": \"<string>\"\n        },\n        \"utc70\": {\n          \"href\": \"<string>\"\n        },\n        \"dolore3\": {\n          \"href\": \"<string>\"\n        },\n        \"aute_\": {\n          \"href\": \"<string>\"\n        }\n      },\n      \"meta\": {\n        \"aliqua_0\": \"<string>\",\n        \"sed_6\": \"<string>\",\n        \"incididunt_6f7\": \"<string>\"\n      },\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"in_de0\": {\n      \"href\": \"<string>\"\n    },\n    \"sit__0\": {\n      \"href\": \"<string>\"\n    },\n    \"officia348\": {\n      \"href\": \"<string>\"\n    },\n    \"est_5\": {\n      \"href\": \"<string>\"\n    }\n  },\n  \"meta\": {\n    \"sed_fe\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-fa08cd8c-676f-4906-aebf-678937ae61db"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:43.000Z",
+                  "updatedAt": "2026-07-28T01:15:43.000Z",
+                  "uid": "35240-a4b5a578-c7f6-4c0c-b1c0-811acbf5b77c"
+                }
+              ],
+              "id": "81748cba-6e51-45dc-9264-8d6e52db1fe4",
+              "createdAt": "2026-07-28T01:15:43.000Z",
+              "updatedAt": "2026-07-28T01:15:43.000Z",
+              "uid": "35240-81748cba-6e51-45dc-9264-8d6e52db1fe4"
+            }
+          ],
+          "id": "9482bcbc-7cbe-416f-858f-a00339776f92",
+          "createdAt": "2026-07-28T01:15:43.000Z",
+          "updatedAt": "2026-07-28T01:15:43.000Z",
+          "uid": "35240-9482bcbc-7cbe-416f-858f-a00339776f92"
+        }
+      ],
+      "id": "1d8f721d-dd3d-4e70-9ba2-19df5ced6f3c",
+      "createdAt": "2026-07-28T01:15:43.000Z",
+      "updatedAt": "2026-07-28T01:15:43.000Z",
+      "uid": "35240-1d8f721d-dd3d-4e70-9ba2-19df5ced6f3c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.brale.xyz"
+    }
+  ]
+}
