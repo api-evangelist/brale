@@ -206,7 +206,7 @@ common:
 - type: Postman
   url: https://www.postman.com/brale-xyz/brale-api/overview
 - type: OpenAPI
-  url: openapi/brale-openapi-original.yml
+  url: openapi/_original/brale-openapi-original.yml
 - type: Authentication
   url: authentication/brale-authentication.yml
 - type: OAuthScopes
