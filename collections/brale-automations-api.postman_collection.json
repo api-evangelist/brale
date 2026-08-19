@@ -1,0 +1,1448 @@
+{
+  "item": [
+    {
+      "id": "b146780a-3d7e-4605-bf60-c9386dca9763",
+      "name": "Automations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "744b417f-2e26-44c9-8a0f-32de6618c538",
+          "name": "Get Automation",
+          "request": {
+            "name": "Get Automation",
+            "description": {
+              "content": "Get Automation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "automations",
+                ":automation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "automation_id",
+                  "description": "(Required) Automation ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7323bf6d-ef6d-40e0-a0f7-9bf4289e4a64",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"status\": \"archived\",\n  \"source\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"funding_instructions\": {\n      \"bank_name\": \"string\",\n      \"bank_address\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"beneficiary_name\": \"string\",\n      \"beneficiary_address\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"address_id\": \"string\",\n    \"financial_institution_id\": \"string\"\n  },\n  \"brand\": {\n    \"account_id\": \"string\"\n  },\n  \"created_at\": \"2020-01-01T12:00:00Z\",\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"updated_at\": \"2020-01-01T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9a95770-83c7-4ab7-94a0-7e1a5d944039",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb399265-3c0c-40f5-9b51-a1d9d97c4ae1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f37946ed-df85-4009-986e-3b1ee00f002a",
+          "name": "Update Automation Status",
+          "request": {
+            "name": "Update Automation Status",
+            "description": {
+              "content": "Disable or archive an Automation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "automations",
+                ":automation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "automation_id",
+                  "description": "(Required) Automation ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bb313de-1334-4b95-8783-4f861e091db7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"status\": \"archived\",\n  \"source\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"funding_instructions\": {\n      \"bank_name\": \"string\",\n      \"bank_address\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"beneficiary_name\": \"string\",\n      \"beneficiary_address\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"address_id\": \"string\",\n    \"financial_institution_id\": \"string\"\n  },\n  \"brand\": {\n    \"account_id\": \"string\"\n  },\n  \"created_at\": \"2020-01-01T12:00:00Z\",\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"updated_at\": \"2020-01-01T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6c8b530-8652-4e29-b600-ffbd0ea52faa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29a2ec15-838e-469e-a657-97fe7fc007a3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57417a7f-c2b4-4e7e-ae85-96ab90487afc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1182703-a736-4865-92c7-c909dc15cdc6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee8c94ba-060e-4d3d-a70a-3c3bca750167",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "677f3e8f-72e7-4a6c-89a8-3b41884d741f",
+              "name": "Upstream service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations",
+                    ":automation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "automation_id",
+                      "description": "(Required) Automation ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae0cb679-a775-4bed-a694-02a59730fe29",
+          "name": "Get Automations",
+          "request": {
+            "name": "Get Automations",
+            "description": {
+              "content": "Get Automations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "automations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a82e2135-6ac1-4480-8572-e288df6c2c47",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"status\": \"archived\",\n  \"source\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"funding_instructions\": {\n      \"bank_name\": \"string\",\n      \"bank_address\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"beneficiary_name\": \"string\",\n      \"beneficiary_address\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"string\",\n    \"transfer_type\": \"string\",\n    \"address_id\": \"string\",\n    \"financial_institution_id\": \"string\"\n  },\n  \"brand\": {\n    \"account_id\": \"string\"\n  },\n  \"created_at\": \"2020-01-01T12:00:00Z\",\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"updated_at\": \"2020-01-01T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85e4d5ac-1572-44db-b6e6-7d9fcf715e39",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfe0e28c-8777-4afe-846f-dc259b93743b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e83025c-7b70-48e0-801d-a5d15e925fdb",
+          "name": "Create Automation",
+          "request": {
+            "name": "Create Automation",
+            "description": {
+              "content": "Create Automation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "automations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73286710-565d-4389-92b3-f1181f4e2a42",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"status\": \"archived\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"funding_instructions\": {\n      \"bank_name\": \"string\",\n      \"bank_address\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"beneficiary_name\": \"string\",\n      \"beneficiary_address\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  },\n  \"created_at\": \"2020-01-01T12:00:00Z\",\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"updated_at\": \"2020-01-01T12:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b440131-609a-46dc-9aec-50541104d3d4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bbd495e-3066-4b2a-99d7-8a726f2f3afe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89b948e9-5fb8-48c9-8b34-e623939320e3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c2777b7-82fb-474a-a1cf-445683cc10a8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "automations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\"\n  },\n  \"destination\": {\n    \"value_type\": \"<string>\",\n    \"transfer_type\": \"<string>\",\n    \"address_id\": \"<string>\",\n    \"financial_institution_id\": \"<string>\"\n  },\n  \"brand\": {\n    \"account_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.brale.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "823fb2dc-e068-4d9f-b2c2-f8a0e9920866",
+    "name": "Brale Accounts Automations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+      "type": "text/plain"
+    }
+  }
+}

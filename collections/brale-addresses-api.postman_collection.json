@@ -1,0 +1,2768 @@
+{
+  "item": [
+    {
+      "id": "52d6b122-b9fe-4578-897c-b93e119d3f2f",
+      "name": "Addresses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ce3e12d-fb72-474d-91c8-96e535164d2e",
+          "name": "List addresses for account",
+          "request": {
+            "name": "List addresses for account",
+            "description": {
+              "content": "Returns wallet addresses associated with your account, including custodial wallets and EOAs. Archived custodial (internal) addresses are omitted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Filter by onchain address (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by address type"
+                },
+                {
+                  "disabled": false,
+                  "key": "transfer_type",
+                  "value": "<string>",
+                  "description": "Filter by transfer type (can be specified multiple times for OR logic)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "71a82859-8645-4c24-929d-dd3c5c193920",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b"
+                    },
+                    {
+                      "key": "type",
+                      "value": "internal"
+                    },
+                    {
+                      "key": "transfer_type",
+                      "value": "ethereum"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addresses\": [\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"status\": \"pending\",\n      \"name\": \"Company External EVM Address\",\n      \"transfer_types\": [\n        \"solana\",\n        \"solana\"\n      ],\n      \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n      \"created\": \"2020-01-01T12:00:00Z\",\n      \"is_primary\": false,\n      \"ownership\": \"self-owned\",\n      \"type\": \"internal\"\n    },\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"status\": \"archived\",\n      \"name\": \"Company External EVM Address\",\n      \"transfer_types\": [\n        \"solana\",\n        \"solana\"\n      ],\n      \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n      \"created\": \"2020-01-01T12:00:00Z\",\n      \"is_primary\": false,\n      \"ownership\": \"customer-owned\",\n      \"type\": \"external\"\n    }\n  ],\n  \"pagination\": {\n    \"next\": \"string\",\n    \"page_size\": 7352,\n    \"prev\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f058f270-e57b-4c33-bad8-8c9300e63572",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b"
+                    },
+                    {
+                      "key": "type",
+                      "value": "internal"
+                    },
+                    {
+                      "key": "transfer_type",
+                      "value": "ethereum"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70a04099-a19c-46b1-b340-0a23754125a2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b"
+                    },
+                    {
+                      "key": "type",
+                      "value": "internal"
+                    },
+                    {
+                      "key": "transfer_type",
+                      "value": "ethereum"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87a469d4-b627-44a9-9221-4b1bb07d0594",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b"
+                    },
+                    {
+                      "key": "type",
+                      "value": "internal"
+                    },
+                    {
+                      "key": "transfer_type",
+                      "value": "ethereum"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abb25802-8913-4f6b-8c29-6ee54fc7f367",
+          "name": "Get individual address for account",
+          "request": {
+            "name": "Get individual address for account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses",
+                ":address_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address_id",
+                  "description": "(Required) Address ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c7e85ba9-4ac2-4c7e-bef1-67bbb9a51406",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"status\": \"active\",\n  \"name\": \"Company External EVM Address\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"created\": \"2020-01-01T12:00:00Z\",\n  \"is_primary\": true,\n  \"ownership\": \"self-owned\",\n  \"type\": \"internal\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f666a27e-184f-4d83-9838-f967da2b4448",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b619a413-2b94-4491-ac06-c74a8296f835",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f79f65dd-fc45-4938-aea4-8787be47a6df",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c012c93b-77d9-4271-83ca-beeda2b86b71",
+              "name": "Unknown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2753e2ed-1fa4-44e6-94c7-f639a22dfa89",
+          "name": "Update address details for an account",
+          "request": {
+            "name": "Update address details for an account",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses",
+                ":address_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address_id",
+                  "description": "(Required) Address ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additional_transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"country\": \"<string>\",\n    \"street_line_2\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efe9fa2d-e5b4-45c8-aa69-3db5401b8280",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"status\": \"active\",\n  \"name\": \"Company External EVM Address\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"created\": \"2020-01-01T12:00:00Z\",\n  \"is_primary\": true,\n  \"ownership\": \"self-owned\",\n  \"type\": \"internal\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07efcfdc-96b9-4ae2-8ccf-ad4cecea6b88",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae466ecf-32b1-4cf4-b9aa-de98b3ee3d3b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85f27d77-1c03-415a-9154-75d78cf5437c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7a4dda6-bab5-47b7-a707-457fe902b11d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64a907bf-150f-4dfb-92c0-2716dde607cd",
+              "name": "Unknown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"additional_transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"bank_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"beneficiary_address\": {\n    \"street_line_1\": \"100 Example St.\",\n    \"city\": \"Springfield\",\n    \"state\": \"<string>\",\n    \"zip\": \"90001\",\n    \"country\": \"US\",\n    \"street_line_2\": \"Suite 500\"\n  },\n  \"name\": \"Company External EVM Address\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1219a22e-9dce-4fd1-b36f-482ce5d9aee5",
+          "name": "Provision internal (custodial) address",
+          "request": {
+            "name": "Provision internal (custodial) address",
+            "description": {
+              "content": "Provisions a new custodial (internal) address for the given account and environment. The first custodial address created for an account/environment combination is marked as primary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses",
+                "internal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f34640c0-09cc-409b-a1e4-7aef14ae9903",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"status\": \"active\",\n  \"name\": \"Company External EVM Address\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"created\": \"2020-01-01T12:00:00Z\",\n  \"is_primary\": true,\n  \"ownership\": \"self-owned\",\n  \"type\": \"internal\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fd53891-e60b-4c9f-af63-7c86b265f900",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81fd3210-c174-4386-914b-4b231d760fc3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e7d7bfa-4950-486c-bcb4-2cce705bac61",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ae093a5-3753-402a-800d-644337e3910a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "570ba775-4694-4908-bf23-1897110bd772",
+              "name": "Unknown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "internal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company Internal EVM Address\",\n  \"transfer_types\": [\n    \"ethereum\",\n    \"ethereum\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ca8b7b3-3cd6-4961-b0f7-aa8dd4253705",
+          "name": "Create external address",
+          "request": {
+            "name": "Create external address",
+            "description": {
+              "content": "Creates a record of an external address that can be used to receive funds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses",
+                "external"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"transfer_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0460c463-988b-450a-bb03-cc4cb34e7b85",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"status\": \"active\",\n  \"name\": \"Company External EVM Address\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"created\": \"2020-01-01T12:00:00Z\",\n  \"is_primary\": true,\n  \"ownership\": \"self-owned\",\n  \"type\": \"internal\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0c3c866-98cc-498e-b912-e6f7f7a75f90",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e89533-cc3e-4bc6-bd33-cdc758bfeae1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bb64361-d75d-4aea-aabc-e423511d78cb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6cc7dfd-5f22-4205-96d2-12c0cdfc0e99",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e376f54f-1ec8-4b5e-bedd-d402b4dfaaab",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cd3b62b-92e2-40cd-bfc8-f3d640be504b",
+              "name": "Unknown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    "external"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Company External EVM Address\",\n  \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\",\n  \"transfer_types\": [\n    \"solana\",\n    \"solana\"\n  ],\n  \"ownership\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dc6d776-e4ae-454e-89bf-7c57ac8161af",
+          "name": "Get token balance for a given address on a specific chain",
+          "request": {
+            "name": "Get token balance for a given address on a specific chain",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "addresses",
+                ":address_id",
+                "balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transfer_type",
+                  "value": "<string>",
+                  "description": "Transfer type"
+                },
+                {
+                  "disabled": false,
+                  "key": "value_type",
+                  "value": "<string>",
+                  "description": "Value type"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address_id",
+                  "description": "(Required) Address ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "620f7b1d-006c-4ef4-a8a4-2a49f19242bd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": {\n    \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n    \"address\": \"0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b\"\n  },\n  \"balance\": {\n    \"value\": \"11234.88\",\n    \"currency\": \"USD\"\n  },\n  \"transfer_type\": \"Solana\",\n  \"value_type\": \"USDC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "049472de-55fc-49d9-8bea-afec4c943952",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e38806fe-bb6e-448e-93d3-388e72daab89",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72c32ebc-71ea-4fe0-823a-e94ca1a634b9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9f9114d-97d0-4b28-8e92-eec4946d1559",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceec1fbf-aad7-4473-9282-a951999264a5",
+              "name": "Unknown",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "addresses",
+                    ":address_id",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transfer_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address_id",
+                      "description": "(Required) Address ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.brale.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4d35801c-a4b9-4439-a5ec-b8f13e5e5e3b",
+    "name": "Brale Accounts Addresses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+      "type": "text/plain"
+    }
+  }
+}

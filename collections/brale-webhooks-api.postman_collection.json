@@ -1,0 +1,3156 @@
+{
+  "item": [
+    {
+      "id": "122f9969-99ec-4598-99bc-2919270c4530",
+      "name": "Webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c773c805-1ea1-4b1b-9447-582a964ef6b6",
+          "name": "List webhook delivery logs",
+          "request": {
+            "name": "List webhook delivery logs",
+            "description": {
+              "content": "Returns outbound delivery attempts for webhook subscriptions owned by the account, newest first, with cursor pagination (`page[size]`, and either `page[after]` or `page[before]` — not both).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                "deliveries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Paging query parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Paging query parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>",
+                  "description": "Paging query parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "392af1bf-e66e-4735-b418-efb8579a19f9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deliveries\": [\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"event_id\": \"string\",\n      \"subscription_id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"attempt_number\": 4613,\n      \"status_code\": \"string\",\n      \"inserted_at\": \"2020-01-01T12:00:00Z\",\n      \"failure_message\": \"string\"\n    },\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"event_id\": \"string\",\n      \"subscription_id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"attempt_number\": 4034,\n      \"status_code\": \"string\",\n      \"inserted_at\": \"2020-01-01T12:00:00Z\",\n      \"failure_message\": \"string\"\n    }\n  ],\n  \"pagination\": {\n    \"next\": \"string\",\n    \"page_size\": 6953,\n    \"prev\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a86672e-e1cf-4cc5-b0e7-95715fd41c9b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "199e901d-7d80-493e-88fc-6b103909850d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_1\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        },\n        \"key_2\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18088249-bb4f-4b60-b24d-30773b683852",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "001e5e57-e229-4b24-8fd3-a0e84beec8e1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "deliveries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be07c10c-01cd-49df-944b-5ad152d6c67b",
+          "name": "Archive webhook subscription",
+          "request": {
+            "name": "Archive webhook subscription",
+            "description": {
+              "content": "Sets an **active** subscription to **archived** so it no longer receives webhooks. Event subscriptions and delivery history are retained. Returns **409** if the subscription is already archived.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                "subscriptions",
+                ":subscription_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscription_id",
+                  "description": "(Required) Webhook subscription ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e7004516-d00e-4b94-ab93-324ec44a63c3",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fcb1f200-e2d0-4816-9015-b73dbe58cdf0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d8e3ca-1f5f-4a46-bf70-151da6ba487e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b44eafe2-52ef-402a-9349-e8303ad34476",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e166e45-632a-43cd-a358-36b6a622a6c4",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f056697-6e06-4312-a73b-e29aa41122ff",
+          "name": "Update webhook subscription",
+          "request": {
+            "name": "Update webhook subscription",
+            "description": {
+              "content": "Updates URL and/or subscribed event types for an **active** subscription. When `events` is sent, it replaces the full set. **Archived** subscriptions return **409**.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                "subscriptions",
+                ":subscription_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscription_id",
+                  "description": "(Required) Webhook subscription ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80357f35-ea87-479b-91ff-bcaf8fbad9a9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url\": \"string\",\n  \"status\": \"archived\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb856b0b-ec10-4cf6-b6ce-8e702ebd633e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84d2a3ca-dc29-4dde-b6b3-68fd5c999128",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60b9af96-919a-4b13-bf7a-c66eae072d18",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a6188dd-1db0-46aa-919d-70f5684bdfcf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e36d155c-17a4-47ba-b703-6bc1325ddbf3",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8227118b-d795-4f6b-83e5-81fa02c72546",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "subscriptions",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57eedb9b-ec4b-42a0-949e-e0454cc350ca",
+          "name": "Get webhook subscription",
+          "request": {
+            "name": "Get webhook subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                ":subscription_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscription_id",
+                  "description": "(Required) Webhook subscription ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91024126-916b-45f8-a556-f213b17ac5d4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url\": \"string\",\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "927fdb52-7446-418f-8832-3adf75fe884d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc015d53-dfd1-4fa3-9086-312fd7aeb2aa",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eedfcb6-344f-468e-98d7-ff98cc899a12",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    ":subscription_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscription_id",
+                      "description": "(Required) Webhook subscription ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64226c98-e2da-4b0a-be45-8be9061ec070",
+          "name": "List webhook subscriptions",
+          "request": {
+            "name": "List webhook subscriptions",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "52512391-2d73-4745-aedd-7f876dad7611",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptions\": [\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"url\": \"string\",\n      \"status\": \"active\"\n    },\n    {\n      \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"url\": \"string\",\n      \"status\": \"active\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0610bed5-28f9-4277-a4bd-0fb5220b0fae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "911ef044-3e58-4687-aea4-7f7085e06eed",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc30dac5-9604-4ada-86fa-c378c4e807ef",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76db8e35-5bc1-4865-85e3-13ec8b18820f",
+          "name": "Create webhook subscription",
+          "request": {
+            "name": "Create webhook subscription",
+            "description": {
+              "content": "Registers a destination URL and one or more event types. The signing secret is returned once in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d1f5fba-d76d-4c25-a4b0-bbd418347774",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2VZvtmVc2j3gQ80CTlcuQXbGrwC\",\n  \"sharedSecret\": \"string\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"url\": \"string\",\n  \"status\": \"archived\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ce889d1-e94f-4d5c-9608-8203461996a2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2178c5d2-ec15-4710-a3bb-729b45533e8e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c06a992-575d-4c87-b952-19fd0b8a2b0e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5ecd8fa-3a01-432d-8e29-3c4652045e04",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "140e3fd9-5566-4bc9-ac2f-402aaff97045",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7269220b-e323-4942-9497-ea33086b3397",
+          "name": "Replay webhook deliveries for an event",
+          "request": {
+            "name": "Replay webhook deliveries for an event",
+            "description": {
+              "content": "Queues one outbound replay delivery job per **active** webhook subscription for this account that subscribes to the event type of the given **`event_id`** (canonical envelope id; e.g. payment id for `payment.completed`, order id for `transfer.completed`, `transfer.canceled`, or `transfer.failed`). Requires **`Idempotency-Key`**. Payload is taken from `webhook_event_payloads` when present, otherwise rebuilt from domain data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                "events",
+                ":event_id",
+                "resend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "event_id",
+                  "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0a0baeb0-926c-4240-89f3-b5fc09fe9454",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "content-location",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"queued\",\n  \"jobIds\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb856a36-dc25-4290-b603-a12a392b64e4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e71538c2-b191-480a-8b18-eea59a2aa2c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d72c19a6-8c34-4f68-aefc-dfaab22bf776",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "312b76ed-ecd4-405e-8689-0cbd674e8a31",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87503928-f9ea-4a3d-8f68-906d904ad7a6",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "events",
+                    ":event_id",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "event_id",
+                      "description": "(Required) Canonical webhook event id (envelope `id`; e.g. payment id for `payment.completed`, order id for transfer events)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fe5d381-b39f-4bae-b4a8-575ab078ab6c",
+          "name": "List supported webhook event types",
+          "request": {
+            "name": "List supported webhook event types",
+            "description": {
+              "content": "Returns the event type strings (and short descriptions) that may be passed in `POST .../webhooks` `events` when creating a subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "webhooks",
+                "event_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) Account ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "addresses:read financial-institutions:read mints:write orders:read redemptions:write self_attested_tokens:burn self_attested_tokens:mint self_attested_tokens:transfer tokens:read webhooks:read webhooks:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.brale.xyz/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "190116d7-1a49-4da2-8ae4-56fb65cd1936",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_types\": [\n    {\n      \"event_type\": \"string\",\n      \"summary\": \"string\"\n    },\n    {\n      \"event_type\": \"string\",\n      \"summary\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05e99800-d7fd-468b-9c3e-95f068a38b25",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d86c66d-ec46-4a8b-ad0f-55638a51f68b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    },\n    {\n      \"code\": \"ValidationError\",\n      \"detail\": \"string\",\n      \"id\": \"string\",\n      \"links\": {\n        \"key_0\": {\n          \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n        }\n      },\n      \"meta\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": {\n        \"parameter\": \"page[cursor]\",\n        \"pointer\": \"/body/data/attributes\"\n      },\n      \"status\": \"400\",\n      \"title\": \"A validation error occurred\"\n    }\n  ],\n  \"links\": {\n    \"key_0\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_1\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    },\n    \"key_2\": {\n      \"href\": \"/some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC\"\n    }\n  },\n  \"meta\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e435432e-a8d8-4c43-bcb7-87032c923a12",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "webhooks",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) Account ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"code\": \"ValidationError\",\n  \"detail\": \"A validation error occurred\",\n  \"status\": 400,\n  \"values\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.brale.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "451e029b-614b-4237-b39f-2b7c7f7c3049",
+    "name": "Brale Accounts Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Update this with a description. Can we use markdown in this section?\n\nContact Support:\n Name: Brale API Support\n Email: support@brale.xyz",
+      "type": "text/plain"
+    }
+  }
+}

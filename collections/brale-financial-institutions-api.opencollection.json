@@ -1,0 +1,350 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brale Accounts Financial Institutions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Financial Institutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get financial institution status and update requirements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/:fi_id/status",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "fi_id",
+                "value": "",
+                "type": "path",
+                "description": "Financial Institution ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get financial institution status and update requirements"
+        },
+        {
+          "info": {
+            "name": "List financial institutions V2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns all financial institutions you have added to your account to receive wired funds."
+        },
+        {
+          "info": {
+            "name": "Register financial institution account via Plaid and return address ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/plaid/register-account",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Registers a financial institution account using Plaid public token and returns the address ID"
+        },
+        {
+          "info": {
+            "name": "Register financial institution account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/register-account",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Registers a financial institution account using Plaid public token"
+        },
+        {
+          "info": {
+            "name": "Create update link token for existing financial institution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/:fi_id/update-link-token",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "fi_id",
+                "value": "",
+                "type": "path",
+                "description": "Financial Institution ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create update link token for existing financial institution"
+        },
+        {
+          "info": {
+            "name": "Create Plaid link token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/plaid/link_token",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a Plaid link token for bank authentication"
+        },
+        {
+          "info": {
+            "name": "Create External financial institution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/external",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a record of an external financial institution that can be used to receive funds."
+        },
+        {
+          "info": {
+            "name": "Create update link token for existing financial institution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/:address_id/update-link-token",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "fi_id",
+                "value": "",
+                "type": "path",
+                "description": "Financial Institution ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create update link token for existing financial institution"
+        },
+        {
+          "info": {
+            "name": "Create Plaid link token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/plaid/link_token",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a Plaid link token for bank authentication"
+        },
+        {
+          "info": {
+            "name": "Get individual financial institution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/financial-institutions/:fi_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "fi_id",
+                "value": "",
+                "type": "path",
+                "description": "FinancialInstitution ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get individual financial institution"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

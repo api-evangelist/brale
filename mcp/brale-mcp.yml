@@ -7,11 +7,9 @@ server:
   transport: http
   url: https://mcp.brale.xyz/
   auth: oauth2
-  auth_note: >-
-    Authenticated with Brale API app credentials (OAuth2 client-credentials). The
-    MCP server is a standalone bridge on top of the public Brale API; it does not
-    bypass authentication, scopes, or account-level controls. v1 is scoped to
-    read-heavy and low-risk operations. Launched March 2026.
+  auth_note: Authenticated with Brale API app credentials (OAuth2 client-credentials). The MCP server
+    is a standalone bridge on top of the public Brale API; it does not bypass authentication, scopes,
+    or account-level controls. v1 is scoped to read-heavy and low-risk operations. Launched March 2026.
   source_repo: https://github.com/stablecoinxyz/brale-api-mcp
 capabilities:
 - Check balances
@@ -31,3 +29,10 @@ tools:
 - name: get_transfer
   description: Query the status of a transfer.
   source_operation: openapi/brale-openapi-original.yml#get_transfer
+deployment:
+  mode: remote
+  endpoint: https://mcp.brale.xyz/
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

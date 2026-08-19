@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brale Accounts Addresses API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List addresses for account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by onchain address (case-insensitive)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by address type"
+              },
+              {
+                "name": "transfer_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transfer type (can be specified multiple times for OR logic)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns wallet addresses associated with your account, including custodial wallets and EOAs. Archived custodial (internal) addresses are omitted."
+        },
+        {
+          "info": {
+            "name": "Get individual address for account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/:address_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "address_id",
+                "value": "",
+                "type": "path",
+                "description": "Address ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get individual address for account"
+        },
+        {
+          "info": {
+            "name": "Update address details for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/:address_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "address_id",
+                "value": "",
+                "type": "path",
+                "description": "Address ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update address details for an account"
+        },
+        {
+          "info": {
+            "name": "Provision internal (custodial) address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/internal",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Provisions a new custodial (internal) address for the given account and environment. The first custodial address created for an account/environment combination is marked as primary."
+        },
+        {
+          "info": {
+            "name": "Create external address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/external",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a record of an external address that can be used to receive funds."
+        },
+        {
+          "info": {
+            "name": "Get token balance for a given address on a specific chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/addresses/:address_id/balance",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "address_id",
+                "value": "",
+                "type": "path",
+                "description": "Address ID"
+              },
+              {
+                "name": "transfer_type",
+                "value": "",
+                "type": "query",
+                "description": "Transfer type"
+              },
+              {
+                "name": "value_type",
+                "value": "",
+                "type": "query",
+                "description": "Value type"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get token balance for a given address on a specific chain"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

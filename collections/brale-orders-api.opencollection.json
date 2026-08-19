@@ -1,0 +1,490 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brale Accounts Orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Mints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/mints",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Paging query parameters"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by on-chain transaction hash"
+              },
+              {
+                "name": "value_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token ticker"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all mint transactions for a tokenization account. Supports pagination and filtering."
+        },
+        {
+          "info": {
+            "name": "Mint Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/mints",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Mint (create) new tokens. Only available for tokenization/self-attested accounts."
+        },
+        {
+          "info": {
+            "name": "List Tokenization Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Paging query parameters"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by on-chain transaction hash"
+              },
+              {
+                "name": "value_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token ticker"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all tokenization transfer transactions for a tokenization account. Supports pagination and filtering."
+        },
+        {
+          "info": {
+            "name": "Transfer Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Transfer attested tokens between addresses on the same blockchain. Only available for tokenization/self-attested accounts."
+        },
+        {
+          "info": {
+            "name": "List Burns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/burns",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Paging query parameters"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by on-chain transaction hash"
+              },
+              {
+                "name": "value_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by token ticker"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all burn transactions for a tokenization account. Supports pagination and filtering."
+        },
+        {
+          "info": {
+            "name": "Burn Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/burns",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Burn (destroy) tokens from an address. Only available for tokenization/self-attested accounts."
+        },
+        {
+          "info": {
+            "name": "List transfers for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Paging query parameters"
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "On-chain transaction hash"
+              },
+              {
+                "name": "automation_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter transfers created by a specific automation"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter transfers by status"
+              },
+              {
+                "name": "address_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter transfers by address ID"
+              },
+              {
+                "name": "transfer_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter transfers by blockchain chain (e.g. solana, base, ethereum). Fiat payment types (e.g. same_day_ach_credit, wire) are not supported as filter values."
+              },
+              {
+                "name": "value_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter transfers by token ticker (e.g. USDC, SBC)"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns all transfers for the specified account."
+        },
+        {
+          "info": {
+            "name": "Create Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts/:account_id/transfers",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create Transfer"
+        },
+        {
+          "info": {
+            "name": "Get Mint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/mints/:mint_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "mint_id",
+                "value": "",
+                "type": "path",
+                "description": "Mint ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a specific mint transaction by ID."
+        },
+        {
+          "info": {
+            "name": "Get Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "Transfer ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Transfer"
+        },
+        {
+          "info": {
+            "name": "Get Burn",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/burns/:burn_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "burn_id",
+                "value": "",
+                "type": "path",
+                "description": "Burn ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a specific burn transaction by ID."
+        },
+        {
+          "info": {
+            "name": "Get Tokenization Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/tokens/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              },
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "Transfer ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a specific tokenization transfer transaction by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

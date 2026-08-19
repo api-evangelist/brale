@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brale Accounts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List accounts managed by organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List accounts managed by organization"
+        },
+        {
+          "info": {
+            "name": "Creates an account managed by organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates an account managed by organization"
+        },
+        {
+          "info": {
+            "name": "List required verification documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id/verification/documents",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List required verification documents"
+        },
+        {
+          "info": {
+            "name": "Stage a verification document for later linking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.brale.xyz/documents",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "document_kind",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "person_label",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Stage a verification document for later linking"
+        },
+        {
+          "info": {
+            "name": "Get individual account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.brale.xyz/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get individual account"
+        },
+        {
+          "info": {
+            "name": "Link staged verification documents to an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.brale.xyz/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "Account ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://auth.brale.xyz/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Link staged verification documents to an account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
