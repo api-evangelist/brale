@@ -41,6 +41,19 @@ tags:
 - Blockchain
 - Cryptocurrency
 - Fintech
+- Financial-Services
+- Custody
+- Tokenization
+- On-Ramp
+- Off-Ramp
+tags_raw:
+- Company
+- Stablecoins
+- Stablecoin Issuance
+- Payments
+- Blockchain
+- Cryptocurrency
+- Fintech
 - Financial Services
 - Custody
 - Tokenization
@@ -58,6 +71,8 @@ apis:
   humanURL: https://docs.brale.xyz/
   baseURL: https://api.brale.xyz
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -138,6 +153,8 @@ apis:
   humanURL: https://docs.brale.xyz/
   baseURL: https://api.brale.xyz
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -158,6 +175,8 @@ apis:
   humanURL: https://docs.brale.xyz/
   baseURL: https://api.brale.xyz
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
