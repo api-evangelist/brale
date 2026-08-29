@@ -1,0 +1,26 @@
+slug: brale
+provider: Brale
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Accounts
+  spec_file: brale-accounts-api-openapi.yml
+  capability_id: BC-1300.10
+  capability_id_l1: BC-1300
+  capability_name: Customer Onboarding Management
+  confidence: 0.8
+  evidence: '"Creates an account managed by organization"; "List required verification documents"; schemas
+    IndividualIdentity, ControllingParty, DocumentRequirement, EndUserTosAttestation'
+  reason: Operations create accounts and drive identity/verification document collection including controlling-party
+    and individual identity data — account opening with identity verification. Onboarding is the best
+    fit; some overlap with KYC/CDD (BC-1300.20) keeps this at 0.8.
