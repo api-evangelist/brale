@@ -204,6 +204,8 @@ apis:
   - type: Postman
     url: https://www.postman.com/brale-xyz/brale-api/overview
 common:
+- type: Website
+  url: https://www.brale.xyz/
 - type: CapabilityMap
   url: capabilities/brale-capability-edges.yml
   name: Brale Business Capability Map
