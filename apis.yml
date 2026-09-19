@@ -125,6 +125,8 @@ apis:
   humanURL: https://docs.brale.xyz/
   baseURL: https://api.brale.xyz
   tags:
+  - Automation
+  tags_raw:
   - Automations
   properties:
   - type: OpenAPI
