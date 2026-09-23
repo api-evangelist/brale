@@ -1,12 +1,7 @@
 {
   "provider": "brale",
   "sources": [
-    "brale-accounts-api-openapi.yml",
-    "brale-addresses-api-openapi.yml",
-    "brale-automations-api-openapi.yml",
-    "brale-financial-institutions-api-openapi.yml",
-    "brale-orders-api-openapi.yml",
-    "brale-webhooks-api-openapi.yml"
+    "_original/brale-openapi-original.yml"
   ],
   "outputs": [
     "brale-accounts-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "brale-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "brale-openapi-original.yml: declared missing tag: Accounts",
+    "brale-openapi-original.yml: declared missing tag: Addresses",
+    "brale-openapi-original.yml: declared missing tag: Automations",
+    "brale-openapi-original.yml: declared missing tag: Financial Institutions",
+    "brale-openapi-original.yml: declared missing tag: Orders",
+    "brale-openapi-original.yml: declared missing tag: Webhooks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "brale-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "brale-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "brale-automations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "brale-financial-institutions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "brale-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "brale-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

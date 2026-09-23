@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: support@brale.xyz
     name: Brale API Support
   description: Update this with a description. Can we use markdown in this section?
   termsOfService: https://brale.xyz/legal
-  title: Brale Accounts Webhooks API
+  title: Brale Webhooks API
   version: '1.0'
 servers:
 - url: https://api.brale.xyz
@@ -463,52 +463,125 @@ paths:
       - Webhooks
 components:
   schemas:
-    WebhookDeliveryLog:
+    ApiError:
       additionalProperties: false
       properties:
-        attempt_number:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    WebhookReplayAccepted:
+      additionalProperties: false
+      properties:
+        jobIds:
+          description: Oban job ids for scheduled replay deliveries (one per active subscription for the event type).
+          items:
+            type: string
+          type: array
+        status:
+          description: Replay delivery jobs were accepted for processing.
+          enum:
+          - queued
+          type: string
+      required:
+      - status
+      - jobIds
+      title: WebhookReplayAccepted
+      type: object
+    UpdateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: When present, replaces all subscribed event types. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*`).
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
+          type:
+          - string
+          - 'null'
+      title: UpdateWebhookSubscription
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    WebhookEventType:
+      additionalProperties: false
+      properties:
+        event_type:
+          description: Wire string to pass in `POST .../webhooks` body `events`.
+          type: string
+        summary:
+          description: Human-readable description of when this event fires.
+          type: string
+      required:
+      - event_type
+      - summary
+      title: WebhookEventType
+      type: object
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
           minimum: 1
           type: integer
-        event_id:
-          description: Envelope id for the event (e.g. payment id for `payment.completed`, transfer / order id for `transfer.completed`, `transfer.canceled`, or `transfer.created`).
-          type: string
-        failure_message:
-          description: Present when the attempt failed.
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ID'
-        inserted_at:
-          $ref: '#/components/schemas/DateTime'
-        status_code:
-          description: HTTP status as string, or a short code such as `request_timeout`.
-          type: string
-        subscription_id:
-          $ref: '#/components/schemas/ID'
-      required:
-      - id
-      - event_id
-      - subscription_id
-      - attempt_number
-      - status_code
-      - inserted_at
-      title: WebhookDeliveryLog
-      type: object
-    Pagination:
-      description: Pagination information for list endpoints
-      properties:
-        next:
-          description: Cursor for the next page of results
-          nullable: true
-          type: string
-        page_size:
-          description: Number of items per page
-          type: integer
-        prev:
-          description: Cursor for the previous page of results
-          nullable: true
-          type: string
-      title: Pagination
+      title: PagingParameters
       type: object
     WebhookSubscriptionCreated:
       additionalProperties: false
@@ -538,28 +611,67 @@ components:
       - status
       title: WebhookSubscriptionCreated
       type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
-    WebhookReplayAccepted:
+    WebhookEventTypeList:
       additionalProperties: false
       properties:
-        jobIds:
-          description: Oban job ids for scheduled replay deliveries (one per active subscription for the event type).
+        event_types:
+          description: Supported event types for new subscriptions, sorted by `event_type`.
+          items:
+            $ref: '#/components/schemas/WebhookEventType'
+          type: array
+      required:
+      - event_types
+      title: WebhookEventTypeList
+      type: object
+    CreateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
           items:
             type: string
+          minItems: 1
           type: array
-        status:
-          description: Replay delivery jobs were accepted for processing.
-          enum:
-          - queued
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
           type: string
       required:
-      - status
-      - jobIds
-      title: WebhookReplayAccepted
+      - url
+      - events
+      title: CreateWebhookSubscription
+      type: object
+    WebhookDeliveryLog:
+      additionalProperties: false
+      properties:
+        attempt_number:
+          minimum: 1
+          type: integer
+        event_id:
+          description: Envelope id for the event (e.g. payment id for `payment.completed`, transfer / order id for `transfer.completed`, `transfer.canceled`, or `transfer.created`).
+          type: string
+        failure_message:
+          description: Present when the attempt failed.
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ID'
+        inserted_at:
+          $ref: '#/components/schemas/DateTime'
+        status_code:
+          description: HTTP status as string, or a short code such as `request_timeout`.
+          type: string
+        subscription_id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+      - event_id
+      - subscription_id
+      - attempt_number
+      - status_code
+      - inserted_at
+      title: WebhookDeliveryLog
       type: object
     WebhookSubscription:
       additionalProperties: false
@@ -596,126 +708,6 @@ components:
       - subscriptions
       title: WebhookSubscriptionList
       type: object
-    WebhookEventType:
-      additionalProperties: false
-      properties:
-        event_type:
-          description: Wire string to pass in `POST .../webhooks` body `events`.
-          type: string
-        summary:
-          description: Human-readable description of when this event fires.
-          type: string
-      required:
-      - event_type
-      - summary
-      title: WebhookEventType
-      type: object
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-      required:
-      - errors
-      title: Failure
-      type: object
-    PagingParameters:
-      description: Paging query parameters
-      properties:
-        after:
-          type: string
-        before:
-          type: string
-        size:
-          format: int32
-          maximum: 100
-          minimum: 1
-          type: integer
-      title: PagingParameters
-      type: object
-    CreateWebhookSubscription:
-      additionalProperties: false
-      properties:
-        events:
-          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
-          items:
-            type: string
-          minItems: 1
-          type: array
-        url:
-          description: HTTPS URL to receive signed webhook POST requests
-          maxLength: 2048
-          type: string
-      required:
-      - url
-      - events
-      title: CreateWebhookSubscription
-      type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          nullable: true
-          type: string
-        id:
-          nullable: true
-          type: string
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-        source:
-          nullable: true
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type: object
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
-      type: object
     WebhookDeliveryLogList:
       additionalProperties: false
       properties:
@@ -730,6 +722,60 @@ components:
       - deliveries
       - pagination
       title: WebhookDeliveryLogList
+      type: object
+    Pagination:
+      description: Pagination information for list endpoints
+      properties:
+        next:
+          description: Cursor for the next page of results
+          type:
+          - string
+          - 'null'
+        page_size:
+          description: Number of items per page
+          type: integer
+        prev:
+          description: Cursor for the previous page of results
+          type:
+          - string
+          - 'null'
+      title: Pagination
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
       type: object
     ApiErrorV2:
       additionalProperties: false
@@ -752,40 +798,6 @@ components:
       required:
       - type
       title: ApiErrorV2
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    WebhookEventTypeList:
-      additionalProperties: false
-      properties:
-        event_types:
-          description: Supported event types for new subscriptions, sorted by `event_type`.
-          items:
-            $ref: '#/components/schemas/WebhookEventType'
-          type: array
-      required:
-      - event_types
-      title: WebhookEventTypeList
-      type: object
-    UpdateWebhookSubscription:
-      additionalProperties: false
-      properties:
-        events:
-          description: When present, replaces all subscribed event types. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*`).
-          items:
-            type: string
-          nullable: true
-          type: array
-        url:
-          description: HTTPS URL to receive signed webhook POST requests
-          maxLength: 2048
-          nullable: true
-          type: string
-      title: UpdateWebhookSubscription
       type: object
   securitySchemes:
     oauth:

@@ -1,4 +1,4 @@
-generated: '2026-07-18'
+generated: '2026-09-19'
 method: searched
 hosts:
 - host: https://brale.xyz
@@ -21,10 +21,35 @@ hosts:
   - path: /.well-known/openid-configuration
     status: 200
     file: brale-auth-openid-configuration.json
-    note: >-
-      OIDC discovery document is served (200) but advertises a placeholder issuer
-      (https://localhost:4444/) and localhost endpoints — the authorization server
-      (Ory Hydra) appears to expose a default/misconfigured discovery document. The
-      working token endpoint per the OpenAPI is https://auth.brale.xyz/oauth2/token.
+    note: OIDC discovery document is served (200) but advertises a placeholder issuer (https://localhost:4444/)
+      and localhost endpoints — the authorization server (Ory Hydra) appears to expose a default/misconfigured
+      discovery document. The working token endpoint per the OpenAPI is https://auth.brale.xyz/oauth2/token.
   - path: /.well-known/oauth-authorization-server
     status: 404
+- host: https://mcp.brale.xyz
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: brale-mcp-oauth-protected-resource.json
+    bytes: 165
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: brale-mcp-oauth-authorization-server.json
+    bytes: 348
+  path_echo_control: passed
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://mcp.brale.xyz
+    path: /.well-known/oauth-protected-resource
+    file: brale-mcp-oauth-protected-resource.json
+  - host: https://mcp.brale.xyz
+    path: /.well-known/oauth-authorization-server
+    file: brale-mcp-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'

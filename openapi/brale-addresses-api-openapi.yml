@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: support@brale.xyz
     name: Brale API Support
   description: Update this with a description. Can we use markdown in this section?
   termsOfService: https://brale.xyz/legal
-  title: Brale Accounts Addresses API
+  title: Brale Addresses API
   version: '1.0'
 servers:
 - url: https://api.brale.xyz
@@ -411,25 +411,148 @@ paths:
       - Addresses
 components:
   schemas:
+    CreateInternalBlockchainAddressRequest:
+      additionalProperties: false
+      properties:
+        name:
+          example: Company Internal EVM Address
+          type:
+          - string
+          - 'null'
+        transfer_types:
+          description: Transfer types for the custodial address. All must belong to the same environment (e.g. ["ethereum", "polygon"] for EVM). Must be non-empty.
+          items:
+            example: ethereum
+            type: string
+          type: array
+      required:
+      - name
+      - transfer_types
+      title: CreateInternalBlockchainAddressRequest
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
+    AddressV2:
+      additionalProperties: false
+      oneOf:
+      - $ref: '#/components/schemas/BlockchainAddressV2'
+      - $ref: '#/components/schemas/FinancialInstitutionV2'
+      title: AddressV2
+      type: object
+    CreateExternalBlockchainAddressRequest:
+      additionalProperties: false
+      properties:
+        address:
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          type: string
+        name:
+          example: Company External EVM Address
+          type:
+          - string
+          - 'null'
+        ownership:
+          description: Ownership type of the address
+          enum:
+          - self-owned
+          - customer-owned
+          type: string
+        transfer_types:
+          items:
+            example: solana
+            type: string
+          type: array
+      required:
+      - name
+      - address
+      - transfer_types
+      title: CreateExternalBlockchainAddressRequest
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    UpdateExternalAddressRequest:
+      additionalProperties: false
+      properties:
+        additional_transfer_types:
+          items:
+            example: solana
+            type: string
+          type: array
+        bank_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
+        beneficiary_address:
+          allOf:
+          - $ref: '#/components/schemas/USStreetAddress'
+          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
+        name:
+          example: Company External EVM Address
+          type:
+          - string
+          - 'null'
+        status:
+          enum:
+          - active
+          - archived
+          type:
+          - string
+          - 'null'
+      title: UpdateExternalAddressRequest
+      type: object
     BlockchainAddressV2:
       properties:
         address:
           description: On-chain address value. Null for pending addresses awaiting API-gateway provisioning.
           example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         created:
           $ref: '#/components/schemas/DateTime'
         id:
           $ref: '#/components/schemas/ID'
         is_primary:
           description: Whether this is the primary custodial address for the environment
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         name:
           example: Company External EVM Address
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         ownership:
           enum:
           - self-owned
@@ -458,79 +581,205 @@ components:
       - transfer_types
       title: BlockchainAddressV2
       type: object
-    AddressListV2:
-      additionalProperties: false
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    FinancialInstitutionV2:
       properties:
-        addresses:
-          items:
-            $ref: '#/components/schemas/AddressV2'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/Pagination'
-          nullable: true
-      required:
-      - addresses
-      title: AddressListV2
-      type: object
-    UpdateExternalAddressRequest:
-      additionalProperties: false
-      properties:
-        additional_transfer_types:
-          items:
-            example: solana
-            type: string
-          type: array
+        account_number:
+          description: 'Masked account number showing only last 4 digits for security (format: ****1234). Full number never returned.'
+          example: '****1234'
+          type:
+          - string
+          - 'null'
+        account_type:
+          enum:
+          - checking
+          - savings
+          example: checking
+          type:
+          - string
+          - 'null'
         bank_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
-          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
-          nullable: true
         beneficiary_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
-          description: For bank (financial institution) addresses only. Supply before adding wire to additional_transfer_types.
-          nullable: true
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        last_updated:
+          description: Last update timestamp
+          example: '2024-01-15T10:30:00Z'
+          format: date_time
+          type: string
         name:
-          example: Company External EVM Address
-          nullable: true
+          example: First Last Bank
+          type:
+          - string
+          - 'null'
+        needs_update:
+          description: Whether this FI needs Plaid reauthorization
+          example: false
+          type: boolean
+        owner:
+          description: Beneficiary name for wire transfers (maps from POST request owner field)
+          example: Jane Doe
+          type:
+          - string
+          - 'null'
+        ownership:
+          description: Ownership type of the financial institution
+          enum:
+          - self-owned
+          - customer-owned
+          example: customer-owned
+          type: string
+        routingNumber:
+          example: '123456789'
           type: string
         status:
           enum:
           - active
           - archived
-          nullable: true
           type: string
-      title: UpdateExternalAddressRequest
+        transfer_types:
+          items:
+            example: ach_debit
+            type: string
+          type:
+          - array
+          - 'null'
+      required:
+      - id
+      - name
+      - routingNumber
+      - status
+      - created
+      title: FinancialInstitutionV2
       type: object
-    AddressReference:
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    Amount:
+      additionalProperties: false
+      properties:
+        currency:
+          example: USD
+          type: string
+        value:
+          example: '11234.88'
+          type: string
+      required:
+      - value
+      - currency
+      title: Amount
+      type: object
+    AddressBalance:
       additionalProperties: false
       properties:
         address:
-          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
+          $ref: '#/components/schemas/AddressReference'
+        balance:
+          $ref: '#/components/schemas/Amount'
+        transfer_type:
+          example: Solana
           type: string
-        id:
-          $ref: '#/components/schemas/ID'
+        value_type:
+          example: USDC
+          type: string
       required:
-      - id
-      - address
-      title: AddressReference
-      type: object
-    Pagination:
-      description: Pagination information for list endpoints
-      properties:
-        next:
-          description: Cursor for the next page of results
-          nullable: true
-          type: string
-        page_size:
-          description: Number of items per page
-          type: integer
-        prev:
-          description: Cursor for the previous page of results
-          nullable: true
-          type: string
-      title: Pagination
+      - value
+      - currency
+      title: AddressBalance
       type: object
     CreateExternalAddressRequest:
       additionalProperties: false
@@ -538,33 +787,6 @@ components:
       - $ref: '#/components/schemas/CreateExternalBlockchainAddressRequest'
       - $ref: '#/components/schemas/CreateExternalFinancialInstitutionRequest'
       title: CreateExternalAddressRequest
-      type: object
-    CreateExternalBlockchainAddressRequest:
-      additionalProperties: false
-      properties:
-        address:
-          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
-          type: string
-        name:
-          example: Company External EVM Address
-          nullable: true
-          type: string
-        ownership:
-          description: Ownership type of the address
-          enum:
-          - self-owned
-          - customer-owned
-          type: string
-        transfer_types:
-          items:
-            example: solana
-            type: string
-          type: array
-      required:
-      - name
-      - address
-      - transfer_types
-      title: CreateExternalBlockchainAddressRequest
       type: object
     CreateExternalFinancialInstitutionRequest:
       additionalProperties: false
@@ -579,12 +801,10 @@ components:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
           description: Bank street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
-          nullable: true
         beneficiary_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
           description: Beneficiary street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
-          nullable: true
         name:
           example: First Last Bank
           type: string
@@ -619,225 +839,51 @@ components:
       - transfer_types
       title: CreateExternalFinancialInstitutionRequest
       type: object
-    AddressV2:
-      additionalProperties: false
-      oneOf:
-      - $ref: '#/components/schemas/BlockchainAddressV2'
-      - $ref: '#/components/schemas/FinancialInstitutionV2'
-      title: AddressV2
-      type: object
-    CreateInternalBlockchainAddressRequest:
+    AddressListV2:
       additionalProperties: false
       properties:
-        name:
-          example: Company Internal EVM Address
-          nullable: true
-          type: string
-        transfer_types:
-          description: Transfer types for the custodial address. All must belong to the same environment (e.g. ["ethereum", "polygon"] for EVM). Must be non-empty.
+        addresses:
           items:
-            example: ethereum
-            type: string
+            $ref: '#/components/schemas/AddressV2'
           type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/Pagination'
       required:
-      - name
-      - transfer_types
-      title: CreateInternalBlockchainAddressRequest
+      - addresses
+      title: AddressListV2
       type: object
-    Failure:
-      additionalProperties: false
+    Pagination:
+      description: Pagination information for list endpoints
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-      required:
-      - errors
-      title: Failure
-      type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          nullable: true
-          type: string
-        id:
-          nullable: true
-          type: string
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-        source:
-          nullable: true
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type: object
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
-      type: object
-    ApiErrorV2:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
+        next:
+          description: Cursor for the next page of results
+          type:
+          - string
+          - 'null'
+        page_size:
+          description: Number of items per page
           type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
-      required:
-      - type
-      title: ApiErrorV2
+        prev:
+          description: Cursor for the previous page of results
+          type:
+          - string
+          - 'null'
+      title: Pagination
       type: object
-    FinancialInstitutionV2:
+    AddressReference:
+      additionalProperties: false
       properties:
-        account_number:
-          description: 'Masked account number showing only last 4 digits for security (format: ****1234). Full number never returned.'
-          example: '****1234'
-          nullable: true
+        address:
+          example: '0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b'
           type: string
-        account_type:
-          enum:
-          - checking
-          - savings
-          example: checking
-          nullable: true
-          type: string
-        bank_address:
-          allOf:
-          - $ref: '#/components/schemas/USStreetAddress'
-          nullable: true
-        beneficiary_address:
-          allOf:
-          - $ref: '#/components/schemas/USStreetAddress'
-          nullable: true
-        created:
-          $ref: '#/components/schemas/DateTime'
         id:
           $ref: '#/components/schemas/ID'
-        last_updated:
-          description: Last update timestamp
-          example: '2024-01-15T10:30:00Z'
-          format: date_time
-          type: string
-        name:
-          example: First Last Bank
-          nullable: true
-          type: string
-        needs_update:
-          description: Whether this FI needs Plaid reauthorization
-          example: false
-          type: boolean
-        owner:
-          description: Beneficiary name for wire transfers (maps from POST request owner field)
-          example: Jane Doe
-          nullable: true
-          type: string
-        ownership:
-          description: Ownership type of the financial institution
-          enum:
-          - self-owned
-          - customer-owned
-          example: customer-owned
-          type: string
-        routingNumber:
-          example: '123456789'
-          type: string
-        status:
-          enum:
-          - active
-          - archived
-          type: string
-        transfer_types:
-          items:
-            example: ach_debit
-            type: string
-          nullable: true
-          type: array
       required:
       - id
-      - name
-      - routingNumber
-      - status
-      - created
-      title: FinancialInstitutionV2
+      - address
+      title: AddressReference
       type: object
-    PagingParameters:
-      description: Paging query parameters
-      properties:
-        after:
-          type: string
-        before:
-          type: string
-        size:
-          format: int32
-          maximum: 100
-          minimum: 1
-          type: integer
-      title: PagingParameters
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
     USStreetAddress:
       additionalProperties: false
       properties:
@@ -921,38 +967,6 @@ components:
       - state
       - zip
       title: USStreetAddress
-      type: object
-    Amount:
-      additionalProperties: false
-      properties:
-        currency:
-          example: USD
-          type: string
-        value:
-          example: '11234.88'
-          type: string
-      required:
-      - value
-      - currency
-      title: Amount
-      type: object
-    AddressBalance:
-      additionalProperties: false
-      properties:
-        address:
-          $ref: '#/components/schemas/AddressReference'
-        balance:
-          $ref: '#/components/schemas/Amount'
-        transfer_type:
-          example: Solana
-          type: string
-        value_type:
-          example: USDC
-          type: string
-      required:
-      - value
-      - currency
-      title: AddressBalance
       type: object
   securitySchemes:
     oauth:

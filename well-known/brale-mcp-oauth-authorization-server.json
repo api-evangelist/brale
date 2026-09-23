@@ -1,0 +1,1 @@
+{"issuer":"https://mcp.brale.xyz","authorization_endpoint":"https://mcp.brale.xyz/oauth/authorize","token_endpoint":"https://mcp.brale.xyz/oauth/token","registration_endpoint":"https://mcp.brale.xyz/oauth/register","code_challenge_methods_supported":["S256","plain"],"response_types_supported":["code"],"client_id_metadata_document_supported":true}

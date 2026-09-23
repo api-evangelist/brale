@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: support@brale.xyz
     name: Brale API Support
   description: Update this with a description. Can we use markdown in this section?
   termsOfService: https://brale.xyz/legal
-  title: Brale Accounts Financial Institutions API
+  title: Brale Financial Institutions API
   version: '1.0'
 servers:
 - url: https://api.brale.xyz
@@ -610,28 +610,95 @@ paths:
       - Financial Institutions
 components:
   schemas:
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    RegisterAccountRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+      required:
+      - public_token
+      - customer_webhook_url
+      title: RegisterAccountRequest
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
     FinancialInstitutionV2:
       properties:
         account_number:
           description: 'Masked account number showing only last 4 digits for security (format: ****1234). Full number never returned.'
           example: '****1234'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         account_type:
           enum:
           - checking
           - savings
           example: checking
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         bank_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
-          nullable: true
         beneficiary_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
-          nullable: true
         created:
           $ref: '#/components/schemas/DateTime'
         id:
@@ -643,8 +710,9 @@ components:
           type: string
         name:
           example: First Last Bank
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         needs_update:
           description: Whether this FI needs Plaid reauthorization
           example: false
@@ -652,8 +720,9 @@ components:
         owner:
           description: Beneficiary name for wire transfers (maps from POST request owner field)
           example: Jane Doe
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         ownership:
           description: Ownership type of the financial institution
           enum:
@@ -673,8 +742,9 @@ components:
           items:
             example: ach_debit
             type: string
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
       required:
       - id
       - name
@@ -683,15 +753,56 @@ components:
       - created
       title: FinancialInstitutionV2
       type: object
-    RegisterAccountResponse:
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    Failure:
+      additionalProperties: false
       properties:
-        financial_institution_id:
-          description: The ID of the created financial institution
-          example: fi_123456789
-          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
       required:
-      - financial_institution_id
-      title: RegisterAccountResponse
+      - errors
+      title: Failure
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
       type: object
     CreateExternalFinancialInstitutionRequest:
       additionalProperties: false
@@ -706,12 +817,10 @@ components:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
           description: Bank street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
-          nullable: true
         beneficiary_address:
           allOf:
           - $ref: '#/components/schemas/USStreetAddress'
           description: Beneficiary street address. Optional for ach_credit, same_day_ach_credit, and rtp_credit. Required when transfer_types includes wire.
-          nullable: true
         name:
           example: First Last Bank
           type: string
@@ -746,21 +855,6 @@ components:
       - transfer_types
       title: CreateExternalFinancialInstitutionRequest
       type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
-    RegisterAccountAddressResponse:
-      properties:
-        address_id:
-          description: The ID of the created address
-          example: addr_123456789
-          type: string
-      required:
-      - address_id
-      title: RegisterAccountAddressResponse
-      type: object
     CreateLinkTokenRequest:
       properties:
         android_package_name:
@@ -789,6 +883,80 @@ components:
           format: uri
           type: string
       title: CreateLinkTokenRequest
+      type: object
+    FinancialInstitutionListV2:
+      additionalProperties: false
+      properties:
+        financial_institutions:
+          items:
+            $ref: '#/components/schemas/FinancialInstitutionV2'
+          type: array
+      required:
+      - financial_institutions
+      title: FinancialInstitutionListV2
+      type: object
+    RegisterAccountWithTransferTypesRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        ownership:
+          description: Ownership type of the financial institution. Defaults to third_party when not provided.
+          enum:
+          - first_party
+          - third_party
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+        transfer_types:
+          description: Transfer types to support for this financial institution
+          example:
+          - ach_credit
+          - wire
+          items:
+            example: ach_credit
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - public_token
+      - customer_webhook_url
+      - transfer_types
+      title: RegisterAccountWithTransferTypesRequest
+      type: object
+    RegisterAccountResponse:
+      properties:
+        financial_institution_id:
+          description: The ID of the created financial institution
+          example: fi_123456789
+          type: string
+      required:
+      - financial_institution_id
+      title: RegisterAccountResponse
+      type: object
+    LinkTokenResponse:
+      properties:
+        callback_url:
+          description: The URL to POST the public token tox after Plaid Link completion to register the account
+          example: http://localhost:4000/financial_institutions/register_account
+          type: string
+        expiration:
+          description: ISO 8601 timestamp when the link token expires
+          example: '2024-01-01T12:00:00Z'
+          type: string
+        link_token:
+          description: The Plaid link token for bank authentication
+          example: link-sandbox-123456789
+          type: string
+      required:
+      - link_token
+      - expiration
+      - callback_url
+      title: LinkTokenResponse
       type: object
     USStreetAddress:
       additionalProperties: false
@@ -874,155 +1042,6 @@ components:
       - zip
       title: USStreetAddress
       type: object
-    RegisterAccountRequest:
-      properties:
-        customer_webhook_url:
-          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
-          example: https://customer.com/webhooks/plaid-updates
-          format: uri
-          type: string
-        public_token:
-          description: The public token returned from Plaid Link
-          example: public-sandbox-123456789
-          type: string
-      required:
-      - public_token
-      - customer_webhook_url
-      title: RegisterAccountRequest
-      type: object
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-      required:
-      - errors
-      title: Failure
-      type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          nullable: true
-          type: string
-        id:
-          nullable: true
-          type: string
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-        source:
-          nullable: true
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type: object
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
-      type: object
-    FinancialInstitutionListV2:
-      additionalProperties: false
-      properties:
-        financial_institutions:
-          items:
-            $ref: '#/components/schemas/FinancialInstitutionV2'
-          type: array
-      required:
-      - financial_institutions
-      title: FinancialInstitutionListV2
-      type: object
-    LinkTokenResponse:
-      properties:
-        callback_url:
-          description: The URL to POST the public token tox after Plaid Link completion to register the account
-          example: http://localhost:4000/financial_institutions/register_account
-          type: string
-        expiration:
-          description: ISO 8601 timestamp when the link token expires
-          example: '2024-01-01T12:00:00Z'
-          type: string
-        link_token:
-          description: The Plaid link token for bank authentication
-          example: link-sandbox-123456789
-          type: string
-      required:
-      - link_token
-      - expiration
-      - callback_url
-      title: LinkTokenResponse
-      type: object
-    ApiErrorV2:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
-      required:
-      - type
-      title: ApiErrorV2
-      type: object
     FinancialInstitutionStatusResponse:
       properties:
         financial_institution_id:
@@ -1051,38 +1070,27 @@ components:
       - last_updated
       title: FinancialInstitutionStatusResponse
       type: object
-    RegisterAccountWithTransferTypesRequest:
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
       properties:
-        customer_webhook_url:
-          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
-          example: https://customer.com/webhooks/plaid-updates
-          format: uri
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
           type: string
-        ownership:
-          description: Ownership type of the financial institution. Defaults to third_party when not provided.
-          enum:
-          - first_party
-          - third_party
-          type: string
-        public_token:
-          description: The public token returned from Plaid Link
-          example: public-sandbox-123456789
-          type: string
-        transfer_types:
-          description: Transfer types to support for this financial institution
-          example:
-          - ach_credit
-          - wire
-          items:
-            example: ach_credit
-            type: string
-          minItems: 1
-          type: array
       required:
-      - public_token
-      - customer_webhook_url
-      - transfer_types
-      title: RegisterAccountWithTransferTypesRequest
+      - href
+      title: Link
+      type: object
+    RegisterAccountAddressResponse:
+      properties:
+        address_id:
+          description: The ID of the created address
+          example: addr_123456789
+          type: string
+      required:
+      - address_id
+      title: RegisterAccountAddressResponse
       type: object
   securitySchemes:
     oauth:

@@ -1,11 +1,11 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: support@brale.xyz
     name: Brale API Support
   description: Update this with a description. Can we use markdown in this section?
   termsOfService: https://brale.xyz/legal
-  title: Brale Accounts Automations API
+  title: Brale Automations API
   version: '1.0'
 servers:
 - url: https://api.brale.xyz
@@ -17,7 +17,6 @@ paths:
   /accounts/{account_id}/automations/{automation_id}:
     get:
       callbacks: {}
-      description: Get Automation
       operationId: get_automation
       parameters:
       - description: Account ID
@@ -133,7 +132,6 @@ paths:
   /accounts/{account_id}/automations:
     get:
       callbacks: {}
-      description: Get Automations
       operationId: get_automations
       parameters:
       - description: Account ID
@@ -169,7 +167,6 @@ paths:
       - Automations
     post:
       callbacks: {}
-      description: Create Automation
       operationId: create_automation
       parameters:
       - description: Account ID
@@ -224,15 +221,50 @@ paths:
       - Automations
 components:
   schemas:
-    AutomationSourceWithFundingInstructions:
+    ApiError:
       additionalProperties: false
-      allOf:
-      - $ref: '#/components/schemas/AutomationSource'
-      - properties:
-          funding_instructions:
-            $ref: '#/components/schemas/FundingInstructions'
-        type: object
-      title: AutomationSourceWithFundingInstructions
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
       type: object
     AutomationDestination:
       additionalProperties: false
@@ -250,11 +282,100 @@ components:
       - transfer_type
       title: AutomationDestination
       type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
     ID:
       description: ID of the resource
       example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
       title: ID
       type: string
+    AutomationSourceWithFundingInstructions:
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/AutomationSource'
+      - properties:
+          funding_instructions:
+            $ref: '#/components/schemas/FundingInstructions'
+        type: object
+      title: AutomationSourceWithFundingInstructions
+      type: object
+    UpdateAutomationStatus:
+      additionalProperties: false
+      properties:
+        status:
+          enum:
+          - disabled
+          - archived
+          type: string
+      required:
+      - status
+      title: UpdateAutomationStatus
+      type: object
+    FundingInstructions:
+      additionalProperties: false
+      properties:
+        account_number:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        beneficiary_address:
+          type: string
+        beneficiary_name:
+          type: string
+        routing_number:
+          type: string
+      required:
+      - bank_name
+      - bank_address
+      - account_number
+      - routing_number
+      - beneficiary_name
+      - beneficiary_address
+      title: FundingInstructions
+      type: object
+    AutomationBrandData:
+      additionalProperties: false
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: AutomationBrandData
+      type: object
+    AutomationSource:
+      additionalProperties: false
+      properties:
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      title: AutomationSource
+      type: object
+    CreateAutomation:
+      additionalProperties: false
+      properties:
+        brand:
+          $ref: '#/components/schemas/AutomationBrandData'
+        destination:
+          $ref: '#/components/schemas/AutomationDestination'
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/AutomationSource'
+      required:
+      - name
+      - source
+      - destination
+      title: CreateAutomation
+      type: object
     AutomationResponse:
       additionalProperties: false
       allOf:
@@ -288,29 +409,6 @@ components:
         type: object
       title: AutomationResponse
       type: object
-    AutomationSource:
-      additionalProperties: false
-      properties:
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      title: AutomationSource
-      type: object
-    UpdateAutomationStatus:
-      additionalProperties: false
-      properties:
-        status:
-          enum:
-          - disabled
-          - archived
-          type: string
-      required:
-      - status
-      title: UpdateAutomationStatus
-      type: object
     Failure:
       additionalProperties: false
       properties:
@@ -322,13 +420,15 @@ components:
         links:
           additionalProperties:
             $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
         meta:
           additionalProperties:
             type: string
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
       required:
       - errors
       title: Failure
@@ -344,79 +444,6 @@ components:
       required:
       - href
       title: Link
-      type: object
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          nullable: true
-          type: string
-        id:
-          nullable: true
-          type: string
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          nullable: true
-          type: object
-        meta:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-        source:
-          nullable: true
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type: object
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
-      type: object
-    AutomationBrandData:
-      additionalProperties: false
-      properties:
-        account_id:
-          type: string
-      required:
-      - account_id
-      title: AutomationBrandData
-      type: object
-    FundingInstructions:
-      additionalProperties: false
-      properties:
-        account_number:
-          type: string
-        bank_address:
-          type: string
-        bank_name:
-          type: string
-        beneficiary_address:
-          type: string
-        beneficiary_name:
-          type: string
-        routing_number:
-          type: string
-      required:
-      - bank_name
-      - bank_address
-      - account_number
-      - routing_number
-      - beneficiary_name
-      - beneficiary_address
-      title: FundingInstructions
       type: object
     ApiErrorV2:
       additionalProperties: false
@@ -440,29 +467,6 @@ components:
       - type
       title: ApiErrorV2
       type: object
-    CreateAutomation:
-      additionalProperties: false
-      properties:
-        brand:
-          $ref: '#/components/schemas/AutomationBrandData'
-        destination:
-          $ref: '#/components/schemas/AutomationDestination'
-        name:
-          type: string
-        source:
-          $ref: '#/components/schemas/AutomationSource'
-      required:
-      - name
-      - source
-      - destination
-      title: CreateAutomation
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
   securitySchemes:
     oauth:
       flows:
