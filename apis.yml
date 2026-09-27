@@ -56,11 +56,12 @@ tags:
 - Blockchain
 - Cryptocurrency
 - Fintech
-- Financial-Services
+- Financial Services
 - Custody
 - Tokenization
 - On-Ramp
 - Off-Ramp
+- A2A
 tags_raw:
 - Company
 - Stablecoins
@@ -74,6 +75,8 @@ tags_raw:
 - Tokenization
 - On-Ramp
 - Off-Ramp
+- Financial-Services
+- A2A
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

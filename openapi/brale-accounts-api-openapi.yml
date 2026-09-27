@@ -311,133 +311,6 @@ paths:
       - Accounts
 components:
   schemas:
-    Account:
-      properties:
-        created:
-          $ref: '#/components/schemas/DateTime'
-        id:
-          $ref: '#/components/schemas/ID'
-        name:
-          example: My Account
-          type: string
-        status:
-          enum:
-          - complete
-          - pending
-          - rejected
-          type: string
-        updated:
-          $ref: '#/components/schemas/DateTime'
-      required:
-      - id
-      - name
-      - status
-      title: Account
-      type: object
-    DocumentRequirement:
-      additionalProperties: false
-      properties:
-        display_name:
-          example: Government-issued photo ID
-          type: string
-        document_kind:
-          $ref: '#/components/schemas/DocumentKindEnum'
-        document_type:
-          enum:
-          - business_document
-          - individual_document
-          - misc_document
-          type: string
-        person_label:
-          example: Jane Doe
-          type:
-          - string
-          - 'null'
-        status:
-          enum:
-          - pending_upload
-          - uploaded
-          type: string
-      required:
-      - document_kind
-      - document_type
-      - display_name
-      - status
-      title: DocumentRequirement
-      type: object
-    EndUserTosAttestation:
-      additionalProperties: false
-      properties:
-        accepted_at:
-          $ref: '#/components/schemas/DateTime'
-        ip:
-          example: 203.0.113.42
-          type: string
-        user_agent:
-          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:138.0) Gecko/20100101 Firefox/138.0
-          type: string
-        version:
-          example: '2025-04-01'
-          type: string
-      required:
-      - accepted_at
-      title: EndUserTosAttestation
-      type: object
-    DocumentKindEnum:
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - ein_letter
-      - government_photo_id
-      - other
-      title: DocumentKindEnum
-      type: string
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    AccountList:
-      additionalProperties: false
-      properties:
-        accounts:
-          items:
-            $ref: '#/components/schemas/Account'
-          type: array
-      required:
-      - accounts
-      title: AccountList
-      type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
-    PatchAccountDocumentsRequest:
-      additionalProperties: false
-      properties:
-        doc_submission_ids:
-          items:
-            $ref: '#/components/schemas/ID'
-          minItems: 1
-          type: array
-      required:
-      - doc_submission_ids
-      title: PatchAccountDocumentsRequest
-      type: object
     VerificationDocumentsList:
       additionalProperties: false
       properties:
@@ -463,119 +336,14 @@ components:
       - available_person_labels
       title: VerificationDocumentsList
       type: object
-    DocumentSubmissionCreated:
+    Failure:
       additionalProperties: false
       properties:
-        doc_submission_id:
-          $ref: '#/components/schemas/ID'
-      required:
-      - doc_submission_id
-      title: DocumentSubmissionCreated
-      type: object
-    ControllingParty:
-      additionalProperties: false
-      properties:
-        address:
-          $ref: '#/components/schemas/USStreetAddress'
-        dob:
-          example: YYYY-MM-DD
-          type: string
-        email:
-          example: a@b.com
-          type: string
-        first_name:
-          example: John
-          type: string
-        last_name:
-          example: Doe
-          type: string
-        ownership_percentage:
-          example: 40
-          type:
-          - number
-          - 'null'
-        phone_number:
-          example: 515-555-1212
-          type: string
-        ssn:
-          example: 123-45-6789
-          type: string
-      required:
-      - first_name
-      - last_name
-      - dob
-      - ssn
-      - address
-      - email
-      - phone_number
-      title: ControllingParty
-      type: object
-    IndividualAddress:
-      additionalProperties: false
-      properties:
-        city:
-          example: London
-          type: string
-        country:
-          example: GB
-          type: string
-        state:
-          description: State, province, or region (free-form; not US-only)
-          example: England
-          type: string
-        street_line_1:
-          example: 10 Downing St
-          type: string
-        street_line_2:
-          example: Flat 2
-          type: string
-        zip:
-          description: Postal code (any format)
-          example: SW1A 2AA
-          type: string
-      required:
-      - street_line_1
-      - city
-      - state
-      - zip
-      title: IndividualAddress
-      type: object
-    ApiErrorV2:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
+        errors:
           items:
-            type: string
+            $ref: '#/components/schemas/ApiError'
           type: array
-      required:
-      - type
-      title: ApiErrorV2
-      type: object
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          type:
-          - string
-          - 'null'
-        id:
-          type:
-          - string
-          - 'null'
+          uniqueItems: true
         links:
           additionalProperties:
             $ref: '#/components/schemas/Link'
@@ -588,24 +356,9 @@ components:
           type:
           - object
           - 'null'
-        source:
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type:
-          - object
-          - 'null'
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
+      required:
+      - errors
+      title: Failure
       type: object
     IndividualIdentity:
       additionalProperties: false
@@ -640,42 +393,99 @@ components:
       - type
       title: IndividualIdentity
       type: object
-    Individual:
+    PatchAccountDocumentsRequest:
       additionalProperties: false
       properties:
-        address:
-          $ref: '#/components/schemas/IndividualAddress'
-        country:
-          description: ISO 3166-1 alpha-2 country code; stored separately for AiPrise routing
-          example: US
+        doc_submission_ids:
+          items:
+            $ref: '#/components/schemas/ID'
+          minItems: 1
+          type: array
+      required:
+      - doc_submission_ids
+      title: PatchAccountDocumentsRequest
+      type: object
+    EndUserTosAttestation:
+      additionalProperties: false
+      properties:
+        accepted_at:
+          $ref: '#/components/schemas/DateTime'
+        ip:
+          example: 203.0.113.42
           type: string
-        date_of_birth:
-          description: YYYY-MM-DD
-          example: '1990-01-31'
+        user_agent:
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:138.0) Gecko/20100101 Firefox/138.0
           type: string
-        email:
-          example: jane@example.com
-          type: string
-        first_name:
-          example: Jane
-          type: string
-        identity:
-          $ref: '#/components/schemas/IndividualIdentity'
-        last_name:
-          example: Doe
-          type: string
-        phone_number:
-          example: 515-555-1212
+        version:
+          example: '2025-04-01'
           type: string
       required:
-      - first_name
-      - last_name
-      - date_of_birth
-      - email
-      - phone_number
-      - address
-      - country
-      title: Individual
+      - accepted_at
+      title: EndUserTosAttestation
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    IndividualAddress:
+      additionalProperties: false
+      properties:
+        city:
+          example: London
+          type: string
+        country:
+          example: GB
+          type: string
+        state:
+          description: State, province, or region (free-form; not US-only)
+          example: England
+          type: string
+        street_line_1:
+          example: 10 Downing St
+          type: string
+        street_line_2:
+          example: Flat 2
+          type: string
+        zip:
+          description: Postal code (any format)
+          example: SW1A 2AA
+          type: string
+      required:
+      - street_line_1
+      - city
+      - state
+      - zip
+      title: IndividualAddress
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
       type: object
     CreateAccountRequest:
       additionalProperties: false
@@ -739,14 +549,25 @@ components:
           type: string
       title: CreateAccountRequest
       type: object
-    Failure:
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    ApiError:
       additionalProperties: false
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
         links:
           additionalProperties:
             $ref: '#/components/schemas/Link'
@@ -759,9 +580,56 @@ components:
           type:
           - object
           - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    DocumentSubmissionCreated:
+      additionalProperties: false
+      properties:
+        doc_submission_id:
+          $ref: '#/components/schemas/ID'
       required:
-      - errors
-      title: Failure
+      - doc_submission_id
+      title: DocumentSubmissionCreated
+      type: object
+    Account:
+      properties:
+        created:
+          $ref: '#/components/schemas/DateTime'
+        id:
+          $ref: '#/components/schemas/ID'
+        name:
+          example: My Account
+          type: string
+        status:
+          enum:
+          - complete
+          - pending
+          - rejected
+          type: string
+        updated:
+          $ref: '#/components/schemas/DateTime'
+      required:
+      - id
+      - name
+      - status
+      title: Account
       type: object
     USStreetAddress:
       additionalProperties: false
@@ -846,6 +714,138 @@ components:
       - state
       - zip
       title: USStreetAddress
+      type: object
+    DocumentRequirement:
+      additionalProperties: false
+      properties:
+        display_name:
+          example: Government-issued photo ID
+          type: string
+        document_kind:
+          $ref: '#/components/schemas/DocumentKindEnum'
+        document_type:
+          enum:
+          - business_document
+          - individual_document
+          - misc_document
+          type: string
+        person_label:
+          example: Jane Doe
+          type:
+          - string
+          - 'null'
+        status:
+          enum:
+          - pending_upload
+          - uploaded
+          type: string
+      required:
+      - document_kind
+      - document_type
+      - display_name
+      - status
+      title: DocumentRequirement
+      type: object
+    AccountList:
+      additionalProperties: false
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/Account'
+          type: array
+      required:
+      - accounts
+      title: AccountList
+      type: object
+    ControllingParty:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/USStreetAddress'
+        dob:
+          example: YYYY-MM-DD
+          type: string
+        email:
+          example: a@b.com
+          type: string
+        first_name:
+          example: John
+          type: string
+        last_name:
+          example: Doe
+          type: string
+        ownership_percentage:
+          example: 40
+          type:
+          - number
+          - 'null'
+        phone_number:
+          example: 515-555-1212
+          type: string
+        ssn:
+          example: 123-45-6789
+          type: string
+      required:
+      - first_name
+      - last_name
+      - dob
+      - ssn
+      - address
+      - email
+      - phone_number
+      title: ControllingParty
+      type: object
+    DocumentKindEnum:
+      enum:
+      - articles_of_incorporation
+      - certificate_of_good_standing
+      - ein_letter
+      - government_photo_id
+      - other
+      title: DocumentKindEnum
+      type: string
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    Individual:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/IndividualAddress'
+        country:
+          description: ISO 3166-1 alpha-2 country code; stored separately for AiPrise routing
+          example: US
+          type: string
+        date_of_birth:
+          description: YYYY-MM-DD
+          example: '1990-01-31'
+          type: string
+        email:
+          example: jane@example.com
+          type: string
+        first_name:
+          example: Jane
+          type: string
+        identity:
+          $ref: '#/components/schemas/IndividualIdentity'
+        last_name:
+          example: Doe
+          type: string
+        phone_number:
+          example: 515-555-1212
+          type: string
+      required:
+      - first_name
+      - last_name
+      - date_of_birth
+      - email
+      - phone_number
+      - address
+      - country
+      title: Individual
       type: object
   securitySchemes:
     oauth:

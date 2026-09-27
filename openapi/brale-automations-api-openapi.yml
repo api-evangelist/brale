@@ -266,6 +266,51 @@ components:
           type: string
       title: ApiError
       type: object
+    UpdateAutomationStatus:
+      additionalProperties: false
+      properties:
+        status:
+          enum:
+          - disabled
+          - archived
+          type: string
+      required:
+      - status
+      title: UpdateAutomationStatus
+      type: object
+    AutomationBrandData:
+      additionalProperties: false
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: AutomationBrandData
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
     AutomationDestination:
       additionalProperties: false
       properties:
@@ -282,17 +327,6 @@ components:
       - transfer_type
       title: AutomationDestination
       type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
     AutomationSourceWithFundingInstructions:
       additionalProperties: false
       allOf:
@@ -302,18 +336,6 @@ components:
             $ref: '#/components/schemas/FundingInstructions'
         type: object
       title: AutomationSourceWithFundingInstructions
-      type: object
-    UpdateAutomationStatus:
-      additionalProperties: false
-      properties:
-        status:
-          enum:
-          - disabled
-          - archived
-          type: string
-      required:
-      - status
-      title: UpdateAutomationStatus
       type: object
     FundingInstructions:
       additionalProperties: false
@@ -339,43 +361,34 @@ components:
       - beneficiary_address
       title: FundingInstructions
       type: object
-    AutomationBrandData:
+    ApiErrorV2:
       additionalProperties: false
       properties:
-        account_id:
+        code:
+          example: ValidationError
           type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
       required:
-      - account_id
-      title: AutomationBrandData
+      - type
+      title: ApiErrorV2
       type: object
-    AutomationSource:
-      additionalProperties: false
-      properties:
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      title: AutomationSource
-      type: object
-    CreateAutomation:
-      additionalProperties: false
-      properties:
-        brand:
-          $ref: '#/components/schemas/AutomationBrandData'
-        destination:
-          $ref: '#/components/schemas/AutomationDestination'
-        name:
-          type: string
-        source:
-          $ref: '#/components/schemas/AutomationSource'
-      required:
-      - name
-      - source
-      - destination
-      title: CreateAutomation
-      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
     AutomationResponse:
       additionalProperties: false
       allOf:
@@ -409,29 +422,22 @@ components:
         type: object
       title: AutomationResponse
       type: object
-    Failure:
+    CreateAutomation:
       additionalProperties: false
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
+        brand:
+          $ref: '#/components/schemas/AutomationBrandData'
+        destination:
+          $ref: '#/components/schemas/AutomationDestination'
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/AutomationSource'
       required:
-      - errors
-      title: Failure
+      - name
+      - source
+      - destination
+      title: CreateAutomation
       type: object
     Link:
       additionalProperties: false
@@ -445,28 +451,22 @@ components:
       - href
       title: Link
       type: object
-    ApiErrorV2:
+    AutomationSource:
       additionalProperties: false
       properties:
-        code:
-          example: ValidationError
+        transfer_type:
           type: string
-        detail:
-          example: A validation error occurred
+        value_type:
           type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
       required:
-      - type
-      title: ApiErrorV2
+      - value_type
+      title: AutomationSource
       type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
   securitySchemes:
     oauth:
       flows:

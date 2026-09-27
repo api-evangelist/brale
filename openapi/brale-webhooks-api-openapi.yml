@@ -508,23 +508,17 @@ components:
           type: string
       title: ApiError
       type: object
-    WebhookReplayAccepted:
+    WebhookEventTypeList:
       additionalProperties: false
       properties:
-        jobIds:
-          description: Oban job ids for scheduled replay deliveries (one per active subscription for the event type).
+        event_types:
+          description: Supported event types for new subscriptions, sorted by `event_type`.
           items:
-            type: string
+            $ref: '#/components/schemas/WebhookEventType'
           type: array
-        status:
-          description: Replay delivery jobs were accepted for processing.
-          enum:
-          - queued
-          type: string
       required:
-      - status
-      - jobIds
-      title: WebhookReplayAccepted
+      - event_types
+      title: WebhookEventTypeList
       type: object
     UpdateWebhookSubscription:
       additionalProperties: false
@@ -544,17 +538,57 @@ components:
           - 'null'
       title: UpdateWebhookSubscription
       type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
+    WebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          items:
+            type: string
+          type: array
+        id:
+          $ref: '#/components/schemas/ID'
+        status:
+          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
+          enum:
+          - active
+          - archived
+          type: string
+        url:
+          type: string
+      required:
+      - id
+      - events
+      - url
+      - status
+      title: WebhookSubscription
+      type: object
+    WebhookDeliveryLogList:
+      additionalProperties: false
+      properties:
+        deliveries:
+          description: Delivery attempts, newest `inserted_at` first.
+          items:
+            $ref: '#/components/schemas/WebhookDeliveryLog'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      required:
+      - deliveries
+      - pagination
+      title: WebhookDeliveryLogList
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
     WebhookEventType:
       additionalProperties: false
       properties:
@@ -568,6 +602,63 @@ components:
       - event_type
       - summary
       title: WebhookEventType
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    Pagination:
+      description: Pagination information for list endpoints
+      properties:
+        next:
+          description: Cursor for the next page of results
+          type:
+          - string
+          - 'null'
+        page_size:
+          description: Number of items per page
+          type: integer
+        prev:
+          description: Cursor for the previous page of results
+          type:
+          - string
+          - 'null'
+      title: Pagination
+      type: object
+    WebhookSubscriptionList:
+      additionalProperties: false
+      properties:
+        subscriptions:
+          items:
+            $ref: '#/components/schemas/WebhookSubscription'
+          type: array
+      required:
+      - subscriptions
+      title: WebhookSubscriptionList
       type: object
     PagingParameters:
       description: Paging query parameters
@@ -611,36 +702,6 @@ components:
       - status
       title: WebhookSubscriptionCreated
       type: object
-    WebhookEventTypeList:
-      additionalProperties: false
-      properties:
-        event_types:
-          description: Supported event types for new subscriptions, sorted by `event_type`.
-          items:
-            $ref: '#/components/schemas/WebhookEventType'
-          type: array
-      required:
-      - event_types
-      title: WebhookEventTypeList
-      type: object
-    CreateWebhookSubscription:
-      additionalProperties: false
-      properties:
-        events:
-          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
-          items:
-            type: string
-          minItems: 1
-          type: array
-        url:
-          description: HTTPS URL to receive signed webhook POST requests
-          maxLength: 2048
-          type: string
-      required:
-      - url
-      - events
-      title: CreateWebhookSubscription
-      type: object
     WebhookDeliveryLog:
       additionalProperties: false
       properties:
@@ -673,74 +734,6 @@ components:
       - inserted_at
       title: WebhookDeliveryLog
       type: object
-    WebhookSubscription:
-      additionalProperties: false
-      properties:
-        events:
-          items:
-            type: string
-          type: array
-        id:
-          $ref: '#/components/schemas/ID'
-        status:
-          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
-          enum:
-          - active
-          - archived
-          type: string
-        url:
-          type: string
-      required:
-      - id
-      - events
-      - url
-      - status
-      title: WebhookSubscription
-      type: object
-    WebhookSubscriptionList:
-      additionalProperties: false
-      properties:
-        subscriptions:
-          items:
-            $ref: '#/components/schemas/WebhookSubscription'
-          type: array
-      required:
-      - subscriptions
-      title: WebhookSubscriptionList
-      type: object
-    WebhookDeliveryLogList:
-      additionalProperties: false
-      properties:
-        deliveries:
-          description: Delivery attempts, newest `inserted_at` first.
-          items:
-            $ref: '#/components/schemas/WebhookDeliveryLog'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - deliveries
-      - pagination
-      title: WebhookDeliveryLogList
-      type: object
-    Pagination:
-      description: Pagination information for list endpoints
-      properties:
-        next:
-          description: Cursor for the next page of results
-          type:
-          - string
-          - 'null'
-        page_size:
-          description: Number of items per page
-          type: integer
-        prev:
-          description: Cursor for the previous page of results
-          type:
-          - string
-          - 'null'
-      title: Pagination
-      type: object
     Failure:
       additionalProperties: false
       properties:
@@ -765,40 +758,47 @@ components:
       - errors
       title: Failure
       type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    ApiErrorV2:
+    WebhookReplayAccepted:
       additionalProperties: false
       properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
+        jobIds:
+          description: Oban job ids for scheduled replay deliveries (one per active subscription for the event type).
           items:
             type: string
           type: array
+        status:
+          description: Replay delivery jobs were accepted for processing.
+          enum:
+          - queued
+          type: string
       required:
-      - type
-      title: ApiErrorV2
+      - status
+      - jobIds
+      title: WebhookReplayAccepted
       type: object
+    CreateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
+          items:
+            type: string
+          minItems: 1
+          type: array
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
+          type: string
+      required:
+      - url
+      - events
+      title: CreateWebhookSubscription
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
   securitySchemes:
     oauth:
       flows:
