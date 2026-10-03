@@ -659,6 +659,39 @@ components:
           type: string
       title: ApiError
       type: object
+    RegisterAccountWithTransferTypesRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        ownership:
+          description: Ownership type of the financial institution. Defaults to third_party when not provided.
+          enum:
+          - first_party
+          - third_party
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+        transfer_types:
+          description: Transfer types to support for this financial institution
+          example:
+          - ach_credit
+          - wire
+          items:
+            example: ach_credit
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - public_token
+      - customer_webhook_url
+      - transfer_types
+      title: RegisterAccountWithTransferTypesRequest
+      type: object
     FinancialInstitutionV2:
       properties:
         account_number:
@@ -734,148 +767,6 @@ components:
       - status
       - created
       title: FinancialInstitutionV2
-      type: object
-    RegisterAccountResponse:
-      properties:
-        financial_institution_id:
-          description: The ID of the created financial institution
-          example: fi_123456789
-          type: string
-      required:
-      - financial_institution_id
-      title: RegisterAccountResponse
-      type: object
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-      required:
-      - errors
-      title: Failure
-      type: object
-    RegisterAccountAddressResponse:
-      properties:
-        address_id:
-          description: The ID of the created address
-          example: addr_123456789
-          type: string
-      required:
-      - address_id
-      title: RegisterAccountAddressResponse
-      type: object
-    RegisterAccountRequest:
-      properties:
-        customer_webhook_url:
-          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
-          example: https://customer.com/webhooks/plaid-updates
-          format: uri
-          type: string
-        public_token:
-          description: The public token returned from Plaid Link
-          example: public-sandbox-123456789
-          type: string
-      required:
-      - public_token
-      - customer_webhook_url
-      title: RegisterAccountRequest
-      type: object
-    RegisterAccountWithTransferTypesRequest:
-      properties:
-        customer_webhook_url:
-          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
-          example: https://customer.com/webhooks/plaid-updates
-          format: uri
-          type: string
-        ownership:
-          description: Ownership type of the financial institution. Defaults to third_party when not provided.
-          enum:
-          - first_party
-          - third_party
-          type: string
-        public_token:
-          description: The public token returned from Plaid Link
-          example: public-sandbox-123456789
-          type: string
-        transfer_types:
-          description: Transfer types to support for this financial institution
-          example:
-          - ach_credit
-          - wire
-          items:
-            example: ach_credit
-            type: string
-          minItems: 1
-          type: array
-      required:
-      - public_token
-      - customer_webhook_url
-      - transfer_types
-      title: RegisterAccountWithTransferTypesRequest
-      type: object
-    CreateLinkTokenRequest:
-      properties:
-        android_package_name:
-          description: Android package name for OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for Android OAuth flows. Cannot be used with redirect_uri.
-          example: com.example.myapp
-          type: string
-        date_of_birth:
-          description: User's date of birth (optional)
-          example: '1990-01-01'
-          type: string
-        email_address:
-          description: User's email address (optional)
-          example: user@example.com
-          type: string
-        legal_name:
-          description: User's legal name (optional)
-          example: John Doe
-          type: string
-        phone_number:
-          description: User's phone number (optional)
-          example: '+1234567890'
-          type: string
-        redirect_uri:
-          description: Universal link for iOS OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for iOS OAuth flows. Cannot be used with android_package_name.
-          example: https://app.example.com/plaid-oauth
-          format: uri
-          type: string
-      title: CreateLinkTokenRequest
-      type: object
-    LinkTokenResponse:
-      properties:
-        callback_url:
-          description: The URL to POST the public token tox after Plaid Link completion to register the account
-          example: http://localhost:4000/financial_institutions/register_account
-          type: string
-        expiration:
-          description: ISO 8601 timestamp when the link token expires
-          example: '2024-01-01T12:00:00Z'
-          type: string
-        link_token:
-          description: The Plaid link token for bank authentication
-          example: link-sandbox-123456789
-          type: string
-      required:
-      - link_token
-      - expiration
-      - callback_url
-      title: LinkTokenResponse
       type: object
     USStreetAddress:
       additionalProperties: false
@@ -961,6 +852,17 @@ components:
       - zip
       title: USStreetAddress
       type: object
+    FinancialInstitutionListV2:
+      additionalProperties: false
+      properties:
+        financial_institutions:
+          items:
+            $ref: '#/components/schemas/FinancialInstitutionV2'
+          type: array
+      required:
+      - financial_institutions
+      title: FinancialInstitutionListV2
+      type: object
     FinancialInstitutionStatusResponse:
       properties:
         financial_institution_id:
@@ -989,44 +891,17 @@ components:
       - last_updated
       title: FinancialInstitutionStatusResponse
       type: object
-    ApiErrorV2:
+    Link:
       additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
       properties:
-        code:
-          example: ValidationError
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
           type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
       required:
-      - type
-      title: ApiErrorV2
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    FinancialInstitutionListV2:
-      additionalProperties: false
-      properties:
-        financial_institutions:
-          items:
-            $ref: '#/components/schemas/FinancialInstitutionV2'
-          type: array
-      required:
-      - financial_institutions
-      title: FinancialInstitutionListV2
+      - href
+      title: Link
       type: object
     CreateExternalFinancialInstitutionRequest:
       additionalProperties: false
@@ -1079,23 +954,148 @@ components:
       - transfer_types
       title: CreateExternalFinancialInstitutionRequest
       type: object
-    Link:
+    ApiErrorV2:
       additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
       properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    LinkTokenResponse:
+      properties:
+        callback_url:
+          description: The URL to POST the public token tox after Plaid Link completion to register the account
+          example: http://localhost:4000/financial_institutions/register_account
+          type: string
+        expiration:
+          description: ISO 8601 timestamp when the link token expires
+          example: '2024-01-01T12:00:00Z'
+          type: string
+        link_token:
+          description: The Plaid link token for bank authentication
+          example: link-sandbox-123456789
           type: string
       required:
-      - href
-      title: Link
+      - link_token
+      - expiration
+      - callback_url
+      title: LinkTokenResponse
+      type: object
+    RegisterAccountRequest:
+      properties:
+        customer_webhook_url:
+          description: URL where customer will receive webhook notifications when Plaid items need updates (required for account registration)
+          example: https://customer.com/webhooks/plaid-updates
+          format: uri
+          type: string
+        public_token:
+          description: The public token returned from Plaid Link
+          example: public-sandbox-123456789
+          type: string
+      required:
+      - public_token
+      - customer_webhook_url
+      title: RegisterAccountRequest
+      type: object
+    RegisterAccountResponse:
+      properties:
+        financial_institution_id:
+          description: The ID of the created financial institution
+          example: fi_123456789
+          type: string
+      required:
+      - financial_institution_id
+      title: RegisterAccountResponse
       type: object
     ID:
       description: ID of the resource
       example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
       title: ID
       type: string
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
+    RegisterAccountAddressResponse:
+      properties:
+        address_id:
+          description: The ID of the created address
+          example: addr_123456789
+          type: string
+      required:
+      - address_id
+      title: RegisterAccountAddressResponse
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    CreateLinkTokenRequest:
+      properties:
+        android_package_name:
+          description: Android package name for OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for Android OAuth flows. Cannot be used with redirect_uri.
+          example: com.example.myapp
+          type: string
+        date_of_birth:
+          description: User's date of birth (optional)
+          example: '1990-01-01'
+          type: string
+        email_address:
+          description: User's email address (optional)
+          example: user@example.com
+          type: string
+        legal_name:
+          description: User's legal name (optional)
+          example: John Doe
+          type: string
+        phone_number:
+          description: User's phone number (optional)
+          example: '+1234567890'
+          type: string
+        redirect_uri:
+          description: Universal link for iOS OAuth return-to-app. Must be pre-registered for the account and allowlisted in Plaid Dashboard. Required for iOS OAuth flows. Cannot be used with android_package_name.
+          example: https://app.example.com/plaid-oauth
+          format: uri
+          type: string
+      title: CreateLinkTokenRequest
+      type: object
   securitySchemes:
     oauth:
       flows:
