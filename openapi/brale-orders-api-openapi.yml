@@ -697,6 +697,27 @@ paths:
       - Orders
 components:
   schemas:
+    Transfer:
+      additionalProperties: false
+      discriminator:
+        propertyName: transferType
+      oneOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - $ref: '#/components/schemas/AutomationsTransfer'
+      - $ref: '#/components/schemas/TransferWithWireInstructions'
+      title: Transfer
+      type: object
+    AutomationsTransfer:
+      allOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - properties:
+          automation_id:
+            type: string
+        required:
+        - automation_id
+        type: object
+      title: AutomationsTransfer
+      type: object
     PaymentDataView:
       additionalProperties: false
       discriminator:
@@ -708,205 +729,6 @@ components:
       - $ref: '#/components/schemas/AddressPaymentData'
       - $ref: '#/components/schemas/AddressPaymentDataWithTransaction'
       title: PaymentDataView
-      type: object
-    ApiError:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          type:
-          - string
-          - 'null'
-        id:
-          type:
-          - string
-          - 'null'
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-        source:
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type:
-          - object
-          - 'null'
-        status:
-          example: '400'
-          type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
-      type: object
-    CreateBurn:
-      additionalProperties: false
-      example:
-        amount: '1000'
-        note: Monthly burn for Q1 2024
-        source:
-          address_id: 2zbcDT1E1K6xjuYT
-          transfer_type: solana
-          value_type: eSDR
-      properties:
-        amount:
-          description: Amount to burn as a decimal string
-          example: '1000.50'
-          type: string
-        note:
-          maxLength: 255
-          type: string
-        source:
-          $ref: '#/components/schemas/BurnSource'
-      required:
-      - amount
-      - source
-      title: CreateBurn
-      type: object
-    ApiErrorV2:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
-          type: string
-        detail:
-          example: A validation error occurred
-          type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
-      required:
-      - type
-      title: ApiErrorV2
-      type: object
-    BurnsList:
-      description: List of burn transactions with pagination metadata
-      properties:
-        burns:
-          items:
-            $ref: '#/components/schemas/BurnResponse'
-          type: array
-        pagination:
-          type: object
-      title: BurnsList
-      type: object
-    PagingParameters:
-      description: Paging query parameters
-      properties:
-        after:
-          type: string
-        before:
-          type: string
-        size:
-          format: int32
-          maximum: 100
-          minimum: 1
-          type: integer
-      title: PagingParameters
-      type: object
-    TransfersList:
-      description: List of transfers with pagination metadata
-      properties:
-        pagination:
-          type: object
-        transfers:
-          items:
-            $ref: '#/components/schemas/Transfer'
-          type: array
-      title: TransfersList
-      type: object
-    CreateMint:
-      additionalProperties: false
-      properties:
-        amount:
-          description: Amount to mint as a decimal string
-          type: string
-        destination:
-          $ref: '#/components/schemas/MintDestination'
-      required:
-      - amount
-      - destination
-      title: CreateMint
-      type: object
-    TokenizationTransfersList:
-      description: List of tokenization transfer transactions with pagination metadata
-      properties:
-        pagination:
-          type: object
-        transfers:
-          items:
-            $ref: '#/components/schemas/TokenizationTransferResponse'
-          type: array
-      title: TokenizationTransfersList
-      type: object
-    ThirdPartyFinancialInstitutionPaymentData:
-      additionalProperties: false
-      properties:
-        address_id:
-          type: string
-        payment_details:
-          allOf:
-          - $ref: '#/components/schemas/PaymentDetails'
-        requested_transfer_type:
-          type:
-          - string
-          - 'null'
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-        wire_memo:
-          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
-          type:
-          - string
-          - 'null'
-      required:
-      - value_type
-      - transfer_type
-      - financial_institution_id
-      title: ThirdPartyFinancialInstitutionPaymentData
-      type: object
-    PaymentData:
-      additionalProperties: false
-      properties:
-        address_id:
-          type: string
-        financial_institution_id:
-          type: string
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-        wire_memo:
-          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
-          type:
-          - string
-          - 'null'
-      required:
-      - value_type
-      - transfer_type
-      title: PaymentData
       type: object
     MintDestination:
       properties:
@@ -930,56 +752,27 @@ components:
       - transfer_type
       title: MintDestination
       type: object
-    AddressPaymentDataWithTransaction:
-      additionalProperties: false
+    TransfersList:
+      description: List of transfers with pagination metadata
       properties:
-        address_id:
-          type: string
-        transaction_id:
-          type: string
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      - transfer_type
-      - address_id
-      title: AddressPaymentDataWithTransaction
+        pagination:
+          type: object
+        transfers:
+          items:
+            $ref: '#/components/schemas/Transfer'
+          type: array
+      title: TransfersList
       type: object
-    AutomationsTransfer:
-      allOf:
-      - $ref: '#/components/schemas/BaseTransfer'
-      - properties:
-          automation_id:
-            type: string
-        required:
-        - automation_id
-        type: object
-      title: AutomationsTransfer
-      type: object
-    BrandData:
-      additionalProperties: false
+    MintsList:
+      description: List of mint transactions with pagination metadata
       properties:
-        account_id:
-          type: string
-      required:
-      - account_id
-      title: BrandData
-      type:
-      - object
-      - 'null'
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
+        mints:
+          items:
+            $ref: '#/components/schemas/MintResponse'
+          type: array
+        pagination:
+          type: object
+      title: MintsList
       type: object
     FinancialInstitutionPaymentData:
       additionalProperties: false
@@ -1008,349 +801,6 @@ components:
       - financial_institution_id
       title: FinancialInstitutionPaymentData
       type: object
-    TokenizationTransferResponse:
-      properties:
-        amount:
-          description: Amount transferred
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        destination:
-          properties:
-            address:
-              description: Destination blockchain address
-              type: string
-            transaction_id:
-              description: On-chain transaction hash
-              type:
-              - string
-              - 'null'
-            transfer_type:
-              description: Blockchain name
-              type: string
-          type: object
-        id:
-          description: Order ID
-          type: string
-        source:
-          properties:
-            address:
-              description: Source blockchain address
-              type: string
-            transaction_id:
-              description: On-chain transaction hash
-              type:
-              - string
-              - 'null'
-            transfer_type:
-              description: Blockchain name
-              type: string
-          type: object
-        status:
-          description: Transaction status
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      title: TokenizationTransferResponse
-      type: object
-    BurnSource:
-      properties:
-        address_id:
-          description: Brale address ID
-          type: string
-        transaction_id:
-          description: On-chain transaction hash
-          type:
-          - string
-          - 'null'
-        transfer_type:
-          description: Blockchain/chain name
-          type: string
-        value_type:
-          description: Token ticker
-          type: string
-      required:
-      - address_id
-      - value_type
-      - transfer_type
-      title: BurnSource
-      type: object
-    CreateTransfer:
-      additionalProperties: false
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        brand:
-          $ref: '#/components/schemas/BrandData'
-        destination:
-          $ref: '#/components/schemas/PaymentData'
-        note:
-          maxLength: 255
-          type: string
-        source:
-          $ref: '#/components/schemas/PaymentData'
-      required:
-      - amount
-      - source
-      - destination
-      title: CreateTransfer
-      type: object
-    TransferSource:
-      properties:
-        address_id:
-          description: Source Brale address ID
-          type: string
-        transaction_id:
-          description: On-chain transaction hash
-          type:
-          - string
-          - 'null'
-        transfer_type:
-          description: Blockchain/chain name
-          type: string
-        value_type:
-          description: Token ticker
-          type: string
-      required:
-      - address_id
-      - value_type
-      - transfer_type
-      title: TransferSource
-      type: object
-    BasePaymentData:
-      additionalProperties: false
-      properties:
-        payment_details:
-          allOf:
-          - $ref: '#/components/schemas/PaymentDetails'
-        requested_transfer_type:
-          type:
-          - string
-          - 'null'
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      - transfer_type
-      title: BasePaymentData
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    TransferDestination:
-      properties:
-        address_id:
-          description: Destination Brale address ID
-          type: string
-        transaction_id:
-          description: On-chain transaction hash
-          type:
-          - string
-          - 'null'
-        transfer_type:
-          description: Blockchain/chain name
-          type: string
-        value_type:
-          description: Token ticker
-          type: string
-      required:
-      - address_id
-      - value_type
-      - transfer_type
-      title: TransferDestination
-      type: object
-    BurnResponse:
-      properties:
-        amount:
-          description: Amount burned
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        id:
-          description: Order ID
-          type: string
-        source:
-          $ref: '#/components/schemas/BurnSource'
-        status:
-          description: Transaction status
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      title: BurnResponse
-      type: object
-    TransferWithWireInstructions:
-      allOf:
-      - $ref: '#/components/schemas/BaseTransfer'
-      - properties:
-          wire_instructions:
-            $ref: '#/components/schemas/WireInstructions'
-        required:
-        - wire_instructions
-        type: object
-      title: TransferWithWireInstructions
-      type: object
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-      required:
-      - errors
-      title: Failure
-      type: object
-    MintResponse:
-      properties:
-        amount:
-          description: Amount minted
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        destination:
-          $ref: '#/components/schemas/MintDestination'
-        id:
-          description: Order ID
-          type: string
-        status:
-          description: Transaction status
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      title: MintResponse
-      type: object
-    Amount:
-      additionalProperties: false
-      properties:
-        currency:
-          example: USD
-          type: string
-        value:
-          example: '11234.88'
-          type: string
-      required:
-      - value
-      - currency
-      title: Amount
-      type: object
-    AddressPaymentData:
-      additionalProperties: false
-      properties:
-        address_id:
-          type: string
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      - transfer_type
-      - address_id
-      title: AddressPaymentData
-      type: object
-    MintsList:
-      description: List of mint transactions with pagination metadata
-      properties:
-        mints:
-          items:
-            $ref: '#/components/schemas/MintResponse'
-          type: array
-        pagination:
-          type: object
-      title: MintsList
-      type: object
-    Transfer:
-      additionalProperties: false
-      discriminator:
-        propertyName: transferType
-      oneOf:
-      - $ref: '#/components/schemas/BaseTransfer'
-      - $ref: '#/components/schemas/AutomationsTransfer'
-      - $ref: '#/components/schemas/TransferWithWireInstructions'
-      title: Transfer
-      type: object
-    WireInstructions:
-      additionalProperties: false
-      properties:
-        account_number:
-          type: string
-        bank_address:
-          type: string
-        bank_name:
-          type: string
-        beneficiary_address:
-          type: string
-        beneficiary_name:
-          type: string
-        memo:
-          type: string
-        routing_number:
-          type: string
-      required:
-      - bank_name
-      - bank_address
-      - account_number
-      - routing_number
-      - beneficiary_name
-      - beneficiary_address
-      title: WireInstructions
-      type: object
-    CreateTokenizationTransfer:
-      additionalProperties: false
-      example:
-        amount: '3200'
-        destination:
-          address_id: 36FkHXYoAJo6QVQSHJ37Nmbaaaa
-          transfer_type: solana
-          value_type: eSDR
-        source:
-          address_id: 36FkHXYoAJo6QVQSHJ37NmbisZx
-          transfer_type: solana
-          value_type: eSDR
-      properties:
-        amount:
-          description: Amount to transfer as a decimal string
-          example: '3200'
-          type: string
-        destination:
-          $ref: '#/components/schemas/TransferDestination'
-        source:
-          $ref: '#/components/schemas/TransferSource'
-      required:
-      - amount
-      - source
-      - destination
-      title: CreateTokenizationTransfer
-      type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
     PaymentDetails:
       additionalProperties: false
       properties:
@@ -1407,6 +857,479 @@ components:
           - 'null'
       title: PaymentDetails
       type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    PaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        financial_institution_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+        wire_memo:
+          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
+          type:
+          - string
+          - 'null'
+      required:
+      - value_type
+      - transfer_type
+      title: PaymentData
+      type: object
+    TransferWithWireInstructions:
+      allOf:
+      - $ref: '#/components/schemas/BaseTransfer'
+      - properties:
+          wire_instructions:
+            $ref: '#/components/schemas/WireInstructions'
+        required:
+        - wire_instructions
+        type: object
+      title: TransferWithWireInstructions
+      type: object
+    TransferSource:
+      properties:
+        address_id:
+          description: Source Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          type:
+          - string
+          - 'null'
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: TransferSource
+      type: object
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
+    BurnsList:
+      description: List of burn transactions with pagination metadata
+      properties:
+        burns:
+          items:
+            $ref: '#/components/schemas/BurnResponse'
+          type: array
+        pagination:
+          type: object
+      title: BurnsList
+      type: object
+    CreateMint:
+      additionalProperties: false
+      properties:
+        amount:
+          description: Amount to mint as a decimal string
+          type: string
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+      required:
+      - amount
+      - destination
+      title: CreateMint
+      type: object
+    BurnResponse:
+      properties:
+        amount:
+          description: Amount burned
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          description: Order ID
+          type: string
+        source:
+          $ref: '#/components/schemas/BurnSource'
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: BurnResponse
+      type: object
+    CreateTokenizationTransfer:
+      additionalProperties: false
+      example:
+        amount: '3200'
+        destination:
+          address_id: 36FkHXYoAJo6QVQSHJ37Nmbaaaa
+          transfer_type: solana
+          value_type: eSDR
+        source:
+          address_id: 36FkHXYoAJo6QVQSHJ37NmbisZx
+          transfer_type: solana
+          value_type: eSDR
+      properties:
+        amount:
+          description: Amount to transfer as a decimal string
+          example: '3200'
+          type: string
+        destination:
+          $ref: '#/components/schemas/TransferDestination'
+        source:
+          $ref: '#/components/schemas/TransferSource'
+      required:
+      - amount
+      - source
+      - destination
+      title: CreateTokenizationTransfer
+      type: object
+    BrandData:
+      additionalProperties: false
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: BrandData
+      type:
+      - object
+      - 'null'
+    ThirdPartyFinancialInstitutionPaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        payment_details:
+          allOf:
+          - $ref: '#/components/schemas/PaymentDetails'
+        requested_transfer_type:
+          type:
+          - string
+          - 'null'
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+        wire_memo:
+          description: OBI memo sent to the receiving bank. Applicable to wire transfers only.
+          type:
+          - string
+          - 'null'
+      required:
+      - value_type
+      - transfer_type
+      - financial_institution_id
+      title: ThirdPartyFinancialInstitutionPaymentData
+      type: object
+    TokenizationTransfersList:
+      description: List of tokenization transfer transactions with pagination metadata
+      properties:
+        pagination:
+          type: object
+        transfers:
+          items:
+            $ref: '#/components/schemas/TokenizationTransferResponse'
+          type: array
+      title: TokenizationTransfersList
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
+      type: object
+    CreateBurn:
+      additionalProperties: false
+      example:
+        amount: '1000'
+        note: Monthly burn for Q1 2024
+        source:
+          address_id: 2zbcDT1E1K6xjuYT
+          transfer_type: solana
+          value_type: eSDR
+      properties:
+        amount:
+          description: Amount to burn as a decimal string
+          example: '1000.50'
+          type: string
+        note:
+          maxLength: 255
+          type: string
+        source:
+          $ref: '#/components/schemas/BurnSource'
+      required:
+      - amount
+      - source
+      title: CreateBurn
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    BasePaymentData:
+      additionalProperties: false
+      properties:
+        payment_details:
+          allOf:
+          - $ref: '#/components/schemas/PaymentDetails'
+        requested_transfer_type:
+          type:
+          - string
+          - 'null'
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      title: BasePaymentData
+      type: object
+    MintResponse:
+      properties:
+        amount:
+          description: Amount minted
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+        id:
+          description: Order ID
+          type: string
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: MintResponse
+      type: object
+    PagingParameters:
+      description: Paging query parameters
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
+      type: object
+    ApiErrorV2:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          example: A validation error occurred
+          type: string
+        status:
+          example: 400
+          type: integer
+        type:
+          type: string
+        values:
+          items:
+            type: string
+          type: array
+      required:
+      - type
+      title: ApiErrorV2
+      type: object
+    BurnSource:
+      properties:
+        address_id:
+          description: Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          type:
+          - string
+          - 'null'
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: BurnSource
+      type: object
+    AddressPaymentDataWithTransaction:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        transaction_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - address_id
+      title: AddressPaymentDataWithTransaction
+      type: object
+    ApiError:
+      additionalProperties: false
+      properties:
+        code:
+          example: ValidationError
+          type: string
+        detail:
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        source:
+          properties:
+            parameter:
+              example: page[cursor]
+              type: string
+            pointer:
+              example: /body/data/attributes
+              type: string
+          type:
+          - object
+          - 'null'
+        status:
+          example: '400'
+          type: string
+        title:
+          example: A validation error occurred
+          type: string
+      title: ApiError
+      type: object
+    CreateTransfer:
+      additionalProperties: false
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        brand:
+          $ref: '#/components/schemas/BrandData'
+        destination:
+          $ref: '#/components/schemas/PaymentData'
+        note:
+          maxLength: 255
+          type: string
+        source:
+          $ref: '#/components/schemas/PaymentData'
+      required:
+      - amount
+      - source
+      - destination
+      title: CreateTransfer
+      type: object
+    TokenizationTransferResponse:
+      properties:
+        amount:
+          description: Amount transferred
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        destination:
+          properties:
+            address:
+              description: Destination blockchain address
+              type: string
+            transaction_id:
+              description: On-chain transaction hash
+              type:
+              - string
+              - 'null'
+            transfer_type:
+              description: Blockchain name
+              type: string
+          type: object
+        id:
+          description: Order ID
+          type: string
+        source:
+          properties:
+            address:
+              description: Source blockchain address
+              type: string
+            transaction_id:
+              description: On-chain transaction hash
+              type:
+              - string
+              - 'null'
+            transfer_type:
+              description: Blockchain name
+              type: string
+          type: object
+        status:
+          description: Transaction status
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      title: TokenizationTransferResponse
+      type: object
     BaseTransfer:
       additionalProperties: false
       properties:
@@ -1439,6 +1362,83 @@ components:
         updated_at:
           $ref: '#/components/schemas/DateTime'
       title: BaseTransfer
+      type: object
+    AddressPaymentData:
+      additionalProperties: false
+      properties:
+        address_id:
+          type: string
+        transfer_type:
+          type: string
+        value_type:
+          type: string
+      required:
+      - value_type
+      - transfer_type
+      - address_id
+      title: AddressPaymentData
+      type: object
+    TransferDestination:
+      properties:
+        address_id:
+          description: Destination Brale address ID
+          type: string
+        transaction_id:
+          description: On-chain transaction hash
+          type:
+          - string
+          - 'null'
+        transfer_type:
+          description: Blockchain/chain name
+          type: string
+        value_type:
+          description: Token ticker
+          type: string
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      title: TransferDestination
+      type: object
+    WireInstructions:
+      additionalProperties: false
+      properties:
+        account_number:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        beneficiary_address:
+          type: string
+        beneficiary_name:
+          type: string
+        memo:
+          type: string
+        routing_number:
+          type: string
+      required:
+      - bank_name
+      - bank_address
+      - account_number
+      - routing_number
+      - beneficiary_name
+      - beneficiary_address
+      title: WireInstructions
+      type: object
+    Amount:
+      additionalProperties: false
+      properties:
+        currency:
+          example: USD
+          type: string
+        value:
+          example: '11234.88'
+          type: string
+      required:
+      - value
+      - currency
+      title: Amount
       type: object
   securitySchemes:
     oauth:

@@ -463,29 +463,20 @@ paths:
       - Webhooks
 components:
   schemas:
-    WebhookSubscription:
+    WebhookDeliveryLogList:
       additionalProperties: false
       properties:
-        events:
+        deliveries:
+          description: Delivery attempts, newest `inserted_at` first.
           items:
-            type: string
+            $ref: '#/components/schemas/WebhookDeliveryLog'
           type: array
-        id:
-          $ref: '#/components/schemas/ID'
-        status:
-          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
-          enum:
-          - active
-          - archived
-          type: string
-        url:
-          type: string
+        pagination:
+          $ref: '#/components/schemas/Pagination'
       required:
-      - id
-      - events
-      - url
-      - status
-      title: WebhookSubscription
+      - deliveries
+      - pagination
+      title: WebhookDeliveryLogList
       type: object
     ApiError:
       additionalProperties: false
@@ -532,62 +523,40 @@ components:
           type: string
       title: ApiError
       type: object
-    PagingParameters:
-      description: Paging query parameters
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
       properties:
-        after:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
           type: string
-        before:
-          type: string
-        size:
-          format: int32
-          maximum: 100
-          minimum: 1
+      required:
+      - href
+      title: Link
+      type: object
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    Pagination:
+      description: Pagination information for list endpoints
+      properties:
+        next:
+          description: Cursor for the next page of results
+          type:
+          - string
+          - 'null'
+        page_size:
+          description: Number of items per page
           type: integer
-      title: PagingParameters
-      type: object
-    WebhookSubscriptionCreated:
-      additionalProperties: false
-      properties:
-        events:
-          items:
-            type: string
-          type: array
-        id:
-          $ref: '#/components/schemas/ID'
-        sharedSecret:
-          description: Signing secret (Base64 Encoded). Returned only on create; store it securely to verify signatures.
-          type: string
-        status:
-          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
-          enum:
-          - active
-          - archived
-          type: string
-        url:
-          type: string
-      required:
-      - id
-      - sharedSecret
-      - events
-      - url
-      - status
-      title: WebhookSubscriptionCreated
-      type: object
-    WebhookDeliveryLogList:
-      additionalProperties: false
-      properties:
-        deliveries:
-          description: Delivery attempts, newest `inserted_at` first.
-          items:
-            $ref: '#/components/schemas/WebhookDeliveryLog'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      required:
-      - deliveries
-      - pagination
-      title: WebhookDeliveryLogList
+        prev:
+          description: Cursor for the previous page of results
+          type:
+          - string
+          - 'null'
+      title: Pagination
       type: object
     WebhookEventType:
       additionalProperties: false
@@ -602,6 +571,48 @@ components:
       - event_type
       - summary
       title: WebhookEventType
+      type: object
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
+      type: string
+    WebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          items:
+            type: string
+          type: array
+        id:
+          $ref: '#/components/schemas/ID'
+        status:
+          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
+          enum:
+          - active
+          - archived
+          type: string
+        url:
+          type: string
+      required:
+      - id
+      - events
+      - url
+      - status
+      title: WebhookSubscription
+      type: object
+    WebhookEventTypeList:
+      additionalProperties: false
+      properties:
+        event_types:
+          description: Supported event types for new subscriptions, sorted by `event_type`.
+          items:
+            $ref: '#/components/schemas/WebhookEventType'
+          type: array
+      required:
+      - event_types
+      title: WebhookEventTypeList
       type: object
     WebhookReplayAccepted:
       additionalProperties: false
@@ -621,24 +632,6 @@ components:
       - jobIds
       title: WebhookReplayAccepted
       type: object
-    Pagination:
-      description: Pagination information for list endpoints
-      properties:
-        next:
-          description: Cursor for the next page of results
-          type:
-          - string
-          - 'null'
-        page_size:
-          description: Number of items per page
-          type: integer
-        prev:
-          description: Cursor for the previous page of results
-          type:
-          - string
-          - 'null'
-      title: Pagination
-      type: object
     WebhookSubscriptionList:
       additionalProperties: false
       properties:
@@ -649,68 +642,6 @@ components:
       required:
       - subscriptions
       title: WebhookSubscriptionList
-      type: object
-    WebhookDeliveryLog:
-      additionalProperties: false
-      properties:
-        attempt_number:
-          minimum: 1
-          type: integer
-        event_id:
-          description: Envelope id for the event (e.g. payment id for `payment.completed`, transfer / order id for `transfer.completed`, `transfer.canceled`, or `transfer.created`).
-          type: string
-        failure_message:
-          description: Present when the attempt failed.
-          type:
-          - string
-          - 'null'
-        id:
-          $ref: '#/components/schemas/ID'
-        inserted_at:
-          $ref: '#/components/schemas/DateTime'
-        status_code:
-          description: HTTP status as string, or a short code such as `request_timeout`.
-          type: string
-        subscription_id:
-          $ref: '#/components/schemas/ID'
-      required:
-      - id
-      - event_id
-      - subscription_id
-      - attempt_number
-      - status_code
-      - inserted_at
-      title: WebhookDeliveryLog
-      type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    CreateWebhookSubscription:
-      additionalProperties: false
-      properties:
-        events:
-          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
-          items:
-            type: string
-          minItems: 1
-          type: array
-        url:
-          description: HTTPS URL to receive signed webhook POST requests
-          maxLength: 2048
-          type: string
-      required:
-      - url
-      - events
-      title: CreateWebhookSubscription
       type: object
     ApiErrorV2:
       additionalProperties: false
@@ -734,23 +665,20 @@ components:
       - type
       title: ApiErrorV2
       type: object
-    WebhookEventTypeList:
-      additionalProperties: false
+    PagingParameters:
+      description: Paging query parameters
       properties:
-        event_types:
-          description: Supported event types for new subscriptions, sorted by `event_type`.
-          items:
-            $ref: '#/components/schemas/WebhookEventType'
-          type: array
-      required:
-      - event_types
-      title: WebhookEventTypeList
+        after:
+          type: string
+        before:
+          type: string
+        size:
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      title: PagingParameters
       type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
     Failure:
       additionalProperties: false
       properties:
@@ -793,12 +721,84 @@ components:
           - 'null'
       title: UpdateWebhookSubscription
       type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
+    CreateWebhookSubscription:
+      additionalProperties: false
+      properties:
+        events:
+          description: Event types to subscribe to. Supports concrete types (e.g. `transfer.created`) and namespace wildcards (e.g. `transfer.*` for all transfer events). See the supported event types endpoint.
+          items:
+            type: string
+          minItems: 1
+          type: array
+        url:
+          description: HTTPS URL to receive signed webhook POST requests
+          maxLength: 2048
+          type: string
+      required:
+      - url
+      - events
+      title: CreateWebhookSubscription
+      type: object
+    WebhookDeliveryLog:
+      additionalProperties: false
+      properties:
+        attempt_number:
+          minimum: 1
+          type: integer
+        event_id:
+          description: Envelope id for the event (e.g. payment id for `payment.completed`, transfer / order id for `transfer.completed`, `transfer.canceled`, or `transfer.created`).
+          type: string
+        failure_message:
+          description: Present when the attempt failed.
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ID'
+        inserted_at:
+          $ref: '#/components/schemas/DateTime'
+        status_code:
+          description: HTTP status as string, or a short code such as `request_timeout`.
+          type: string
+        subscription_id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+      - event_id
+      - subscription_id
+      - attempt_number
+      - status_code
+      - inserted_at
+      title: WebhookDeliveryLog
+      type: object
+    WebhookSubscriptionCreated:
+      additionalProperties: false
+      properties:
+        events:
+          items:
+            type: string
+          type: array
+        id:
+          $ref: '#/components/schemas/ID'
+        sharedSecret:
+          description: Signing secret (Base64 Encoded). Returned only on create; store it securely to verify signatures.
+          type: string
+        status:
+          description: 'Subscription lifecycle: active deliveries or archived (no longer used).'
+          enum:
+          - active
+          - archived
+          type: string
+        url:
+          type: string
+      required:
+      - id
+      - sharedSecret
+      - events
+      - url
+      - status
+      title: WebhookSubscriptionCreated
+      type: object
   securitySchemes:
     oauth:
       flows:
