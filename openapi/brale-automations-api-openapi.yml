@@ -221,32 +221,114 @@ paths:
       - Automations
 components:
   schemas:
-    CreateAutomation:
+    AutomationSource:
       additionalProperties: false
       properties:
-        brand:
-          $ref: '#/components/schemas/AutomationBrandData'
-        destination:
-          $ref: '#/components/schemas/AutomationDestination'
-        name:
+        transfer_type:
           type: string
-        source:
-          $ref: '#/components/schemas/AutomationSource'
+        value_type:
+          type: string
       required:
-      - name
-      - source
-      - destination
-      title: CreateAutomation
+      - value_type
+      title: AutomationSource
       type: object
-    AutomationSourceWithFundingInstructions:
+    ID:
+      description: ID of the resource
+      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      title: ID
+      type: string
+    Failure:
+      additionalProperties: false
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/ApiError'
+          type: array
+          uniqueItems: true
+        links:
+          additionalProperties:
+            $ref: '#/components/schemas/Link'
+          type:
+          - object
+          - 'null'
+        meta:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+      required:
+      - errors
+      title: Failure
+      type: object
+    FundingInstructions:
+      additionalProperties: false
+      properties:
+        account_number:
+          type: string
+        bank_address:
+          type: string
+        bank_name:
+          type: string
+        beneficiary_address:
+          type: string
+        beneficiary_name:
+          type: string
+        routing_number:
+          type: string
+      required:
+      - bank_name
+      - bank_address
+      - account_number
+      - routing_number
+      - beneficiary_name
+      - beneficiary_address
+      title: FundingInstructions
+      type: object
+    AutomationResponse:
       additionalProperties: false
       allOf:
-      - $ref: '#/components/schemas/AutomationSource'
       - properties:
-          funding_instructions:
-            $ref: '#/components/schemas/FundingInstructions'
+          brand:
+            $ref: '#/components/schemas/AutomationBrandData'
+          created_at:
+            $ref: '#/components/schemas/DateTime'
+          destination:
+            $ref: '#/components/schemas/AutomationDestination'
+          id:
+            $ref: '#/components/schemas/ID'
+          name:
+            type: string
+          source:
+            $ref: '#/components/schemas/AutomationSourceWithFundingInstructions'
+          status:
+            enum:
+            - pending
+            - active
+            - disabled
+            - archived
+            type: string
+          updated_at:
+            $ref: '#/components/schemas/DateTime'
+        required:
+        - name
+        - status
+        - source
+        - destination
         type: object
-      title: AutomationSourceWithFundingInstructions
+      title: AutomationResponse
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+      properties:
+        href:
+          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
+          type: string
+      required:
+      - href
+      title: Link
       type: object
     ApiError:
       additionalProperties: false
@@ -309,79 +391,12 @@ components:
       - transfer_type
       title: AutomationDestination
       type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
-    AutomationSource:
-      additionalProperties: false
-      properties:
-        transfer_type:
-          type: string
-        value_type:
-          type: string
-      required:
-      - value_type
-      title: AutomationSource
-      type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
+    DateTime:
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
+      format: date-time
+      title: DateTime
       type: string
-    AutomationBrandData:
-      additionalProperties: false
-      properties:
-        account_id:
-          type: string
-      required:
-      - account_id
-      title: AutomationBrandData
-      type: object
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-      required:
-      - errors
-      title: Failure
-      type: object
-    UpdateAutomationStatus:
-      additionalProperties: false
-      properties:
-        status:
-          enum:
-          - disabled
-          - archived
-          type: string
-      required:
-      - status
-      title: UpdateAutomationStatus
-      type: object
     ApiErrorV2:
       additionalProperties: false
       properties:
@@ -404,69 +419,54 @@ components:
       - type
       title: ApiErrorV2
       type: object
-    AutomationResponse:
-      additionalProperties: false
-      allOf:
-      - properties:
-          brand:
-            $ref: '#/components/schemas/AutomationBrandData'
-          created_at:
-            $ref: '#/components/schemas/DateTime'
-          destination:
-            $ref: '#/components/schemas/AutomationDestination'
-          id:
-            $ref: '#/components/schemas/ID'
-          name:
-            type: string
-          source:
-            $ref: '#/components/schemas/AutomationSourceWithFundingInstructions'
-          status:
-            enum:
-            - pending
-            - active
-            - disabled
-            - archived
-            type: string
-          updated_at:
-            $ref: '#/components/schemas/DateTime'
-        required:
-        - name
-        - status
-        - source
-        - destination
-        type: object
-      title: AutomationResponse
-      type: object
-    FundingInstructions:
+    CreateAutomation:
       additionalProperties: false
       properties:
-        account_number:
+        brand:
+          $ref: '#/components/schemas/AutomationBrandData'
+        destination:
+          $ref: '#/components/schemas/AutomationDestination'
+        name:
           type: string
-        bank_address:
-          type: string
-        bank_name:
-          type: string
-        beneficiary_address:
-          type: string
-        beneficiary_name:
-          type: string
-        routing_number:
+        source:
+          $ref: '#/components/schemas/AutomationSource'
+      required:
+      - name
+      - source
+      - destination
+      title: CreateAutomation
+      type: object
+    AutomationSourceWithFundingInstructions:
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/AutomationSource'
+      - properties:
+          funding_instructions:
+            $ref: '#/components/schemas/FundingInstructions'
+        type: object
+      title: AutomationSourceWithFundingInstructions
+      type: object
+    UpdateAutomationStatus:
+      additionalProperties: false
+      properties:
+        status:
+          enum:
+          - disabled
+          - archived
           type: string
       required:
-      - bank_name
-      - bank_address
-      - account_number
-      - routing_number
-      - beneficiary_name
-      - beneficiary_address
-      title: FundingInstructions
+      - status
+      title: UpdateAutomationStatus
       type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
+    AutomationBrandData:
+      additionalProperties: false
+      properties:
+        account_id:
+          type: string
+      required:
+      - account_id
+      title: AutomationBrandData
+      type: object
   securitySchemes:
     oauth:
       flows:
