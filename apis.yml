@@ -189,18 +189,36 @@ apis:
     url: https://docs.brale.xyz/documentation/introduction
   - type: Postman
     url: https://www.postman.com/brale-xyz/brale-api/overview
-- aid: brale:brale-webhooks-api
-  name: Brale Webhooks API
-  description: The Webhooks API from Brale — 6 operation(s) for webhooks.
+- aid: brale:brale-plaid-api
+  name: Brale Plaid API
+  description: Bank linking and ACH debit via Plaid.
   humanURL: https://docs.brale.xyz/
   baseURL: https://api.brale.xyz
   tags:
-  - Webhook
-  tags_raw:
-  - Webhooks
+  - Plaid
   properties:
   - type: OpenAPI
-    url: openapi/brale-webhooks-api-openapi.yml
+    url: openapi/brale-plaid-api-openapi.yml
+  - type: Documentation
+    url: https://docs.brale.xyz/
+  - type: DeveloperPortal
+    url: https://docs.brale.xyz/
+  - type: APIReference
+    url: https://docs.brale.xyz/api-reference/brale-introduction
+  - type: GettingStarted
+    url: https://docs.brale.xyz/documentation/introduction
+  - type: Postman
+    url: https://www.postman.com/brale-xyz/brale-api/overview
+- aid: brale:brale-transfers-api
+  name: Brale Transfers API
+  description: Endpoints for creating and retrieving transfers (fiat to stablecoins, etc.)
+  humanURL: https://docs.brale.xyz/
+  baseURL: https://api.brale.xyz
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/brale-transfers-api-openapi.yml
   - type: Documentation
     url: https://docs.brale.xyz/
   - type: DeveloperPortal

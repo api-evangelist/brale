@@ -1,828 +1,731 @@
 openapi: 3.2.0
 info:
-  contact:
-    email: support@brale.xyz
-    name: Brale API Support
-  description: Update this with a description. Can we use markdown in this section?
-  termsOfService: https://brale.xyz/legal
-  title: Brale Accounts API
-  version: '1.0'
+  title: Brale Issuance and Orchestration Accounts API
+  version: 2.3.1
+  description: 'Brale supports stablecoin issuance and orchestration, enabling businesses and
+
+    ecosystems to create their own stablecoins and convert between fiat and stablecoins
+
+    seamlessly. From stablecoin onramps, offramps, and swaps to custody and payouts, the
+
+    Brale API makes it easy to build stablecoin-enabled products.
+
+
+    NOTE: All resource IDs (including account_id, address_id, financial_institution_id,
+
+    and automation_id) are KSUIDs—27-character alphanumeric strings that are sortable
+
+    by time. Examples showing UUIDs are incorrect.
+
+
+    **What''s new in 2.3.1**
+
+    - Unified **Addresses** model for on-chain and off-chain endpoints
+
+    - `Transfers` now accepts **address_id only** (no financial_institution_id)
+
+    - Optional `brand` object to control bank statement presentation (`branding` still accepted as legacy alias)
+
+    - Added off-chain rails: `ach_credit`, `same_day_ach_credit`, `ach_debit`, `same_day_ach_debit`, `rtp-credit`
+
+    - Plaid endpoints moved to `/accounts/{account_id}/plaid/*`
+
+    - `Financial Institutions` marked **deprecated** (migration path to **Addresses**)
+
+    - Create Account now uses `CreateManagedAccountRequest` with `beneficial_owners`, `business_controller`, and `EndUserTosAttestation`.
+
+    - Transfers now accept `brand` (replaces `branding`, still aliased in docs).
+
+    - Plaid endpoints updated to return `address_id` and accept `transfer_types`.
+
+    - Off-chain Address creation uses `CreateExternalAddressRequest` oneOf with bank + blockchain variants.
+
+    - FI endpoints kept but marked deprecated; use Addresses instead.
+
+    - `rtp_credit` is the canonical RTP rail name.
+
+
+    **FedNow**
+
+    - Added the `fednow_credit` rail. Outbound: create a Transfer with
+
+    `destination.transfer_type: fednow_credit` to a bank Address that lists
+
+    `fednow_credit` in `transfer_types`. Inbound: payers send FedNow credits to an
+
+    active Automation''s `source.funding_instructions`; Brale creates the Transfer
+
+    automatically with `source.transfer_type: fednow_credit`.
+
+    - Simulate a testnet FedNow deposit with `transfer_type: fednow` on
+
+    `POST /accounts/{account_id}/automations/{automation_id}/simulations/deposits`.
+
+    - `bank_address` and `beneficiary_address` are required only when an external
+
+    bank Address requests `wire`.
+
+    - FedNow availability depends on account enablement.'
 servers:
 - url: https://api.brale.xyz
-  variables: {}
-security: []
+  description: Production server
+security:
+- BearerAuth: []
 tags:
 - name: Accounts
+  description: Endpoints related to managing customer accounts (KYB, details, etc.)
 paths:
   /accounts:
     get:
-      callbacks: {}
-      operationId: list_accounts
-      parameters: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountList'
-          description: OK
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Not Found
-      security:
-      - oauth:
-        - accounts:read
-      summary: List accounts managed by organization
       tags:
       - Accounts
+      operationId: listAccounts
+      summary: Retrieve all accounts
+      description: Returns an array of accounts.
+      responses:
+        '200':
+          description: An array of accounts
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
     post:
-      callbacks: {}
-      operationId: create_account
-      parameters: []
+      tags:
+      - Accounts
+      operationId: createAccount
+      summary: Create a customer account
+      description: Creates a new customer (account) with the required KYC/KYB details.
+      parameters:
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+        example: idemp-123e4567-e89b-12d3-a456-426614174000
+        description: 'A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key. Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
+
+          '
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAccountRequest'
-        description: Create account request body (business or individual)
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Not Found
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unprocessable Entity
-      security:
-      - oauth:
-        - accounts:write
-      summary: Creates an account managed by organization
-      tags:
-      - Accounts
-  /accounts/{account_id}/verification/documents:
-    get:
-      callbacks: {}
-      operationId: list_verification_documents
-      parameters:
-      - description: Account ID
-        in: path
-        name: account_id
-        required: true
-        schema:
-          $ref: '#/components/schemas/ID'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationDocumentsList'
-          description: OK
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Not Found
-      security:
-      - oauth:
-        - accounts:read
-      summary: List required verification documents
-      tags:
-      - Accounts
-  /documents:
-    post:
-      callbacks: {}
-      operationId: create_document_submission
-      parameters: []
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                document_kind:
-                  $ref: '#/components/schemas/DocumentKindEnum'
-                file:
-                  format: binary
-                  type: string
-                person_label:
-                  type:
-                  - string
-                  - 'null'
-              required:
-              - file
-              - document_kind
-              type: object
-        description: Document submission upload
-        required: true
+            examples:
+              create_business_account:
+                summary: Business account with controller + TOS attestation
+                value:
+                  business_name: ABC Company Inc
+                  ein: 11-1111111
+                  address:
+                    street_line_1: 100 Example St
+                    city: Des Moines
+                    state: IA
+                    zip: '50309'
+                    country: US
+                  phone_number: '5155550182'
+                  email: ops@abc.example
+                  website: https://abc.example
+                  beneficial_owners:
+                  - first_name: Jane
+                    last_name: Doe
+                    dob: '1980-05-12'
+                    ssn: 222-22-2222
+                    email: jane@example.com
+                    phone_number: 212-555-0182
+                    address:
+                      street_line_1: 100 Example St
+                      city: Des Moines
+                      state: IA
+                      zip: '50309'
+                      country: US
+                  business_controller:
+                    first_name: Alicia
+                    last_name: Ng
+                    dob: '1986-07-14'
+                    ssn: 123-45-6789
+                    email: alicia.ng@example.com
+                    phone_number: '+12125550182'
+                    address:
+                      street_line_1: 200 Market St
+                      city: Des Moines
+                      state: IA
+                      zip: '50310'
+                      country: US
+                  tos_attestation:
+                    accepted_at: '2025-05-13T20:45:15Z'
+                    version: '2025-04-01'
+                    ip: 203.0.113.42
+                    user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ...
+                  name: My Account
+              create_business_transactional_account_non_us:
+                summary: Business (KYB) transactional account, non-US
+                value:
+                  entity_type: business
+                  account_type: transactional
+                  business_name: Example Trading Ltd
+                  ein: '12345678'
+                  address:
+                    street_line_1: 10 Example Street
+                    city: London
+                    zip: EC1A 1BB
+                    country: GB
+                  phone_number: '+442071234567'
+                  email: ops@example.co.uk
+                  website: https://example.co.uk
+                  beneficial_owners: []
+                  business_controller:
+                    first_name: Oliver
+                    last_name: Smith
+                    dob: '1985-03-14'
+                    email: oliver@example.co.uk
+                    phone_number: '+447700900123'
+                    address:
+                      street_line_1: 10 Example Street
+                      city: London
+                      zip: EC1A 1BB
+                      country: GB
+                    identity:
+                      number: '123456789'
+                      type: PASSPORT
+                  tos_attestation:
+                    accepted_at: '2026-05-13T20:45:15Z'
+                    version: '2025-04-01'
+              create_business_custodial_account_regulated_non_us:
+                summary: Business (KYB) custodial account, regulated non-US
+                value:
+                  entity_type: business
+                  account_type: custodial
+                  verification_mode: standard
+                  business_name: Example Payments Inc
+                  ein: '123456789'
+                  address:
+                    street_line_1: 100 King Street West
+                    city: Toronto
+                    state: 'ON'
+                    zip: M5X 1A9
+                    country: CA
+                  phone_number: '+14165550123'
+                  email: ops@example.ca
+                  website: https://example.ca
+                  regulatory_profile:
+                    regulator: FINTRAC
+                    license_number: M12345678
+                  beneficial_owners: []
+                  business_controller:
+                    first_name: Emma
+                    last_name: Tremblay
+                    dob: '1984-06-21'
+                    email: emma@example.ca
+                    phone_number: '+14165550188'
+                    address:
+                      street_line_1: 100 King Street West
+                      city: Toronto
+                      state: 'ON'
+                      zip: M5X 1A9
+                      country: CA
+                    identity:
+                      number: AB123456
+                      type: PASSPORT
+                  tos_attestation:
+                    accepted_at: '2026-05-13T20:45:15Z'
+                    version: '2025-04-01'
+              create_individual_account:
+                summary: Individual (KYC) transactional account
+                value:
+                  entity_type: individual
+                  account_type: transactional
+                  verification_mode: standard
+                  individual:
+                    first_name: Jane
+                    last_name: Doe
+                    date_of_birth: '1990-01-01'
+                    email: jane@example.com
+                    phone_number: '2125550182'
+                    country: US
+                    address:
+                      street_line_1: 123 Main St
+                      street_line_2: Apt 4
+                      city: Des Moines
+                      state: IA
+                      zip: '50309'
+                    identity:
+                      number: 222-22-2222
+                      type: SSN9
+                  tos_attestation:
+                    accepted_at: '2026-05-13T20:45:15Z'
+                    version: '2025-04-01'
+                    ip: 203.0.113.42
+                    user_agent: Mozilla/5.0 ...
+              create_individual_custodial_account:
+                summary: Individual (KYC) custodial account
+                value:
+                  entity_type: individual
+                  account_type: custodial
+                  verification_mode: standard
+                  individual:
+                    first_name: Jane
+                    last_name: Doe
+                    date_of_birth: '1990-01-01'
+                    email: jane@example.com
+                    phone_number: '2125550182'
+                    country: US
+                    address:
+                      street_line_1: 123 Main St
+                      street_line_2: Apt 4
+                      city: Des Moines
+                      state: IA
+                      zip: '50309'
+                    identity:
+                      number: 222-22-2222
+                      type: SSN9
+                  tos_attestation:
+                    accepted_at: '2026-05-13T20:45:15Z'
+                    version: '2025-04-01'
+              create_individual_account_non_us:
+                summary: Individual (KYC) transactional account, non-US
+                value:
+                  entity_type: individual
+                  account_type: transactional
+                  individual:
+                    first_name: Amara
+                    last_name: Okafor
+                    date_of_birth: '1988-07-22'
+                    email: amara@example.com
+                    phone_number: '+2348012345678'
+                    country: NG
+                    address:
+                      street_line_1: 12 Awolowo Road
+                      city: Lagos
+                      state: Lagos
+                      zip: '101233'
+                    identity:
+                      number: '22222222222'
+                      type: BVN
+                  tos_attestation:
+                    accepted_at: '2026-05-13T20:45:15Z'
+                    version: '2025-04-01'
       responses:
         '201':
+          description: Account successfully created
           content:
-            application/json:
+            '*/*':
               schema:
-                $ref: '#/components/schemas/DocumentSubmissionCreated'
-          description: Created
-          headers:
-            location:
-              schema:
-                type: string
-              style: simple
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/Ksuid'
         '400':
+          description: "Bad request. Possible `type` values on the business path:\n- `regulator_required` — `regulatory_profile` was sent with\n  `regulator` missing or blank. Permanent; safe to cache against an\n  idempotency key.\n\n- `license_number_required` — `regulatory_profile` was sent with\n  `license_number` missing or blank. Permanent; safe to cache\n  against an idempotency key.\n\n\nPossible `type` values on the individual path:\n- `individual_details_required` — `entity_type: individual` was\n  sent with no `individual` object.\n\n- `tos_attestation_required` — the individual path was used with\n  no `tos_attestation`.\n\n- `unexpected_business_fields` — a business-only field\n  (`business_name`, `ein`, `website`, `business_controller`,\n  `beneficial_owners`, `regulatory_profile`) was sent on the\n  individual path.\n\n- `invalid_attestation_timestamp` — `tos_attestation.accepted_at`\n  is not an ISO-8601 timestamp.\n"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Bad Request
-        '401':
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: "Unprocessable entity. Possible `type` values on account creation:\n- `unsupported_account_combination` — the combination of\n  `entity_type`, `account_type`, and `verification_mode` is\n  not supported: any `verification_mode: bypass`, or\n  `verification_mode: reliance` from a caller without reliance\n  enabled. Permanent; safe to cache against an idempotency key.\n\n- `unsupported_jurisdiction` — Brale does not serve the\n  applicant's jurisdiction for the requested account type (for\n  example, a non-US individual custodial account, a non-US\n  business custodial account without `regulatory_profile` or\n  outside the approved countries, or a US state where the\n  combination is unavailable). Permanent; safe to cache against an\n  idempotency key.\n\n- `invalid_us_state` — `individual.country` is `US` or `USA` and\n  `individual.address.state` is missing, blank, or not a\n  recognized US state or territory (abbreviation or full name).\n"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-      security:
-      - oauth:
-        - accounts:write
-      summary: Stage a verification document for later linking
-      tags:
-      - Accounts
+                $ref: '#/components/schemas/ErrorResponse'
   /accounts/{account_id}:
     get:
-      callbacks: {}
-      operationId: get_account
-      parameters:
-      - description: Account ID
-        in: path
-        name: account_id
-        required: true
-        schema:
-          $ref: '#/components/schemas/ID'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-          description: OK
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Not Found
-      security:
-      - oauth:
-        - accounts:read
-      summary: Get individual account
       tags:
       - Accounts
-    patch:
-      callbacks: {}
-      operationId: patch_account_documents
+      operationId: getAccount
+      summary: Retrieve a customer account
+      description: Returns the details of a specific customer account, including KYB status.
       parameters:
-      - description: Account ID
+      - name: account_id
         in: path
-        name: account_id
         required: true
+        description: The ID of the account
         schema:
-          $ref: '#/components/schemas/ID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchAccountDocumentsRequest'
-        description: Patch account documents request body
-        required: true
+          $ref: '#/components/schemas/Ksuid'
       responses:
         '200':
+          description: Details of the requested account
           content:
-            application/json:
+            '*/*':
               schema:
                 $ref: '#/components/schemas/Account'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unauthorized
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorV2'
-          description: Not Found
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Failure'
-          description: Unprocessable Entity
-      security:
-      - oauth:
-        - accounts:write
-      summary: Link staged verification documents to an account
-      tags:
-      - Accounts
 components:
   schemas:
     CreateAccountRequest:
-      additionalProperties: false
+      title: CreateAccountRequest
+      description: 'Request body for `POST /accounts`. The three optional dimension fields `entity_type`, `account_type`, and `verification_mode` select which shape is validated. All eight combinations of `entity_type` (`business`, `individual`), `account_type` (`custodial`, `transactional`), and `verification_mode` (`standard`, `reliance`) are supported. Omitting all three fields creates a business custodial account with `standard` verification.
+
+        `verification_mode: bypass` is not supported for any combination and returns `422 unsupported_account_combination`. `reliance` is enabled per managing account by Brale and is not self-serve; a caller without it enabled receives `422 unsupported_account_combination`.
+
+
+        No `discriminator` is declared, because `entity_type` is optional: a request that omits it is a business account, and a discriminator would require the property to be present. The two branches resolve unambiguously without one, since both set `additionalProperties: false` and their required fields are disjoint.
+
+        '
+      oneOf:
+      - $ref: '#/components/schemas/CreateManagedAccountRequest'
+      - $ref: '#/components/schemas/CreateIndividualAccountRequest'
+    Account:
+      title: Account
+      type: object
+      description: Summary representation of a customer account returned by GET /accounts and GET /accounts/{account_id}. Account creation requires KYB / business details (see `AccountCreateRequest` / `CreateManagedAccountRequest`), but account read and list responses return only this account summary and do not return sensitive KYB details.
       properties:
+        id:
+          $ref: '#/components/schemas/Ksuid'
+        name:
+          type: string
+          description: Account / business display name returned by the API.
+          example: ABC Company
+        status:
+          type: string
+          description: KYB / onboarding status of the account.
+          enum:
+          - complete
+          - pending
+          - rejected
+          example: complete
+        created:
+          type: string
+          format: date-time
+          description: When the account was created.
+          example: '2026-01-01T00:00:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: When the account was last updated.
+          example: '2026-01-01T00:00:00Z'
+      required:
+      - id
+      - name
+      - status
+      example:
+        id: 2VcUIIsgARwVbEGlIYbhg6fGG57
+        name: ABC Company
+        status: complete
+        created: '2026-01-01T00:00:00Z'
+        updated: '2026-01-01T00:00:00Z'
+    BusinessAddress:
+      type: object
+      additionalProperties: false
+      title: BusinessAddress
+      description: 'Business address. `state` is absent from `required` because whether it is required depends on `country`: a US business must supply a recognized US state or territory, and elsewhere it is optional and free-form.
+
+        '
+      required:
+      - street_line_1
+      - city
+      - zip
+      properties:
+        street_line_1:
+          type: string
+          example: 100 Example St.
+        street_line_2:
+          type: string
+          example: Suite 500
+        city:
+          type: string
+          example: Springfield
+        state:
+          type: string
+          description: 'State, province, or region. When the business''s country is US or omitted this is required and must be a US state or territory, by abbreviation or full name (`CA`, `California`, `PR`). Optional and free-form otherwise.
+
+            '
+          example: CA
+        zip:
+          type: string
+          description: Postal code (any format).
+          example: '90001'
+        country:
+          type: string
+          description: 'ISO 3166-1 alpha-2 country code of the business. Defaults to `US` when omitted. Determines jurisdiction coverage for the account. A non-US business in an approved country can be created as a transactional account, or as a custodial account if it sends `regulatory_profile`.
+
+            '
+          example: US
+    CreateManagedAccountRequest:
+      type: object
+      additionalProperties: false
+      title: CreateManagedAccountRequest
+      description: 'Business (KYB) account creation payload. This is the default path when `entity_type` is omitted, or when it is explicitly set to `business`. `account_type` selects between a custodial account (the default) and a non-custodial transactional account. A business outside the US sends its country in `address.country`; see `BusinessAddress`. It can be created as a transactional account, or as a custodial account if it is a regulated business in an approved country and sends `regulatory_profile`.
+
+        '
+      required:
+      - business_name
+      - ein
+      - address
+      - phone_number
+      - email
+      - website
+      - business_controller
+      - tos_attestation
+      properties:
+        entity_type:
+          type: string
+          enum:
+          - business
+          description: 'Optional discriminator. When omitted, defaults to `business`.
+
+            '
+          example: business
         account_type:
-          default: custodial
+          type: string
           enum:
           - custodial
           - transactional
-          type: string
-        address:
-          $ref: '#/components/schemas/USStreetAddress'
-        beneficial_owners:
-          items:
-            $ref: '#/components/schemas/ControllingParty'
-          type:
-          - array
-          - 'null'
-        business_controller:
-          $ref: '#/components/schemas/ControllingParty'
-        business_name:
-          example: My Customer
-          type: string
-        doc_submission_ids:
-          description: Optional staged document submission IDs to link at account creation
-          items:
-            $ref: '#/components/schemas/ID'
-          type:
-          - array
-          - 'null'
-        ein:
-          example: '123456789'
-          type: string
-        email:
-          example: a@b.com
-          type: string
-        entity_type:
-          default: business
-          enum:
-          - business
-          - individual
-          type: string
-        individual:
-          $ref: '#/components/schemas/Individual'
-        phone_number:
-          example: 515-555-1212
-          type:
-          - string
-          - 'null'
-        tos_attestation:
-          $ref: '#/components/schemas/EndUserTosAttestation'
+          description: 'Optional. When omitted, defaults to `custodial` for business accounts. `custodial` accounts receive Brale-managed internal wallets and can hold balances. Business custodial accounts are available in supported US states, and outside the US only to regulated businesses in approved countries that send `regulatory_profile`; any other non-US business custodial request returns `422 unsupported_jurisdiction`. `transactional` accounts are non-custodial: they receive no internal wallets, hold no balances at Brale, and register external destination-only addresses.
+
+            '
+          example: custodial
         verification_mode:
-          default: standard
+          type: string
           enum:
           - standard
           - reliance
-          - bypass
+          description: 'Optional. When omitted, defaults to `standard`. `reliance` is enabled per managing account by Brale and is not self-serve; a caller without it enabled receives `422 unsupported_account_combination`.
+
+            '
+          example: standard
+        business_name:
           type: string
+          example: My Customer
+        ein:
+          type: string
+          example: '123456789'
+        address:
+          $ref: '#/components/schemas/BusinessAddress'
+        regulatory_profile:
+          $ref: '#/components/schemas/RegulatoryProfile'
+        beneficial_owners:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ControllingParty'
+        ultimate_beneficial_owners:
+          deprecated: true
+          description: Deprecated alias of beneficial_owners.
+          type: array
+          items:
+            $ref: '#/components/schemas/ControllingParty'
+        business_controller:
+          $ref: '#/components/schemas/ControllingParty'
+        email:
+          type: string
+          example: a@b.com
+        phone_number:
+          type: string
+          example: 515-555-1212
+        tos_attestation:
+          $ref: '#/components/schemas/EndUserTosAttestation'
         website:
+          type: string
           example: https://example.com
+        name:
           type: string
-      title: CreateAccountRequest
+          example: My Account
+        doc_submission_ids:
+          type: array
+          description: Optional pre-staged verification document submission IDs to link on creation.
+          items:
+            $ref: '#/components/schemas/Ksuid'
+    RegulatoryProfile:
       type: object
-    ApiError:
       additionalProperties: false
+      title: RegulatoryProfile
+      description: 'Optional. Send only for a regulated business, for example a money services business (MSB) or a virtual asset service provider (VASP). Sending it declares the business regulated; omitting it means the business is not regulated. Required for a non-US business custodial account. Declaring the business regulated is not approval: Brale requests supporting regulatory documents and verifies the license during verification. Business path only; sending it on the individual path returns `400 unexpected_business_fields`.
+
+        '
       properties:
-        code:
-          example: ValidationError
+        regulator:
           type: string
-        detail:
-          type:
-          - string
-          - 'null'
-        id:
-          type:
-          - string
-          - 'null'
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-        source:
-          properties:
-            parameter:
-              example: page[cursor]
-              type: string
-            pointer:
-              example: /body/data/attributes
-              type: string
-          type:
-          - object
-          - 'null'
-        status:
-          example: '400'
+          description: 'The authority the business is licensed or registered with. Required and must be non-blank when `regulatory_profile` is sent; otherwise the request returns `400 regulator_required`.
+
+            '
+          example: FINTRAC
+        license_number:
           type: string
-        title:
-          example: A validation error occurred
-          type: string
-      title: ApiError
+          description: 'The license or registration number that `regulator` issued. Required and must be non-blank when `regulatory_profile` is sent; otherwise the request returns `400 license_number_required`.
+
+            '
+          example: M12345678
+    ControllingParty:
       type: object
-    EndUserTosAttestation:
       additionalProperties: false
+      title: ControllingParty
+      description: 'A business controller or beneficial owner. Identity is supplied one of two ways, and exactly one of them is required: `ssn` for a US party, which is what every request written before non-US parties were supported already sends, or `identity` (number and type) otherwise.
+
+
+        `ssn` is only accepted when the party''s country is the US, since an SSN has no meaning elsewhere. A US party may also use `identity` when the document is something other than an SSN.
+
+        '
+      required:
+      - first_name
+      - last_name
+      - dob
+      - address
+      - email
+      - phone_number
+      properties:
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        dob:
+          type: string
+          example: YYYY-MM-DD
+        ssn:
+          type: string
+          example: 123-45-6789
+          description: 'US Social Security Number. Required for a US party unless `identity` is supplied, and not accepted for a party outside the US.
+
+            '
+        identity:
+          allOf:
+          - $ref: '#/components/schemas/IndividualIdentity'
+          description: 'Typed identity document, a number and the kind of document it came from. Required for a party outside the US, where the number could be a passport, a national ID or a tax number and the type is what keeps it from being submitted as an SSN. Mutually exclusive with `ssn`.
+
+            '
+        address:
+          $ref: '#/components/schemas/ControllingPartyAddress'
+        email:
+          type: string
+          example: a@b.com
+        phone_number:
+          type: string
+          example: 515-555-1212
+          description: 'Parsed against the party''s own country, so a number written in national form outside the US is accepted and stored in E.164.
+
+            '
+        ownership_percentage:
+          type:
+          - number
+          - 'null'
+          example: 40
+    EndUserTosAttestation:
+      type: object
+      additionalProperties: false
+      title: EndUserTosAttestation
+      required:
+      - accepted_at
       properties:
         accepted_at:
           $ref: '#/components/schemas/DateTime'
         ip:
+          type: string
           example: 203.0.113.42
-          type: string
         user_agent:
+          type: string
           example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:138.0) Gecko/20100101 Firefox/138.0
-          type: string
         version:
+          type: string
           example: '2025-04-01'
-          type: string
-      required:
-      - accepted_at
-      title: EndUserTosAttestation
+    CreateIndividualAccountRequest:
       type: object
-    Individual:
       additionalProperties: false
+      title: CreateIndividualAccountRequest
+      description: 'Individual (KYC) account creation payload, custodial or transactional. The request shape is identical for both account types. Business-only fields (`business_name`, `ein`, `website`, `business_controller`, `beneficial_owners`, `regulatory_profile`) must not be sent on this path; they are rejected with `400 unexpected_business_fields`.
+
+        '
+      required:
+      - entity_type
+      - account_type
+      - individual
+      - tos_attestation
       properties:
-        address:
-          $ref: '#/components/schemas/IndividualAddress'
-        country:
-          description: ISO 3166-1 alpha-2 country code; stored separately for AiPrise routing
-          example: US
+        entity_type:
           type: string
-        date_of_birth:
-          description: YYYY-MM-DD
-          example: '1990-01-31'
+          enum:
+          - individual
+          example: individual
+        account_type:
           type: string
-        email:
-          example: jane@example.com
+          enum:
+          - custodial
+          - transactional
+          description: '`custodial` accounts receive Brale-custodied internal wallets and can hold balances at Brale; they are US-only. `transactional` accounts are non-custodial: they receive no custodial wallets and cannot create custodial addresses.
+
+            '
+          example: transactional
+        verification_mode:
           type: string
-        first_name:
-          example: Jane
+          enum:
+          - standard
+          - reliance
+          description: '`standard` (default) or `reliance`. Use `reliance` when your integration operates under an agreement with Brale that specifies a reliance model. Reliance is enabled per managing account by Brale and is not self-serve; a caller without it enabled receives `422 unsupported_account_combination`.
+
+            '
+          example: standard
+        individual:
+          $ref: '#/components/schemas/Individual'
+        tos_attestation:
+          $ref: '#/components/schemas/EndUserTosAttestation'
+        name:
           type: string
-        identity:
-          $ref: '#/components/schemas/IndividualIdentity'
-        last_name:
-          example: Doe
-          type: string
-        phone_number:
-          example: 515-555-1212
-          type: string
+          description: Optional display name. When omitted, the account's `name` is derived from the individual's first and last name.
+          example: Jane Doe
+        doc_submission_ids:
+          type: array
+          description: Optional pre-staged verification document submission IDs to link on creation.
+          items:
+            $ref: '#/components/schemas/Ksuid'
+    Individual:
+      type: object
+      additionalProperties: false
+      title: Individual
       required:
       - first_name
       - last_name
       - date_of_birth
       - email
       - phone_number
-      - address
       - country
-      title: Individual
-      type: object
-    AccountList:
-      additionalProperties: false
-      properties:
-        accounts:
-          items:
-            $ref: '#/components/schemas/Account'
-          type: array
-      required:
-      - accounts
-      title: AccountList
-      type: object
-    Account:
-      properties:
-        created:
-          $ref: '#/components/schemas/DateTime'
-        id:
-          $ref: '#/components/schemas/ID'
-        name:
-          example: My Account
-          type: string
-        status:
-          enum:
-          - complete
-          - pending
-          - rejected
-          type: string
-        updated:
-          $ref: '#/components/schemas/DateTime'
-      required:
-      - id
-      - name
-      - status
-      title: Account
-      type: object
-    PatchAccountDocumentsRequest:
-      additionalProperties: false
-      properties:
-        doc_submission_ids:
-          items:
-            $ref: '#/components/schemas/ID'
-          minItems: 1
-          type: array
-      required:
-      - doc_submission_ids
-      title: PatchAccountDocumentsRequest
-      type: object
-    ControllingParty:
-      additionalProperties: false
-      properties:
-        address:
-          $ref: '#/components/schemas/USStreetAddress'
-        dob:
-          example: YYYY-MM-DD
-          type: string
-        email:
-          example: a@b.com
-          type: string
-        first_name:
-          example: John
-          type: string
-        last_name:
-          example: Doe
-          type: string
-        ownership_percentage:
-          example: 40
-          type:
-          - number
-          - 'null'
-        phone_number:
-          example: 515-555-1212
-          type: string
-        ssn:
-          example: 123-45-6789
-          type: string
-      required:
-      - first_name
-      - last_name
-      - dob
-      - ssn
       - address
-      - email
-      - phone_number
-      title: ControllingParty
-      type: object
-    DocumentSubmissionCreated:
-      additionalProperties: false
+      - identity
       properties:
-        doc_submission_id:
-          $ref: '#/components/schemas/ID'
-      required:
-      - doc_submission_id
-      title: DocumentSubmissionCreated
-      type: object
-    DocumentRequirement:
-      additionalProperties: false
-      properties:
-        display_name:
-          example: Government-issued photo ID
+        first_name:
           type: string
-        document_kind:
-          $ref: '#/components/schemas/DocumentKindEnum'
-        document_type:
-          enum:
-          - business_document
-          - individual_document
-          - misc_document
+          example: Jane
+        last_name:
           type: string
-        person_label:
-          example: Jane Doe
-          type:
-          - string
-          - 'null'
-        status:
-          enum:
-          - pending_upload
-          - uploaded
+          example: Doe
+        date_of_birth:
           type: string
-      required:
-      - document_kind
-      - document_type
-      - display_name
-      - status
-      title: DocumentRequirement
-      type: object
-    DocumentKindEnum:
-      enum:
-      - articles_of_incorporation
-      - certificate_of_good_standing
-      - ein_letter
-      - government_photo_id
-      - other
-      title: DocumentKindEnum
-      type: string
-    VerificationDocumentsList:
-      additionalProperties: false
-      properties:
-        account_id:
-          $ref: '#/components/schemas/ID'
-        available_person_labels:
-          example:
-          - Jane Doe
-          items:
-            type: string
-          type: array
-        documents:
-          items:
-            $ref: '#/components/schemas/DocumentRequirement'
-          type: array
-        other_documents_uploaded_count:
-          example: 0
-          type: integer
-      required:
-      - account_id
-      - documents
-      - other_documents_uploaded_count
-      - available_person_labels
-      title: VerificationDocumentsList
-      type: object
-    DateTime:
-      description: ISO-8601 timestamp that includes date and time
-      example: '2020-01-01T12:00:00Z'
-      format: date-time
-      title: DateTime
-      type: string
-    ApiErrorV2:
-      additionalProperties: false
-      properties:
-        code:
-          example: ValidationError
+          description: ISO date, `YYYY-MM-DD`.
+          example: '1990-01-01'
+        email:
           type: string
-        detail:
-          example: A validation error occurred
+          example: jane@example.com
+        phone_number:
           type: string
-        status:
-          example: 400
-          type: integer
-        type:
-          type: string
-        values:
-          items:
-            type: string
-          type: array
-      required:
-      - type
-      title: ApiErrorV2
-      type: object
-    IndividualAddress:
-      additionalProperties: false
-      properties:
-        city:
-          example: London
-          type: string
+          example: '2125550182'
         country:
-          example: GB
           type: string
-        state:
-          description: State, province, or region (free-form; not US-only)
-          example: England
-          type: string
-        street_line_1:
-          example: 10 Downing St
-          type: string
-        street_line_2:
-          example: Flat 2
-          type: string
-        zip:
-          description: Postal code (any format)
-          example: SW1A 2AA
-          type: string
-      required:
-      - street_line_1
-      - city
-      - state
-      - zip
-      title: IndividualAddress
-      type: object
-    USStreetAddress:
-      additionalProperties: false
-      properties:
-        city:
-          example: Springfield
-          type: string
-        country:
+          description: 'Top-level jurisdiction used for verification. Separate from `address`. When `US` or `USA`, `address.state` must be a valid US state or territory.
+
+            '
           example: US
-          type: string
-        state:
-          enum:
-          - AL
-          - AK
-          - AS
-          - AZ
-          - AR
-          - CA
-          - CO
-          - CT
-          - DE
-          - DC
-          - FL
-          - GA
-          - GU
-          - HI
-          - ID
-          - IL
-          - IN
-          - IA
-          - KS
-          - KY
-          - LA
-          - ME
-          - MD
-          - MA
-          - MI
-          - MN
-          - MS
-          - MO
-          - MT
-          - NE
-          - NV
-          - NH
-          - NJ
-          - NM
-          - NY
-          - NC
-          - ND
-          - MP
-          - OH
-          - OK
-          - OR
-          - PA
-          - PR
-          - RI
-          - SC
-          - SD
-          - TN
-          - TX
-          - VI
-          - UT
-          - VT
-          - VA
-          - WA
-          - WV
-          - WI
-          - WY
-          type: string
-        street_line_1:
-          example: 100 Example St.
-          type: string
-        street_line_2:
-          example: Suite 500
-          type: string
-        zip:
-          example: '90001'
-          type: string
-      required:
-      - street_line_1
-      - city
-      - state
-      - zip
-      title: USStreetAddress
-      type: object
-    ID:
-      description: ID of the resource
-      example: 2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      title: ID
-      type: string
-    Failure:
-      additionalProperties: false
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/ApiError'
-          type: array
-          uniqueItems: true
-        links:
-          additionalProperties:
-            $ref: '#/components/schemas/Link'
-          type:
-          - object
-          - 'null'
-        meta:
-          additionalProperties:
-            type: string
-          type:
-          - object
-          - 'null'
-      required:
-      - errors
-      title: Failure
-      type: object
-    Link:
-      additionalProperties: false
-      example:
-        href: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-      properties:
-        href:
-          example: /some-resource/2VZvtmVc2j3gQ80CTlcuQXbGrwC
-          type: string
-      required:
-      - href
-      title: Link
-      type: object
+        address:
+          $ref: '#/components/schemas/IndividualAddress'
+        identity:
+          $ref: '#/components/schemas/IndividualIdentity'
     IndividualIdentity:
+      type: object
       additionalProperties: false
+      title: IndividualIdentity
+      description: 'A government-issued identifier for a natural person. One identity is submitted per person: `SSN9` for a US taxpayer, or a document type such as `PASSPORT` or `NATIONAL_ID` for someone outside the US. Used by an individual account and, as `identity`, by a controlling party.
+
+        '
+      required:
+      - number
+      - type
       properties:
         number:
-          description: The identity number.
-          example: 123-45-6789
           type: string
+          example: 222-22-2222
+          description: The identifier value (for `SSN9`, the 9-digit Social Security number).
         type:
-          description: The identity number type.
+          type: string
           enum:
           - SSN9
           - SSN4
@@ -838,30 +741,150 @@ components:
           - KENYA_KRA_PIN
           - ALIEN_CARD
           - RESIDENT_ID
-          - COLOMBIA_PPT_NUMBER
+          - COLOMBIA_PPT
           - GHANA_CARD_NUMBER
           example: SSN9
-          type: string
-      required:
-      - number
-      - type
-      title: IndividualIdentity
+          description: The kind of identifier submitted.
+    IndividualAddress:
       type: object
+      additionalProperties: false
+      title: IndividualAddress
+      description: 'Residential address for an individual account. When `individual.country` is `US` or `USA`, `state` is required and must be a US state or territory, as an abbreviation or full name (`CA`, `California`, and `PR` all work); otherwise the request returns `422 invalid_us_state`. A US territory is a US jurisdiction, not a separate country: send `country: US` with the territory in `state` (`PR`, `GU`, `AS`, `VI`, `MP`). For non-US individuals `state` is optional and free-form, since many countries have no state or province.
+
+
+        `state` is absent from `required` because whether it is required depends on `individual.country`, which this schema cannot express.
+
+        '
+      required:
+      - street_line_1
+      - city
+      - zip
+      properties:
+        street_line_1:
+          type: string
+          example: 123 Main St
+        street_line_2:
+          type: string
+          example: Apt 4
+        city:
+          type: string
+          example: Des Moines
+        state:
+          type: string
+          description: 'State, province, or region. Required when `individual.country` is `US` or `USA`, and accepted as an abbreviation or full name (`CA`, `California`, `PR`); optional and free-form otherwise. A blank value is treated as absent.
+
+            '
+          example: IA
+        zip:
+          type: string
+          description: Postal code. Any format is accepted, so non-US postal codes are supported.
+          example: '50309'
+        country:
+          type: string
+          description: 'Optional. The individual''s jurisdiction is taken from the top-level `individual.country`, not from this field.
+
+            '
+          example: US
+    ControllingPartyAddress:
+      type: object
+      additionalProperties: false
+      title: ControllingPartyAddress
+      description: 'Postal address for a business controller or beneficial owner. `state` is free-form and the postal code accepts any format, so controlling parties outside the US are supported.
+
+
+        `state` is absent from `required` because whether it is required depends on `country`, which this schema cannot express: a US party must supply a recognized US state, and elsewhere it is optional because many countries have no state or province.
+
+        '
+      required:
+      - street_line_1
+      - city
+      - zip
+      properties:
+        street_line_1:
+          type: string
+          example: Calle 93
+        street_line_2:
+          type: string
+          example: Oficina 402
+        city:
+          type: string
+          example: Bogota
+        state:
+          type: string
+          description: 'State, province, or region. Required when `country` is the US, optional otherwise. A blank value is treated as absent.
+
+            '
+          example: Cundinamarca
+        zip:
+          type: string
+          description: Postal code. Any format is accepted, so non-US postal codes are supported.
+          example: '110221'
+        country:
+          type: string
+          description: 'ISO 3166-1 country code or country name. Defaults to `US` when omitted, so requests written before non-US parties were supported are unchanged.
+
+            '
+          example: CO
+    ErrorResponse:
+      type: object
+      title: ErrorResponse
+      description: Standard Brale error envelope.
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: Machine-readable error type identifier.
+          example: unsupported_account_combination
+        message:
+          type: string
+          description: Human-readable explanation of the error.
+          example: The combination of entity_type, account_type, and verification_mode is not supported.
+    Ksuid:
+      title: Kusid
+      type: string
+      format: ksuid
+      pattern: ^[a-zA-Z0-9]{27}$
+      example: 2VcUIIsgARwVbEGlIYbhg6fGG57
+    DateTime:
+      type: string
+      format: date-time
+      title: DateTime
+      description: ISO-8601 timestamp that includes date and time
+      example: '2020-01-01T12:00:00Z'
   securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Use the Bearer token returned from the Auth endpoint via OAuth2 client_credentials flow. Include the token in the "Authorization: Bearer <token>" header.
+
+        '
     oauth:
+      type: oauth2
       flows:
         clientCredentials:
-          scopes:
-            addresses:read: Read address details
-            financial-institutions:read: Read financial institution details
-            mints:write: Mint more of a specific token on chain
-            orders:read: Read order details
-            redemptions:write: Redeem/burn a particular token on a specific chain
-            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
-            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
-            self_attested_tokens:transfer: Transfer attested tokens (tokenization accounts only)
-            tokens:read: Read token details
-            webhooks:read: Read webhook subscriptions
-            webhooks:write: Create and manage webhook subscriptions
           tokenUrl: https://auth.brale.xyz/oauth2/token
-      type: oauth2
+          scopes:
+            accounts:read: Read account details
+            accounts:write: Create or update accounts
+            addresses:read: Read address details
+            addresses:write: Create addresses
+            automations:read: Read automations
+            automations:write: Create automations
+            network:testnet: Access testnet-only operations, such as Automation deposit simulation
+            financial-institutions:read: Read FI details (legacy)
+            financial-institutions:write: Create FI (legacy)
+            transfers:read: Read transfers
+            transfers:write: Create transfers
+x-tagGroups:
+- name: Core
+  tags:
+  - Accounts
+  - Addresses
+  - Transfers
+  - Automations
+  - Plaid
+- name: Legacy
+  tags:
+  - Financial Institutions
+  - Orders

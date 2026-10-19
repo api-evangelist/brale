@@ -1,0 +1,247 @@
+openapi: 3.2.0
+info:
+  title: Brale Issuance and Orchestration Plaid API
+  version: 2.3.1
+  description: 'Brale supports stablecoin issuance and orchestration, enabling businesses and
+
+    ecosystems to create their own stablecoins and convert between fiat and stablecoins
+
+    seamlessly. From stablecoin onramps, offramps, and swaps to custody and payouts, the
+
+    Brale API makes it easy to build stablecoin-enabled products.
+
+
+    NOTE: All resource IDs (including account_id, address_id, financial_institution_id,
+
+    and automation_id) are KSUIDs—27-character alphanumeric strings that are sortable
+
+    by time. Examples showing UUIDs are incorrect.
+
+
+    **What''s new in 2.3.1**
+
+    - Unified **Addresses** model for on-chain and off-chain endpoints
+
+    - `Transfers` now accepts **address_id only** (no financial_institution_id)
+
+    - Optional `brand` object to control bank statement presentation (`branding` still accepted as legacy alias)
+
+    - Added off-chain rails: `ach_credit`, `same_day_ach_credit`, `ach_debit`, `same_day_ach_debit`, `rtp-credit`
+
+    - Plaid endpoints moved to `/accounts/{account_id}/plaid/*`
+
+    - `Financial Institutions` marked **deprecated** (migration path to **Addresses**)
+
+    - Create Account now uses `CreateManagedAccountRequest` with `beneficial_owners`, `business_controller`, and `EndUserTosAttestation`.
+
+    - Transfers now accept `brand` (replaces `branding`, still aliased in docs).
+
+    - Plaid endpoints updated to return `address_id` and accept `transfer_types`.
+
+    - Off-chain Address creation uses `CreateExternalAddressRequest` oneOf with bank + blockchain variants.
+
+    - FI endpoints kept but marked deprecated; use Addresses instead.
+
+    - `rtp_credit` is the canonical RTP rail name.
+
+
+    **FedNow**
+
+    - Added the `fednow_credit` rail. Outbound: create a Transfer with
+
+    `destination.transfer_type: fednow_credit` to a bank Address that lists
+
+    `fednow_credit` in `transfer_types`. Inbound: payers send FedNow credits to an
+
+    active Automation''s `source.funding_instructions`; Brale creates the Transfer
+
+    automatically with `source.transfer_type: fednow_credit`.
+
+    - Simulate a testnet FedNow deposit with `transfer_type: fednow` on
+
+    `POST /accounts/{account_id}/automations/{automation_id}/simulations/deposits`.
+
+    - `bank_address` and `beneficiary_address` are required only when an external
+
+    bank Address requests `wire`.
+
+    - FedNow availability depends on account enablement.'
+servers:
+- url: https://api.brale.xyz
+  description: Production server
+security:
+- BearerAuth: []
+tags:
+- name: Plaid
+  description: Bank linking and ACH debit via Plaid.
+paths:
+  /accounts/{account_id}/plaid/link_token:
+    post:
+      tags:
+      - Plaid
+      summary: Create Plaid link token
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenResponse'
+      operationId: postAccountsByAccountIdPlaidLinkToken
+      x-operation-id-source: derived
+  /accounts/{account_id}/plaid/register-account:
+    post:
+      tags:
+      - Plaid
+      summary: Register financial institution account via Plaid and return address ID
+      parameters:
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAccountWithTransferTypesRequest'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL of the created address resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAccountAddressResponse'
+      description: Registers a bank using a Plaid public_token and returns the new Address ID.
+      operationId: postAccountsByAccountIdPlaidRegisterAccount
+      x-operation-id-source: derived
+components:
+  schemas:
+    RegisterAccountWithTransferTypesRequest:
+      type: object
+      title: RegisterAccountWithTransferTypesRequest
+      required:
+      - public_token
+      - customer_webhook_url
+      - transfer_types
+      properties:
+        public_token:
+          type: string
+          description: Plaid public token
+          example: public-sandbox-123456789
+        customer_webhook_url:
+          type: string
+          format: uri
+          description: Webhook for Plaid item updates
+          example: https://customer.com/webhooks/plaid-updates
+        transfer_types:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            example: ach_credit
+          description: Rails to enable (e.g., ach_credit, rtp_credit)
+    LinkTokenResponse:
+      type: object
+      title: LinkTokenResponse
+      required:
+      - link_token
+      - expiration
+      - callback_url
+      properties:
+        link_token:
+          type: string
+          description: Plaid Link token
+          example: link-sandbox-123456789
+        expiration:
+          type: string
+          description: ISO 8601 expiration
+          example: '2024-01-01T12:00:00Z'
+        callback_url:
+          type: string
+          description: URL to POST the public token to after Plaid Link
+          example: https://customer.com/webhooks/plaid-updates
+    CreateLinkTokenRequest:
+      type: object
+      title: CreateLinkTokenRequest
+      properties:
+        legal_name:
+          type: string
+          description: User's legal name
+          example: John Doe
+        email_address:
+          type: string
+          description: User's email address
+          example: user@example.com
+        phone_number:
+          type: string
+          description: User's phone number
+          example: '+1234567890'
+        date_of_birth:
+          type: string
+          description: User's date of birth
+          example: '1990-01-01'
+    RegisterAccountAddressResponse:
+      type: object
+      title: RegisterAccountAddressResponse
+      required:
+      - address_id
+      properties:
+        address_id:
+          type: string
+          description: ID of the created address
+          example: addr_123456789
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Use the Bearer token returned from the Auth endpoint via OAuth2 client_credentials flow. Include the token in the "Authorization: Bearer <token>" header.
+
+        '
+    oauth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.brale.xyz/oauth2/token
+          scopes:
+            accounts:read: Read account details
+            accounts:write: Create or update accounts
+            addresses:read: Read address details
+            addresses:write: Create addresses
+            automations:read: Read automations
+            automations:write: Create automations
+            network:testnet: Access testnet-only operations, such as Automation deposit simulation
+            financial-institutions:read: Read FI details (legacy)
+            financial-institutions:write: Create FI (legacy)
+            transfers:read: Read transfers
+            transfers:write: Create transfers
+x-tagGroups:
+- name: Core
+  tags:
+  - Accounts
+  - Addresses
+  - Transfers
+  - Automations
+  - Plaid
+- name: Legacy
+  tags:
+  - Financial Institutions
+  - Orders
