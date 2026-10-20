@@ -92,6 +92,43 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-official-clis.py
   first_seen: '2026-10-20'
+- partner_name: DefiLlama
+  partner: defillama
+  partner_match: aggregator
+  type: coverage
+  channel: partner-built
+  relationship: connector-coverage
+  direction: partner-built
+  evidence: https://stablecoins.llama.fi/stablecoin/196
+  category: stablecoin data coverage
+  contract_reference:
+    register: DefiLlama stablecoins (stablecoins.llama.fi)
+    standard: null
+    spec_file: null
+    role: stablecoin-issuer
+    registered_name: Classic USD
+    register_id: https://stablecoins.llama.fi/stablecoin/196
+    matched_domain: brale.xyz
+    matched_by: domain+issuer-named-in-description
+    stablecoins:
+    - symbol: USC
+      name: Classic USD
+      peg: peggedUSD
+      mechanism: fiat-backed
+      defillama: https://stablecoins.llama.fi/stablecoin/196
+    - symbol: litUSD
+      name: litUSD
+      peg: peggedUSD
+      mechanism: fiat-backed
+      defillama: https://stablecoins.llama.fi/stablecoin/318
+    peg_mechanisms:
+    - fiat-backed
+    signal_note: 'coverage: DefiLlama tracks the issuer''s stablecoin(s); coins, pegs and circulation are context,
+      never counted'
+    detected_by: sweep-stablecoins-tokenization.py
+    detected: '2026-10-20'
+  detected_by: sweep-stablecoins-tokenization.py
+  first_seen: '2026-10-20'
 generated: '2026-10-18'
 method: searched
 source:
@@ -104,17 +141,22 @@ source:
 - https://proxy.golang.org
 checked:
 - https://api.nuget.org/v3
-- https://cdn.winget.microsoft.com/cache
 - https://crates.io/api/v1
-- https://formulae.brew.sh/api/cask.json
-- https://formulae.brew.sh/api/formula.json
-- https://github.com/ScoopInstaller/Extras
-- https://github.com/ScoopInstaller/Main
-- https://kantarainitiative.org/trust-status-list/
-- https://msb.fincen.gov/
 - https://proxy.golang.org
 - https://pypi.org/pypi
 - https://registry.npmjs.org
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
+- https://kantarainitiative.org/trust-status-list/
+- https://msb.fincen.gov/
 - https://www.access-dvs-register.service.gov.uk/register/download-register
+- https://cdn.winget.microsoft.com/cache
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
+- https://stablecoins.llama.fi/stablecoins
+- https://www.esma.europa.eu/sites/default/files/2024-12/ARTZZ.csv
+- https://www.esma.europa.eu/sites/default/files/2024-12/EMTWP.csv
+- https://www.esma.europa.eu/sites/default/files/2024-12/OTHER.csv
+- https://www.hkma.gov.hk/eng/regulatory-resources/registers/register-of-licensed-stablecoin-issuers/

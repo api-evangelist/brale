@@ -67,3 +67,41 @@
       P856 not contradicting (Kin 2026-10-20 decision 2)
   status: not-a-workflow
   arazzo: null
+- slug: brale-defillama
+  label: DefiLlama
+  partner: defillama
+  partner_name: DefiLlama
+  category: stablecoin data coverage
+  type: coverage
+  channel: partner-built
+  evidence: https://stablecoins.llama.fi/stablecoin/196
+  source: edge
+  relationship: connector-coverage
+  contract_reference:
+    register: DefiLlama stablecoins (stablecoins.llama.fi)
+    standard: null
+    spec_file: null
+    role: stablecoin-issuer
+    registered_name: Classic USD
+    register_id: https://stablecoins.llama.fi/stablecoin/196
+    matched_domain: brale.xyz
+    matched_by: domain+issuer-named-in-description
+    stablecoins:
+    - symbol: USC
+      name: Classic USD
+      peg: peggedUSD
+      mechanism: fiat-backed
+      defillama: https://stablecoins.llama.fi/stablecoin/196
+    - symbol: litUSD
+      name: litUSD
+      peg: peggedUSD
+      mechanism: fiat-backed
+      defillama: https://stablecoins.llama.fi/stablecoin/318
+    peg_mechanisms:
+    - fiat-backed
+    signal_note: 'coverage: DefiLlama tracks the issuer''s stablecoin(s); coins, pegs and circulation are context,
+      never counted'
+    detected_by: sweep-stablecoins-tokenization.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
